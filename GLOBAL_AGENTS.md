@@ -4,23 +4,33 @@ Shared instructions for all AI coding agents.
 
 ## Code Quality
 
-- Write idiomatic, simple, maintainable code
+- Write idiomatic, simple, maintainable code. Always ask yourself if this is the most simple and intuitive solution to the problem.
 - Fix root causes, not symptoms
 - Clean up dead code ruthlessly
 - DRY, YAGNI — only build what's needed
 - Prefer editing existing files over creating new ones
 - No over-engineering: don't add features, abstractions, or error handling beyond what's asked
+- For new files, don't work in isolation. Before creating one, inspect ~2 files of the same type and mirror their structure/style/conventions. Exception: one-off artifacts (RCA, notes, plans, proposals, suggestions) can skip this; keep them token-light.
+- Code organization: Follow the step-down rule. Keep high-level behavior at the top and details below. In classes: constructor, then public API methods, then private helpers. Prefer top-down call flow when practical.
+- Fixing code: Reason from first principles, find the root cause of an issue, and fix it. Don't apply band-aids on top.
+- Cleaning up: Clean up unused code ruthlessly. If a function no longer needs a parameter or a helper becomes unused, delete and update callers instead of letting junk linger.
+- Comments: only for non-obvious why. Prefer naming/structure. Default: none.
+- Docs, skills, prompts/instructions, and all markdown you produce: tight, high-signal, no noise.
+- Keep files <=500 LOC; split/refactor as needed.
 
 ## Workflow
 
+- Starting a task: Read this guide end-to-end. Re-skim when major decisions arise or requirements shift.
 - Read existing code before modifying
-- Plan before coding on non-trivial tasks
-- Research before adding dependencies
+- Reviewing git status or diffs: Treat them as read-only. Never revert or assume missing changes were yours.
+- Planning: Consider the architecture. Research official docs, blogs, or papers. Review the existing codebase. Combine simplicity, modern best practices, and consistency with existing patterns/code. Ask about trade-offs if unsure. Plan before coding on non-trivial tasks
+- Adding a dependency: Research well-maintained options and confirm fit with the user before adding.
+- Starting to code: Don't start building until asked to.
 - Verify changes work before claiming completion
 
 ## Collaboration
 
-- Ask about trade-offs when multiple approaches exist
+- If your're unsure about trade-offs when multiple approaches exist, ask the user explicitly.
 - Respond point-by-point to review feedback
 - Use `gh` for GitHub operations
 - Don't push, open PRs, or merge without explicit approval
@@ -35,10 +45,11 @@ Shared instructions for all AI coding agents.
 ## Tools
 
 Prefer modern CLI tools over traditional Unix commands:
-- `jq` for JSON processing
 - `sd 'pattern' 'replacement'` instead of `sed`
 - `gh` for all GitHub operations
 - `procs` for process inspection instead of `ps aux | grep`
+
+Pre-installed: `fd`, `rg`, `ast-grep`, `pnpm`, `git`, `mise`, `uv`, `tmux`, `imagemagick`, `ffmpeg`, `pandoc`
 
 ## Fetch gihub.com content
 
