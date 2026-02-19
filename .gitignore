@@ -1,0 +1,8 @@
+*.bak
+.DS_Store
+node_modules/
+
+# External skills (re-fetchable via npx skills update)
+skills/vendor/*/
+!skills/vendor/.skill-lock.json
+!skills/vendor/.gitkeep

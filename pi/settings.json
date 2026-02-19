@@ -1,0 +1,17 @@
+{
+  "defaultProvider": "anthropic",
+  "defaultModel": "claude-opus-4-6",
+  "defaultThinkingLevel": "high",
+  "hideThinkingBlock": false,
+  "enabledModels": [
+    "claude-opus-4-6:xhigh",
+    "claude-sonnet-4-5:xhigh",
+    "claude-sonnet-4:medium",
+    "claude-haiku-4-5:medium",
+    "gpt-5.3-codex:high"
+  ],
+  "packages": [
+    "npm:pi-screenshots-picker",
+    "npm:pi-superpowers-plus"
+  ]
+}
