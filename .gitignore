@@ -1,6 +1,7 @@
 *.bak
 .DS_Store
 node_modules/
+docs/plans/
 
 # External skills (re-fetchable via npx skills update)
 skills/vendor/*/
