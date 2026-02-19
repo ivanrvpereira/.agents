@@ -1,0 +1,224 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+AGENTS_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+CLAUDE_DIR="$HOME/.claude"
+PI_DIR="$HOME/.pi/agent"
+
+DRY_RUN=false
+PRUNE=false
+BOOTSTRAP=false
+YES=false
+
+usage() {
+    cat <<EOF
+Usage: $(basename "$0") [OPTIONS]
+
+Sync agent configurations from ~/.agents to agent config directories.
+
+Options:
+  --dry-run      Preview changes without applying
+  --prune        Remove stale symlinks from agent directories
+  --bootstrap    Also install Claude Code plugins
+  --yes          Skip confirmation prompts
+  --help         Show this help
+EOF
+}
+
+info() { echo -e "  \033[0;32m✓\033[0m $*"; }
+warn() { echo -e "  \033[1;33m!\033[0m $*"; }
+dry()  { echo -e "  \033[0;36m~\033[0m $*"; }
+skip() { echo -e "  \033[0;90m-\033[0m $* (already linked)"; }
+
+for arg in "$@"; do
+    case "$arg" in
+        --dry-run)   DRY_RUN=true ;;
+        --prune)     PRUNE=true ;;
+        --bootstrap) BOOTSTRAP=true ;;
+        --yes)       YES=true ;;
+        --help)      usage; exit 0 ;;
+        *)           warn "Unknown option: $arg"; usage; exit 1 ;;
+    esac
+done
+
+# Create a symlink, backing up existing non-symlink targets
+link_file() {
+    local src="$1" dst="$2"
+
+    if [ -L "$dst" ]; then
+        local current
+        current="$(readlink "$dst")"
+        if [ "$current" = "$src" ]; then
+            skip "$dst"
+            return
+        fi
+        if $DRY_RUN; then dry "Update: $dst → $src"; return; fi
+        rm "$dst"
+    elif [ -e "$dst" ]; then
+        if $DRY_RUN; then dry "Backup + link: $dst → $src"; return; fi
+        warn "Backing up $dst → ${dst}.bak"
+        mv "$dst" "${dst}.bak"
+    else
+        if $DRY_RUN; then dry "Link: $dst → $src"; return; fi
+    fi
+
+    ln -sf "$src" "$dst"
+    info "$dst → $src"
+}
+
+# Create a directory symlink
+link_dir() {
+    local src="$1" dst="$2"
+
+    if [ -L "$dst" ]; then
+        local current
+        current="$(readlink "$dst")"
+        if [ "$current" = "$src" ]; then
+            skip "$dst"
+            return
+        fi
+        if $DRY_RUN; then dry "Update dir: $dst → $src"; return; fi
+        rm "$dst"
+    elif [ -d "$dst" ]; then
+        if $DRY_RUN; then dry "Backup dir + link: $dst → $src"; return; fi
+        warn "Backing up $dst → ${dst}.bak"
+        mv "$dst" "${dst}.bak"
+    else
+        if $DRY_RUN; then dry "Link dir: $dst → $src"; return; fi
+    fi
+
+    ln -sfn "$src" "$dst"
+    info "$dst → $src"
+}
+
+# Symlink each skill directory into a target skills directory
+link_skills() {
+    local src_dir="$1" dst_dir="$2"
+
+    $DRY_RUN || mkdir -p "$dst_dir"
+
+    # Own skills (top-level dirs, excluding vendor/)
+    for skill in "$src_dir"/*/; do
+        [ -d "$skill" ] || continue
+        local name
+        name="$(basename "$skill")"
+        [ "$name" = "vendor" ] && continue
+        link_file "$skill" "$dst_dir/$name"
+    done
+
+    # Vendor skills (flattened into target)
+    if [ -d "$src_dir/vendor" ]; then
+        for skill in "$src_dir"/vendor/*/; do
+            [ -d "$skill" ] || continue
+            local name
+            name="$(basename "$skill")"
+            link_file "$skill" "$dst_dir/$name"
+        done
+    fi
+}
+
+# Prune stale symlinks pointing into AGENTS_DIR
+prune_stale() {
+    local dir="$1"
+    [ -d "$dir" ] || return 0
+
+    for item in "$dir"/*; do
+        [ -L "$item" ] || continue
+        local target
+        target="$(readlink "$item")"
+
+        # Only prune symlinks pointing into our agents dir
+        case "$target" in
+            "$AGENTS_DIR"*|*/.agents/*)
+                if [ ! -e "$item" ]; then
+                    if $DRY_RUN; then
+                        dry "Prune: $item (→ $target)"
+                    else
+                        rm "$item"
+                        info "Pruned: $item"
+                    fi
+                fi
+                ;;
+        esac
+    done
+}
+
+# --- Main ---
+
+if ! $YES && ! $DRY_RUN; then
+    echo "Sync $AGENTS_DIR → agent config directories"
+    echo "  Claude: $CLAUDE_DIR"
+    echo "  Pi:     $PI_DIR"
+    echo ""
+    read -rp "Continue? [y/N] " confirm
+    [ "$confirm" = "y" ] || [ "$confirm" = "Y" ] || exit 0
+fi
+
+if ! $DRY_RUN; then
+    mkdir -p "$CLAUDE_DIR" "$CLAUDE_DIR/skills"
+    mkdir -p "$PI_DIR" "$PI_DIR/skills" "$PI_DIR/extensions"
+fi
+
+echo ""
+echo "=== Shared ==="
+link_file "$AGENTS_DIR/AGENTS.md" "$CLAUDE_DIR/CLAUDE.md"
+link_file "$AGENTS_DIR/AGENTS.md" "$PI_DIR/AGENTS.md"
+link_skills "$AGENTS_DIR/skills" "$CLAUDE_DIR/skills"
+link_skills "$AGENTS_DIR/skills" "$PI_DIR/skills"
+
+echo ""
+echo "=== Claude Code ==="
+link_file "$AGENTS_DIR/claude/settings.json" "$CLAUDE_DIR/settings.json"
+link_file "$AGENTS_DIR/claude/statusline-command.sh" "$CLAUDE_DIR/statusline-command.sh"
+link_dir "$AGENTS_DIR/claude/rules" "$CLAUDE_DIR/rules"
+link_dir "$AGENTS_DIR/claude/commands" "$CLAUDE_DIR/commands"
+link_dir "$AGENTS_DIR/claude/scripts" "$CLAUDE_DIR/scripts"
+
+echo ""
+echo "=== Pi ==="
+if [ -f "$AGENTS_DIR/pi/settings.json" ]; then
+    link_file "$AGENTS_DIR/pi/settings.json" "$PI_DIR/settings.json"
+fi
+
+# Pi extensions (per-item symlinks: dirs and .ts files)
+if [ -d "$AGENTS_DIR/pi/extensions" ]; then
+    for ext in "$AGENTS_DIR/pi/extensions"/*/; do
+        [ -d "$ext" ] || continue
+        link_file "$ext" "$PI_DIR/extensions/$(basename "$ext")"
+    done
+    for ext in "$AGENTS_DIR/pi/extensions"/*.ts; do
+        [ -f "$ext" ] || continue
+        link_file "$ext" "$PI_DIR/extensions/$(basename "$ext")"
+    done
+fi
+
+# Pi-specific skills
+if [ -d "$AGENTS_DIR/pi/skills" ]; then
+    for skill in "$AGENTS_DIR/pi/skills"/*/; do
+        [ -d "$skill" ] || continue
+        link_file "$skill" "$PI_DIR/skills/$(basename "$skill")"
+    done
+fi
+
+# Prune stale symlinks
+if $PRUNE; then
+    echo ""
+    echo "=== Pruning stale symlinks ==="
+    prune_stale "$CLAUDE_DIR/skills"
+    prune_stale "$PI_DIR/skills"
+    prune_stale "$PI_DIR/extensions"
+fi
+
+# Bootstrap plugins
+if $BOOTSTRAP; then
+    echo ""
+    echo "=== Installing Claude Code plugins ==="
+    if [ -x "$AGENTS_DIR/claude/install-plugins.sh" ]; then
+        "$AGENTS_DIR/claude/install-plugins.sh"
+    else
+        warn "claude/install-plugins.sh not found or not executable"
+    fi
+fi
+
+echo ""
+echo "Done."
