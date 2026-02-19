@@ -13,5 +13,6 @@
   "packages": [
     "npm:pi-screenshots-picker",
     "npm:pi-superpowers-plus"
-  ]
+  ],
+  "lastChangelogVersion": "0.53.0"
 }

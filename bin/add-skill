@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+AGENTS_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+
+usage() {
+    cat <<EOF
+Usage: $(basename "$0") <skill-name>
+
+Install a local skill from skills/<skill-name> to Claude Code and Pi globally.
+
+Examples:
+  $(basename "$0") my-skill         # Install skills/my-skill
+EOF
+}
+
+if [ $# -eq 0 ] || [ "$1" = "--help" ]; then
+    usage
+    exit "${1:+1}"
+fi
+
+SKILL_NAME="$1"
+SKILL_DIR="$AGENTS_DIR/skills/$SKILL_NAME"
+
+if [ ! -d "$SKILL_DIR" ]; then
+    echo "Error: skill directory not found: $SKILL_DIR" >&2
+    exit 1
+fi
+
+if [ ! -f "$SKILL_DIR/SKILL.md" ]; then
+    echo "Error: no SKILL.md found in $SKILL_DIR" >&2
+    exit 1
+fi
+
+exec npx skills add "$SKILL_DIR" -g -a claude-code -a pi --yes

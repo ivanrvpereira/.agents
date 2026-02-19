@@ -161,8 +161,9 @@ fi
 
 echo ""
 echo "=== Shared ==="
-link_file "$AGENTS_DIR/AGENTS.md" "$CLAUDE_DIR/CLAUDE.md"
-link_file "$AGENTS_DIR/AGENTS.md" "$PI_DIR/AGENTS.md"
+link_file "$AGENTS_DIR/GLOBAL_CLAUDE.md" "$CLAUDE_DIR/CLAUDE.md"
+link_file "$AGENTS_DIR/GLOBAL_AGENTS.md" "$CLAUDE_DIR/AGENTS.md"
+link_file "$AGENTS_DIR/GLOBAL_AGENTS.md" "$PI_DIR/AGENTS.md"
 link_skills "$AGENTS_DIR/skills" "$CLAUDE_DIR/skills"
 link_skills "$AGENTS_DIR/skills" "$PI_DIR/skills"
 
@@ -170,7 +171,6 @@ echo ""
 echo "=== Claude Code ==="
 link_file "$AGENTS_DIR/claude/settings.json" "$CLAUDE_DIR/settings.json"
 link_file "$AGENTS_DIR/claude/statusline-command.sh" "$CLAUDE_DIR/statusline-command.sh"
-link_dir "$AGENTS_DIR/claude/rules" "$CLAUDE_DIR/rules"
 link_dir "$AGENTS_DIR/claude/commands" "$CLAUDE_DIR/commands"
 link_dir "$AGENTS_DIR/claude/scripts" "$CLAUDE_DIR/scripts"
 

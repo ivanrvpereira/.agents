@@ -167,7 +167,6 @@
       "Bash(tmux:*)"
     ]
   },
-  "model": "opus",
   "hooks": {
     "Stop": [
       {
@@ -197,18 +196,17 @@
     "command": "bash ~/.claude/statusline-command.sh"
   },
   "enabledPlugins": {
-    "frontend-design@claude-code-plugins": true,
-    "cc-caffeine@samber": true,
-    "dev-browser@dev-browser-marketplace": true,
-    "llm-application-dev@claude-code-workflows": true,
-    "context7@claude-plugins-official": true,
-    "example-skills@anthropic-agent-skills": false,
-    "claude-mem@thedotmack": false,
-    "document-skills@anthropic-agent-skills": true,
     "superpowers@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true,
-    "pyright-lsp@claude-plugins-official": true,
-    "gopls-lsp@claude-plugins-official": true
+    "context7@claude-plugins-official": true,
+    "cc-caffeine@samber": true,
+    "document-skills@anthropic-agent-skills": false,
+    "dev-browser@dev-browser-marketplace": false,
+    "llm-application-dev@claude-code-workflows": false,
+    "typescript-lsp@claude-plugins-official": false,
+    "pyright-lsp@claude-plugins-official": false,
+    "gopls-lsp@claude-plugins-official": false,
+    "example-skills@anthropic-agent-skills": false
   },
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
+  "model": "opus"
 }
