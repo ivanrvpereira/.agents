@@ -1,0 +1,132 @@
+{
+  "version": 3,
+  "skills": {
+    "frontend-design": {
+      "source": "mitsuhiko/agent-stuff",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mitsuhiko/agent-stuff.git",
+      "skillPath": "skills/frontend-design/SKILL.md",
+      "skillFolderHash": "f27c7ee2304a7a15f20654f533d6d878acdf488a",
+      "installedAt": "2026-02-19T12:37:29.598Z",
+      "updatedAt": "2026-02-19T12:37:29.598Z"
+    },
+    "find-skills": {
+      "source": "vercel-labs/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/skills.git",
+      "skillPath": "skills/find-skills/SKILL.md",
+      "skillFolderHash": "c2f31172b6f256272305a5e6e7228b258446899f",
+      "installedAt": "2026-02-19T13:00:52.639Z",
+      "updatedAt": "2026-02-19T13:00:52.639Z"
+    },
+    "web-design-guidelines": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
+      "skillPath": "skills/web-design-guidelines/SKILL.md",
+      "skillFolderHash": "3116f3e62dbd02b44a598b1aa690d2a8938e8f89",
+      "installedAt": "2026-02-19T13:04:33.140Z",
+      "updatedAt": "2026-02-19T13:04:33.140Z"
+    },
+    "mermaid": {
+      "source": "mitsuhiko/agent-stuff",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mitsuhiko/agent-stuff.git",
+      "skillPath": "skills/mermaid/SKILL.md",
+      "skillFolderHash": "0d4d0a3da84a1f936740b58dd8e95c11a9ba486f",
+      "installedAt": "2026-02-19T13:17:41.284Z",
+      "updatedAt": "2026-02-19T13:17:41.284Z"
+    },
+    "github": {
+      "source": "mitsuhiko/agent-stuff",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mitsuhiko/agent-stuff.git",
+      "skillPath": "skills/github/SKILL.md",
+      "skillFolderHash": "c308bc949f232a4f31a77263a3d29be8fc55647c",
+      "installedAt": "2026-02-19T13:19:37.470Z",
+      "updatedAt": "2026-02-19T13:19:37.470Z"
+    },
+    "git-commit": {
+      "source": "goncalossilva/.agents",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/goncalossilva/.agents.git",
+      "skillPath": "skills/git-commit/SKILL.md",
+      "skillFolderHash": "16daac35a87c5f972c32a428d3e10813dad44ba6",
+      "installedAt": "2026-02-19T13:29:29.655Z",
+      "updatedAt": "2026-02-19T13:29:29.655Z"
+    },
+    "sentry": {
+      "source": "mitsuhiko/agent-stuff",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mitsuhiko/agent-stuff.git",
+      "skillPath": "skills/sentry/SKILL.md",
+      "skillFolderHash": "e6c86e31bd3008ce5876698c7e101c8132134e32",
+      "installedAt": "2026-02-19T13:35:21.668Z",
+      "updatedAt": "2026-02-19T13:35:21.668Z"
+    },
+    "summarize": {
+      "source": "mitsuhiko/agent-stuff",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mitsuhiko/agent-stuff.git",
+      "skillPath": "skills/summarize/SKILL.md",
+      "skillFolderHash": "14b51a3413413bfe6c7b05666bd33cf2ebb7a2e5",
+      "installedAt": "2026-02-19T13:36:27.173Z",
+      "updatedAt": "2026-02-19T13:36:27.173Z"
+    },
+    "uv": {
+      "source": "mitsuhiko/agent-stuff",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mitsuhiko/agent-stuff.git",
+      "skillPath": "skills/uv/SKILL.md",
+      "skillFolderHash": "4d5f7ddace5cf5367dbf5b5c4837af3cbd2fe734",
+      "installedAt": "2026-02-19T13:36:43.174Z",
+      "updatedAt": "2026-02-19T13:36:43.174Z"
+    },
+    "tmux": {
+      "source": "mitsuhiko/agent-stuff",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/mitsuhiko/agent-stuff.git",
+      "skillPath": "skills/tmux/SKILL.md",
+      "skillFolderHash": "e13c178bf88cb6c423d5dd6c5ebcfa3b45001f11",
+      "installedAt": "2026-02-19T13:36:51.340Z",
+      "updatedAt": "2026-02-19T13:36:51.340Z"
+    },
+    "oracle": {
+      "source": "goncalossilva/.agents",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/goncalossilva/.agents.git",
+      "skillPath": "skills/oracle/SKILL.md",
+      "skillFolderHash": "054f18f5d293e1e52be582becd659a4aee72ae1f",
+      "installedAt": "2026-02-19T13:43:51.177Z",
+      "updatedAt": "2026-02-19T13:43:51.177Z"
+    },
+    "deep-research": {
+      "source": "199-biotechnologies/claude-deep-research-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/199-biotechnologies/claude-deep-research-skill.git",
+      "skillPath": "SKILL.md",
+      "skillFolderHash": "a725f9afa22880b367767c1639e3e956fe7d983f",
+      "installedAt": "2026-02-19T14:57:14.552Z",
+      "updatedAt": "2026-02-19T14:57:14.552Z"
+    },
+    "vercel-composition-patterns": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
+      "skillPath": "skills/composition-patterns/SKILL.md",
+      "skillFolderHash": "bf90d0a4b83ea054653350f9c67f6de235d3a368",
+      "installedAt": "2026-02-19T15:14:48.787Z",
+      "updatedAt": "2026-02-19T15:14:48.787Z"
+    },
+    "vercel-react-best-practices": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
+      "skillPath": "skills/react-best-practices/SKILL.md",
+      "skillFolderHash": "079b06a135401704ea94ab74c7c9d86c92ba259f",
+      "installedAt": "2026-02-19T15:14:48.836Z",
+      "updatedAt": "2026-02-19T15:14:48.836Z"
+    }
+  },
+  "dismissed": {}
+}
