@@ -14,8 +14,8 @@ npx skills update  # restore external skills
 
 ```
 AGENTS.md          # Project knowledge base (symlinked as CLAUDE.md context)
-GLOBAL_AGENTS.md   # Shared agent instructions (symlinked to both agents)
-GLOBAL_CLAUDE.md   # Claude wrapper (@AGENTS.md + Exa tools)
+_agents.md         # Shared agent instructions (symlinked to both agents)
+_claude.md         # Claude wrapper (@AGENTS.md + Exa tools)
 CLAUDE.md          # Project-level CLAUDE.md (@AGENTS.md)
 .skill-lock.json   # Tracks external skills for updates
 bin/sync           # Unified symlink manager
@@ -63,7 +63,7 @@ All skills live in `skills/` and are symlinked to both Claude Code and Pi.
 | `crwl` | Web crawling with Crawl4AI CLI |
 | `hcloud` | Hetzner Cloud infrastructure via hcloud CLI |
 | `marp` | Slide presentations from Markdown |
-| `doc-extract` | Extract documents to clean markdown |
+| `marker` | Parse documents (PDF, images, PPTX, DOCX, XLSX, HTML, EPUB) to markdown via marker-pdf |
 | `prd` | Generate Product Requirements Documents |
 | `skill-creator` | Guide for creating new skills |
 
