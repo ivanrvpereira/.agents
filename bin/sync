@@ -156,7 +156,7 @@ fi
 
 if ! $DRY_RUN; then
     mkdir -p "$CLAUDE_DIR" "$CLAUDE_DIR/skills"
-    mkdir -p "$PI_DIR" "$PI_DIR/skills" "$PI_DIR/extensions"
+    mkdir -p "$PI_DIR" "$PI_DIR/extensions"
 fi
 
 echo ""
@@ -165,7 +165,6 @@ link_file "$AGENTS_DIR/GLOBAL_CLAUDE.md" "$CLAUDE_DIR/CLAUDE.md"
 link_file "$AGENTS_DIR/GLOBAL_AGENTS.md" "$CLAUDE_DIR/AGENTS.md"
 link_file "$AGENTS_DIR/GLOBAL_AGENTS.md" "$PI_DIR/AGENTS.md"
 link_skills "$AGENTS_DIR/skills" "$CLAUDE_DIR/skills"
-link_skills "$AGENTS_DIR/skills" "$PI_DIR/skills"
 
 echo ""
 echo "=== Claude Code ==="
@@ -192,20 +191,11 @@ if [ -d "$AGENTS_DIR/pi/extensions" ]; then
     done
 fi
 
-# Pi-specific skills
-if [ -d "$AGENTS_DIR/pi/skills" ]; then
-    for skill in "$AGENTS_DIR/pi/skills"/*/; do
-        [ -d "$skill" ] || continue
-        link_file "$skill" "$PI_DIR/skills/$(basename "$skill")"
-    done
-fi
-
 # Prune stale symlinks
 if $PRUNE; then
     echo ""
     echo "=== Pruning stale symlinks ==="
     prune_stale "$CLAUDE_DIR/skills"
-    prune_stale "$PI_DIR/skills"
     prune_stale "$PI_DIR/extensions"
 fi
 

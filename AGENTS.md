@@ -32,7 +32,7 @@ pi/                    # Pi: settings, extensions, skills
 **Shared** (both agents):
 - `GLOBAL_CLAUDE.md` → `~/.claude/CLAUDE.md`
 - `AGENTS.md` → `~/.pi/agent/AGENTS.md`
-- Each `skills/<name>/` → both agents' skills directories (including vendor)
+- Each `skills/<name>/` → `~/.claude/skills/` (Pi reads skills directly from `~/.agents`)
 
 **Claude Code** (`~/.claude/`):
 - `claude/settings.json` → settings (permissions, hooks, plugins, model config)
