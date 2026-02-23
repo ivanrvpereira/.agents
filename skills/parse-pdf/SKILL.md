@@ -1,6 +1,6 @@
 ---
 name: parse-pdf
-description: Parse documents to markdown using marker-pdf. Supports PDF, images (PNG/JPG/TIFF/etc.), PPTX, DOCX, XLSX, HTML, and EPUB. Use when the user asks to read, extract, or parse document content. Default to no LLM — only pass --use-llm if the user explicitly requests it.
+description: Parse documents to markdown using marker-pdf. Supports PDF, images (PNG/JPG/TIFF/etc.), PPTX, DOCX, XLSX, HTML, and EPUB. Use when the user asks to read, extract, or parse document content.
 ---
 
 # parse-pdf — Document to Markdown
