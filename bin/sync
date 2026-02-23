@@ -161,9 +161,9 @@ fi
 
 echo ""
 echo "=== Shared ==="
-link_file "$AGENTS_DIR/GLOBAL_CLAUDE.md" "$CLAUDE_DIR/CLAUDE.md"
-link_file "$AGENTS_DIR/GLOBAL_AGENTS.md" "$CLAUDE_DIR/AGENTS.md"
-link_file "$AGENTS_DIR/GLOBAL_AGENTS.md" "$PI_DIR/AGENTS.md"
+link_file "$AGENTS_DIR/_claude.md" "$CLAUDE_DIR/CLAUDE.md"
+link_file "$AGENTS_DIR/_agents.md" "$CLAUDE_DIR/AGENTS.md"
+link_file "$AGENTS_DIR/_agents.md" "$PI_DIR/AGENTS.md"
 link_skills "$AGENTS_DIR/skills" "$CLAUDE_DIR/skills"
 
 echo ""

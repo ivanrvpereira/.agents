@@ -6,7 +6,7 @@ Centralized configuration repository for AI coding agents. Manages shared and ag
 
 ```
 AGENTS.md       # Shared agent instructions → ~/.pi/agent/AGENTS.md
-GLOBAL_CLAUDE.md       # Claude wrapper (@AGENTS.md) → ~/.claude/CLAUDE.md
+_claude.md             # Claude wrapper (@AGENTS.md) → ~/.claude/CLAUDE.md
 bin/sync               # Symlink manager (creates all links below)
 skills/                # Shared skills → both agents' skills dirs
 .skill-lock.json       # Tracks external skills for updates
@@ -30,7 +30,7 @@ pi/                    # Pi: settings, extensions, skills
 `bin/sync` creates symlinks from this repo into each agent's config directory:
 
 **Shared** (both agents):
-- `GLOBAL_CLAUDE.md` → `~/.claude/CLAUDE.md`
+- `_claude.md` → `~/.claude/CLAUDE.md`
 - `AGENTS.md` → `~/.pi/agent/AGENTS.md`
 - Each `skills/<name>/` → `~/.claude/skills/` (Pi reads skills directly from `~/.agents`)
 
