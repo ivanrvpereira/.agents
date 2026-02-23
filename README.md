@@ -5,9 +5,9 @@ Centralized configuration for AI coding agents. Manages shared and agent-specifi
 ## Setup
 
 ```bash
-git clone git@github.com:ivanpereira/.agents.git ~/.agents
+git clone git@github.com:ivanrvpereira/.agents.git ~/.agents
 ~/.agents/bin/sync --bootstrap
-npx skills update  # restore external skills
+npx skills update -g  # restore external skills
 ```
 
 ## Structure
@@ -52,39 +52,39 @@ npx skills update -g
 
 ## Skills
 
-All skills live in `skills/` and are symlinked to both Claude Code and Pi.
+All skills live in `skills/`. They are symlinked to Claude Code and auto-discovered by Pi from `~/.agents/skills` (since Pi v0.54.0).
 
 ### Local (hand-crafted)
 
 | Skill | Description |
 |-------|-------------|
-| `agent-browser` | Browser automation for AI agents |
-| `agents-md` | Generate/review AGENTS.md files |
-| `crwl` | Web crawling with Crawl4AI CLI |
-| `hcloud` | Hetzner Cloud infrastructure via hcloud CLI |
-| `marp` | Slide presentations from Markdown |
-| `marker` | Parse documents (PDF, images, PPTX, DOCX, XLSX, HTML, EPUB) to markdown via marker-pdf |
-| `prd` | Generate Product Requirements Documents |
-| `skill-creator` | Guide for creating new skills |
+| [`agent-browser`](skills/agent-browser/SKILL.md) | Browser automation for AI agents |
+| [`agents-md`](skills/agents-md/SKILL.md) | Generate/review AGENTS.md files |
+| [`crwl`](skills/crwl/SKILL.md) | Web crawling with Crawl4AI CLI |
+| [`hcloud`](skills/hcloud/SKILL.md) | Hetzner Cloud infrastructure via hcloud CLI |
+| [`marp`](skills/marp/SKILL.md) | Slide presentations from Markdown |
+| [`marker`](skills/marker/SKILL.md) | Parse documents (PDF, images, PPTX, DOCX, XLSX, HTML, EPUB) to markdown via marker-pdf |
+| [`prd`](skills/prd/SKILL.md) | Generate Product Requirements Documents |
+| [`skill-creator`](skills/skill-creator/SKILL.md) | Guide for creating new skills |
 
 ### Remote (via `npx skills`, tracked in `.skill-lock.json`)
 
-| Skill | Source |
-|-------|--------|
-| `deep-research` | `199-biotechnologies/claude-deep-research-skill` |
-| `find-skills` | `vercel-labs/skills` |
-| `frontend-design` | `mitsuhiko/agent-stuff` |
-| `git-commit` | `goncalossilva/.agents` |
-| `github` | `mitsuhiko/agent-stuff` |
-| `mermaid` | `mitsuhiko/agent-stuff` |
-| `oracle` | `goncalossilva/.agents` |
-| `sentry` | `mitsuhiko/agent-stuff` |
-| `summarize` | `mitsuhiko/agent-stuff` |
-| `tmux` | `mitsuhiko/agent-stuff` |
-| `uv` | `mitsuhiko/agent-stuff` |
-| `vercel-composition-patterns` | `vercel-labs/agent-skills` |
-| `vercel-react-best-practices` | `vercel-labs/agent-skills` |
-| `web-design-guidelines` | `vercel-labs/agent-skills` |
+| Skill | Description | Source |
+|-------|-------------|--------|
+| [`deep-research`](https://github.com/199-biotechnologies/claude-deep-research-skill/blob/main/SKILL.md) | Multi-source research with citation tracking and verification | [199-biotechnologies/claude-deep-research-skill](https://github.com/199-biotechnologies/claude-deep-research-skill) |
+| [`find-skills`](https://github.com/vercel-labs/skills/blob/main/skills/find-skills/SKILL.md) | Discover and install agent skills by capability | [vercel-labs/skills](https://github.com/vercel-labs/skills) |
+| [`frontend-design`](https://github.com/mitsuhiko/agent-stuff/blob/main/skills/frontend-design/SKILL.md) | Design and implement production-ready frontend interfaces | [mitsuhiko/agent-stuff](https://github.com/mitsuhiko/agent-stuff) |
+| [`git-commit`](https://github.com/goncalossilva/.agents/blob/main/skills/git-commit/SKILL.md) | Focused, reviewable commits with clear rationale | [goncalossilva/.agents](https://github.com/goncalossilva/.agents) |
+| [`github`](https://github.com/mitsuhiko/agent-stuff/blob/main/skills/github/SKILL.md) | GitHub operations via `gh` CLI (issues, PRs, CI runs, API) | [mitsuhiko/agent-stuff](https://github.com/mitsuhiko/agent-stuff) |
+| [`mermaid`](https://github.com/mitsuhiko/agent-stuff/blob/main/skills/mermaid/SKILL.md) | Create and edit Mermaid diagrams with validation | [mitsuhiko/agent-stuff](https://github.com/mitsuhiko/agent-stuff) |
+| [`oracle`](https://github.com/goncalossilva/.agents/blob/main/skills/oracle/SKILL.md) | Get a second opinion from another LLM on code, design, or debugging | [goncalossilva/.agents](https://github.com/goncalossilva/.agents) |
+| [`sentry`](https://github.com/mitsuhiko/agent-stuff/blob/main/skills/sentry/SKILL.md) | Fetch and analyze Sentry issues, events, and logs | [mitsuhiko/agent-stuff](https://github.com/mitsuhiko/agent-stuff) |
+| [`summarize`](https://github.com/mitsuhiko/agent-stuff/blob/main/skills/summarize/SKILL.md) | Fetch a URL or convert files (PDF/DOCX/HTML) to Markdown | [mitsuhiko/agent-stuff](https://github.com/mitsuhiko/agent-stuff) |
+| [`tmux`](https://github.com/mitsuhiko/agent-stuff/blob/main/skills/tmux/SKILL.md) | Remote control tmux sessions for interactive CLIs | [mitsuhiko/agent-stuff](https://github.com/mitsuhiko/agent-stuff) |
+| [`uv`](https://github.com/mitsuhiko/agent-stuff/blob/main/skills/uv/SKILL.md) | Python package and script management with `uv` | [mitsuhiko/agent-stuff](https://github.com/mitsuhiko/agent-stuff) |
+| [`vercel-composition-patterns`](https://github.com/vercel-labs/agent-skills/blob/main/skills/composition-patterns/SKILL.md) | React composition patterns (compound components, render props, context) | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) |
+| [`vercel-react-best-practices`](https://github.com/vercel-labs/agent-skills/blob/main/skills/react-best-practices/SKILL.md) | React and Next.js performance optimization guidelines | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) |
+| [`web-design-guidelines`](https://github.com/vercel-labs/agent-skills/blob/main/skills/web-design-guidelines/SKILL.md) | Review UI for accessibility, design, and UX best practices | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) |
 
 To update remote skills: `npx skills update -g`
 
