@@ -1,13 +1,13 @@
 ---
-name: parse-pdf
+name: marker
 description: Parse documents to markdown using marker-pdf. Supports PDF, images (PNG/JPG/TIFF/etc.), PPTX, DOCX, XLSX, HTML, and EPUB. Use when the user asks to read, extract, or parse document content.
 ---
 
-# parse-pdf — Document to Markdown
+# marker — Document to Markdown
 
-Parse documents into clean markdown using `marker-pdf` via the `parse-pdf.sh` wrapper script.
+Parse documents into clean markdown using `marker-pdf` via the `marker.sh` wrapper script.
 
-Script location: `~/.agents/skills/parse-pdf/parse-pdf.sh`
+Script location: `~/.agents/skills/marker/marker.sh`
 
 **Supported formats:** PDF, images (PNG/JPG/TIFF/BMP/GIF/WebP), PPTX, DOCX, XLSX, HTML, EPUB
 
@@ -20,16 +20,16 @@ Script location: `~/.agents/skills/parse-pdf/parse-pdf.sh`
 
 ```bash
 # Basic extraction
-~/.agents/skills/parse-pdf/parse-pdf.sh /path/to/file [output_dir]
+~/.agents/skills/marker/marker.sh /path/to/file [output_dir]
 
 # With LLM enhancement (Gemini 2.5 Flash — better tables, headers, image descriptions)
-~/.agents/skills/parse-pdf/parse-pdf.sh /path/to/file [output_dir] --use-llm
+~/.agents/skills/marker/marker.sh /path/to/file [output_dir] --use-llm
 
 # Large documents — lower DPI to reduce memory (~68% less)
-~/.agents/skills/parse-pdf/parse-pdf.sh /path/to/file [output_dir] --low-dpi
+~/.agents/skills/marker/marker.sh /path/to/file [output_dir] --low-dpi
 
 # Flags can be combined
-~/.agents/skills/parse-pdf/parse-pdf.sh /path/to/file [output_dir] --use-llm --low-dpi
+~/.agents/skills/marker/marker.sh /path/to/file [output_dir] --use-llm --low-dpi
 ```
 
 ## Usage
@@ -37,7 +37,7 @@ Script location: `~/.agents/skills/parse-pdf/parse-pdf.sh`
 ### Local file
 
 ```bash
-~/.agents/skills/parse-pdf/parse-pdf.sh "/path/to/document.docx" /tmp/output
+~/.agents/skills/marker/marker.sh "/path/to/document.docx" /tmp/output
 ```
 
 Prints the output `.md` path to stdout.
@@ -46,7 +46,7 @@ Prints the output `.md` path to stdout.
 
 ```bash
 curl -sL "https://example.com/document.pdf" -o /tmp/document.pdf
-~/.agents/skills/parse-pdf/parse-pdf.sh /tmp/document.pdf /tmp/output
+~/.agents/skills/marker/marker.sh /tmp/document.pdf /tmp/output
 ```
 
 ### With LLM enhancement
