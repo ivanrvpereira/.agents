@@ -13,11 +13,15 @@ npx skills update  # restore external skills
 ## Structure
 
 ```
-AGENTS.md          # Shared instructions (symlinked to both agents)
+AGENTS.md          # Project knowledge base (symlinked as CLAUDE.md context)
+GLOBAL_AGENTS.md   # Shared agent instructions (symlinked to both agents)
+GLOBAL_CLAUDE.md   # Claude wrapper (@AGENTS.md + Exa tools)
+CLAUDE.md          # Project-level CLAUDE.md (@AGENTS.md)
+.skill-lock.json   # Tracks external skills for updates
 bin/sync           # Unified symlink manager
-skills/            # Shared skills
-skills/vendor/     # External skills (via npx skills)
-claude/            # Claude Code configs (settings, rules, commands, scripts)
+bin/add-skill      # Install local skill to both agents
+skills/            # Shared skills (local + remote)
+claude/            # Claude Code configs (settings, commands, scripts)
 pi/                # Pi configs (settings, extensions, skills)
 ```
 
@@ -36,11 +40,14 @@ bin/sync --bootstrap
 # Remove stale symlinks
 bin/sync --prune
 
+# Add a local skill to both agents
+bin/add-skill my-skill
+
 # Add an external skill
 npx skills add owner/repo -g
 
 # Update all external skills
-npx skills update
+npx skills update -g
 ```
 
 ## Skills
@@ -56,7 +63,7 @@ All skills live in `skills/` and are symlinked to both Claude Code and Pi.
 | `crwl` | Web crawling with Crawl4AI CLI |
 | `hcloud` | Hetzner Cloud infrastructure via hcloud CLI |
 | `marp` | Slide presentations from Markdown |
-| `parse-pdf` | Parse PDFs to markdown |
+| `doc-extract` | Extract documents to clean markdown |
 | `prd` | Generate Product Requirements Documents |
 | `skill-creator` | Guide for creating new skills |
 
@@ -90,9 +97,9 @@ skills/my-skill/
 └── SKILL.md
 ```
 
-Then install it: `npx skills add ~/.agents/skills/my-skill -g -a claude-code -a pi --yes`
+Then install it: `bin/add-skill my-skill`
 
 ## Adding agent-specific content
 
-- **Claude Code**: Add files under `claude/` (rules, commands, scripts)
+- **Claude Code**: Add files under `claude/` (commands, scripts)
 - **Pi**: Add extensions under `pi/extensions/`, skills under `pi/skills/`
