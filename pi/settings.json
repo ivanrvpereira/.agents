@@ -17,7 +17,8 @@
     {
       "source": "git:github.com/mitsuhiko/agent-stuff",
       "skills": []
-    }
+    },
+    "npm:pi-perplexity"
   ],
   "lastChangelogVersion": "0.54.2",
   "theme": "dark"
