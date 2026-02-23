@@ -51,7 +51,7 @@ curl -sL "https://example.com/document.pdf" -o /tmp/document.pdf
 
 ### With LLM enhancement
 
-Uses Gemini 2.5 Flash. API key fetched from 1Password at runtime — never stored in config or CLI args.
+Uses Gemini 2.5 Flash. Requires `GOOGLE_API_KEY` in the environment.
 
 **What LLM adds:** image alt-text, better table merging, improved header detection. Body text extraction is identical without it.
 
@@ -90,4 +90,3 @@ Note: DPI affects image-based processing (PDFs, scanned images). Text-native for
 
 - Output dir defaults to a temp dir if omitted (path printed to stderr)
 - Accepts a single file or a directory of documents
-- API key never stored in config — fetched from 1Password at runtime
