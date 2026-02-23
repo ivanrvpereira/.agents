@@ -1,6 +1,6 @@
 {
   "defaultProvider": "anthropic",
-  "defaultModel": "claude-opus-4-6",
+  "defaultModel": "claude-sonnet-4-6",
   "defaultThinkingLevel": "high",
   "hideThinkingBlock": false,
   "enabledModels": [
@@ -12,7 +12,13 @@
   ],
   "packages": [
     "npm:pi-screenshots-picker",
-    "npm:pi-superpowers-plus"
+    "npm:pi-superpowers-plus",
+    "npm:@coctostan/pi-exa-gh-web-tools",
+    {
+      "source": "git:github.com/mitsuhiko/agent-stuff",
+      "skills": []
+    }
   ],
-  "lastChangelogVersion": "0.53.0"
+  "lastChangelogVersion": "0.54.2",
+  "theme": "dark"
 }
