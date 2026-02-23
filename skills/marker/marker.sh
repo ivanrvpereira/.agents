@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# parse-pdf.sh — Extract documents to markdown using marker-pdf
+# marker.sh — Extract documents to markdown using marker-pdf
 # Supports: PDF, images (PNG/JPG/TIFF/etc.), PPTX, DOCX, XLSX, HTML, EPUB
-# Usage: parse-pdf.sh <input> [output_dir] [--use-llm] [--low-dpi]
+# Usage: marker.sh <input> [output_dir] [--use-llm] [--low-dpi]
 
 OP_GEMINI_REF="op://development/gemini-api-key/credential"
 
@@ -19,7 +19,7 @@ MIN_LOWRES_DPI=48
 MIN_HIGHRES_DPI=72
 
 usage() {
-  echo "Usage: parse-pdf.sh <input|input_dir> [output_dir] [--use-llm] [--low-dpi]"
+  echo "Usage: marker.sh <input|input_dir> [output_dir] [--use-llm] [--low-dpi]"
   echo ""
   echo "Supported: PDF, images (PNG/JPG/TIFF/etc.), PPTX, DOCX, XLSX, HTML, EPUB"
   echo ""
