@@ -1,80 +1,50 @@
 ---
 name: marker
-description: Parse documents to markdown using marker-pdf. Supports PDF, images (PNG/JPG/TIFF/etc.), PPTX, DOCX, XLSX, HTML, and EPUB. Use when the user asks to read, extract, or parse document content.
+description: Parse documents to markdown using marker-pdf. Supports PDF, images (PNG/JPG/TIFF/BMP/GIF/WebP), PPTX, DOCX, XLSX, HTML, and EPUB. Use when the user asks to read, extract, parse, or convert document content to markdown.
 ---
 
 # marker — Document to Markdown
 
-Parse documents into clean markdown using `marker-pdf` via the `marker.sh` wrapper script.
-
-Script location: `~/.agents/skills/marker/marker.sh`
+Parse documents into clean markdown via `~/.agents/skills/marker/marker.sh`.
 
 **Supported formats:** PDF, images (PNG/JPG/TIFF/BMP/GIF/WebP), PPTX, DOCX, XLSX, HTML, EPUB
-
-## Triggers
-
-- `parse/read/extract this document/pdf/file`
-- `convert X to markdown`
 
 ## Quick Reference
 
 ```bash
-# Basic extraction
-~/.agents/skills/marker/marker.sh /path/to/file [output_dir]
+# Basic
+marker.sh /path/to/file [output_dir]
 
-# With LLM enhancement (Gemini 2.5 Flash — better tables, headers, image descriptions)
-~/.agents/skills/marker/marker.sh /path/to/file [output_dir] --use-llm
+# LLM-enhanced (better tables, headers, image descriptions) — requires GOOGLE_API_KEY
+marker.sh /path/to/file [output_dir] --use-llm
 
-# Large documents — lower DPI to reduce memory (~68% less)
-~/.agents/skills/marker/marker.sh /path/to/file [output_dir] --low-dpi
+# Force OCR — fixes garbled text, enables proper inline math
+marker.sh /path/to/file [output_dir] --force-ocr
 
-# Flags can be combined
-~/.agents/skills/marker/marker.sh /path/to/file [output_dir] --use-llm --low-dpi
+# Specific pages only
+marker.sh /path/to/file [output_dir] --page-range=0,5-10,20
+
+# Large documents — lower DPI, ~68% less memory
+marker.sh /path/to/file [output_dir] --low-dpi
+
+# Remote file
+curl -sL "https://example.com/doc.pdf" -o /tmp/doc.pdf && marker.sh /tmp/doc.pdf
 ```
 
-## Usage
-
-### Local file
-
-```bash
-~/.agents/skills/marker/marker.sh "/path/to/document.docx" /tmp/output
-```
-
-Prints the output `.md` path to stdout.
-
-### Remote file
-
-```bash
-curl -sL "https://example.com/document.pdf" -o /tmp/document.pdf
-~/.agents/skills/marker/marker.sh /tmp/document.pdf /tmp/output
-```
-
-### With LLM enhancement
-
-Uses Gemini 2.5 Flash. Requires `GOOGLE_API_KEY` in the environment.
-
-**What LLM adds:** image alt-text, better table merging, improved header detection. Body text extraction is identical without it.
-
-### Large documents (--low-dpi)
-
-Reduces DPI from 96/192 to 72/96, cutting memory ~68% per page. Use for documents that crash or are very large (100+ pages).
-
-### Crash recovery
-
-3-tier auto-retry on crash:
-
-1. **Default DPI** (96/192) — first attempt
-2. **Low DPI** (72/96) — auto-retry if default crashes
-3. **Minimum DPI** (48/72) — final fallback
-
-If `--low-dpi` is passed, starts at tier 2.
+Prints the output `.md` path to stdout. Output dir defaults to a temp dir if omitted.
 
 ## Flags
 
 | Flag | Effect |
 |------|--------|
-| `--use-llm` | Gemini 2.5 Flash enhancement (image descriptions, better tables/headers) |
-| `--low-dpi` | Lower DPI (72/96), ~68% less memory — use for large documents |
+| `--use-llm` | Gemini 2.5 Flash enhancement — better tables, merged headers, image alt-text. Requires `GOOGLE_API_KEY`. |
+| `--force-ocr` | Force OCR on all pages. Use for garbled/corrupted text or to enable proper inline math. |
+| `--page-range=` | Convert specific pages, e.g. `0,5-10,20`. |
+| `--low-dpi` | Lower DPI (72/96), ~68% less memory — use for large docs (100+ pages). |
+
+## LLM Services
+
+Default LLM is Gemini 2.5 Flash (`GOOGLE_API_KEY`). For other backends (Ollama, Claude, OpenAI, Vertex), call `marker` directly with `--llm_service`. See [upstream docs](https://github.com/datalab-to/marker#llm-services).
 
 ## DPI Presets
 
@@ -84,9 +54,11 @@ If `--low-dpi` is passed, starts at tier 2.
 | Low (`--low-dpi`) | 72 / 96 | ~4 MB | Large documents (100+ pages) |
 | Minimum (auto-fallback) | 48 / 72 | ~2 MB | Crash recovery only |
 
-Note: DPI affects image-based processing (PDFs, scanned images). Text-native formats (DOCX, HTML, EPUB) are less sensitive to DPI settings.
+Auto-retries on crash: default → low DPI → minimum DPI.
 
-## Notes
+## Troubleshooting
 
-- Output dir defaults to a temp dir if omitted (path printed to stderr)
-- Accepts a single file or a directory of documents
+- **Garbled or wrong text** — use `--force-ocr`
+- **Bad tables** — use `--use-llm`
+- **Out of memory / crash** — use `--low-dpi`, or split the document
+- **Inline math not rendering** — use `--force-ocr` (with `--use-llm` for highest quality)

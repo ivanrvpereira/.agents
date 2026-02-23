@@ -19,13 +19,15 @@ MIN_LOWRES_DPI=48
 MIN_HIGHRES_DPI=72
 
 usage() {
-  echo "Usage: marker.sh <input|input_dir> [output_dir] [--use-llm] [--low-dpi]"
+  echo "Usage: marker.sh <input|input_dir> [output_dir] [options]"
   echo ""
   echo "Supported: PDF, images (PNG/JPG/TIFF/etc.), PPTX, DOCX, XLSX, HTML, EPUB"
   echo ""
   echo "Options:"
-  echo "  --use-llm   Enable LLM-enhanced extraction (Gemini 2.5 Flash via 1Password)"
-  echo "  --low-dpi   Use lower DPI (72/96) to reduce memory for large documents"
+  echo "  --use-llm              LLM-enhanced extraction (Gemini 2.5 Flash, requires GOOGLE_API_KEY)"
+  echo "  --low-dpi              Lower DPI (72/96), ~68% less memory — for large documents"
+  echo "  --force-ocr            Force OCR on all pages (fixes garbled text, enables inline math)"
+  echo "  --page-range=0,5-10   Convert specific pages only"
   echo ""
   echo "On crash, auto-retries with minimum DPI (48/72)."
   exit 1
@@ -35,20 +37,26 @@ usage() {
 
 USE_LLM=false
 LOW_DPI=false
+FORCE_OCR=false
+PAGE_RANGE=""
 
 # Parse flags from any position
 for arg in "$@"; do
   case "$arg" in
     --use-llm) USE_LLM=true ;;
     --low-dpi) LOW_DPI=true ;;
+    --force-ocr) FORCE_OCR=true ;;
+    --page-range=*) PAGE_RANGE="${arg#--page-range=}" ;;
   esac
 done
 
 # Strip flags from positional args
 POSITIONAL=()
+skip_next=false
 for arg in "$@"; do
+  if $skip_next; then skip_next=false; continue; fi
   case "$arg" in
-    --use-llm|--low-dpi) ;;
+    --use-llm|--low-dpi|--force-ocr|--page-range=*) ;;
     *) POSITIONAL+=("$arg") ;;
   esac
 done
@@ -88,6 +96,14 @@ MARKER_ARGS=(
 
 if $LOW_DPI; then
   MARKER_ARGS+=(--lowres_image_dpi "$LOW_LOWRES_DPI" --highres_image_dpi "$LOW_HIGHRES_DPI")
+fi
+
+if $FORCE_OCR; then
+  MARKER_ARGS+=(--force_ocr)
+fi
+
+if [[ -n "$PAGE_RANGE" ]]; then
+  MARKER_ARGS+=(--page_range "$PAGE_RANGE")
 fi
 
 if $USE_LLM; then
