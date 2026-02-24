@@ -33,6 +33,8 @@ Before writing anything, analyze and report:
 
 Present findings to the user before generating files. Ask about any gaps.
 
+**Filter ruthlessly:** Most of what you discover does NOT belong in the AGENTS.md. Models can read package.json, explore file trees, and grep codebases on their own. Only carry forward information the model can't discover or consistently gets wrong. When in doubt, leave it out — you can always add it later when a real problem surfaces.
+
 ### Phase 2: Reconcile CLAUDE.md and AGENTS.md
 
 Check for existing files at the project root:
@@ -126,6 +128,33 @@ Present files in order with paths:
 [content]
 ```
 
+### Anti-Patterns
+
+Avoid these in generated AGENTS.md files:
+
+**Writing style:**
+- No filler intros ("Welcome to...", "This document explains...")
+- No condescending tone ("You should...", "Remember to...", "Make sure to...")
+- No prose paragraphs — use headers, bullets, and code blocks
+- No explaining "why" — state the rule, not the rationale
+- No duplicating skill content — reference the skill file path instead
+
+**Content quality:**
+- No hallucinated paths — verify every file reference exists before writing
+- No restating model knowledge — frontier models already know best practices (e.g., "use descriptive names", "handle errors", "follow DRY"). Only document project-specific deviations from standard practice.
+- No restating discoverable info — if the model can find it by reading package.json, tsconfig, file structure, or grepping the codebase, it doesn't belong in the AGENTS.md. Only include what the model can't find or consistently gets wrong.
+- No negative instructions — mentioning something (even "don't use X") biases the model toward it. Remove the topic entirely, or restructure the codebase so the wrong path is harder to reach.
+- No placeholder commands — extract real commands or ask the user
+- No contradictions between root and sub-files
+- No stale versions — extract programmatically from package.json/lockfiles
+
+**Structure:**
+- No embedded code snippets — use `file:line` references (snippets go stale)
+- No vague stack descriptions — include specific versions
+- No missing boundaries — always include "Never commit secrets"
+- No using LLMs as linters — delegate formatting to tools/hooks
+- No uncurated /init output — LLM-generated context files perform worse than no file at all. Always manually review and strip auto-generated content down to only what the model can't discover on its own.
+
 ### Quality Gate
 
 Before presenting, verify:
@@ -141,46 +170,35 @@ Before presenting, verify:
 
 ## Review
 
-Read [references/review-checklist.md](references/review-checklist.md) for the full scoring rubric.
-
 ### Process
 
 1. Read the existing AGENTS.md (and any sub-files)
-2. Read [references/best-practices.md](references/best-practices.md) for the complete best practices guide
-3. Score each section using the checklist (0-2 per section, /20 total)
-4. For each gap, provide a specific recommendation with a concrete example of what to add
-5. Flag any anti-patterns found (vague instructions, missing commands, embedded snippets, etc.)
+2. Evaluate against these criteria:
+   - Every line passes the "can the model discover this on its own?" test
+   - Commands are copy-paste ready and actually run
+   - File references point to paths that exist
+   - No section exceeds 20 lines (extract to sub-file)
+   - Root file is under 300 lines, ideally 30-60
+   - No duplication between root and sub-files
+   - No lines compressible 50%+ without losing meaning
+   - Boundaries include "never commit secrets" and read-only dirs
+   - Destructive/production actions gated behind "ask first"
+   - All anti-patterns from the Generate workflow are absent
+3. Propose a rewritten AGENTS.md (or diff) fixing every issue found
+4. For each change, include a one-line rationale
 
-### Report Format
+### Output Format
 
-```markdown
-## AGENTS.md Review
-
-### Score: X/16
-
-### Strengths
-- [What's working well]
-
-### Issues
-1. **[Section]**: [Problem] → [Specific fix with example]
-2. ...
-
-### Recommended Changes
-[Concrete diff-style suggestions or rewritten sections]
-```
+Present the proposed rewrite as a complete file (or files), not a report card. Precede it with a short summary of what changed and why.
 
 ---
 
 ## Update
 
 1. Read the existing AGENTS.md
-2. Identify what changed in the codebase (new packages, changed commands, updated stack)
-3. Apply changes while preserving manual content
-4. Verify the file still meets the quality gate from the Generate workflow
+2. **Subtract first:** Remove lines the model no longer gets wrong, stale references, and anything discoverable from the codebase. With each model generation, agents need less steering — prune aggressively.
+3. Identify what changed in the codebase (new packages, changed commands, updated stack)
+4. Apply changes while preserving manual content
+5. Verify the file still meets the quality gate from the Generate workflow
 
----
 
-## References
-
-- **[references/best-practices.md](references/best-practices.md)** — Comprehensive best practices guide synthesized from analysis of 2,500+ repositories. Read when generating or reviewing.
-- **[references/review-checklist.md](references/review-checklist.md)** — Scoring rubric and checklist for auditing AGENTS.md files. Read when reviewing.
