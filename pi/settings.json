@@ -1,7 +1,7 @@
 {
   "defaultProvider": "anthropic",
-  "defaultModel": "claude-sonnet-4-6",
-  "defaultThinkingLevel": "high",
+  "defaultModel": "claude-opus-4-6",
+  "defaultThinkingLevel": "xhigh",
   "hideThinkingBlock": false,
   "enabledModels": [
     "claude-opus-4-6:xhigh",
@@ -20,7 +20,12 @@
       "skills": []
     },
     "npm:pi-perplexity",
-    {"source": "git:github.com/nicobailon/visual-explainer", "skills": ["SKILL.md"]}
+    {
+      "source": "git:github.com/nicobailon/visual-explainer",
+      "skills": [
+        "SKILL.md"
+      ]
+    }
   ],
   "lastChangelogVersion": "0.55.4",
   "theme": "dark"
