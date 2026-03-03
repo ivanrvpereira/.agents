@@ -12,14 +12,16 @@
   ],
   "packages": [
     "npm:pi-screenshots-picker",
-    "npm:pi-superpowers-plus",
+    "npm:pi-subagents",
+    "npm:pi-boomerang",
     "npm:@coctostan/pi-exa-gh-web-tools",
     {
       "source": "git:github.com/mitsuhiko/agent-stuff",
       "skills": []
     },
-    "npm:pi-perplexity"
+    "npm:pi-perplexity",
+    {"source": "git:github.com/nicobailon/visual-explainer", "skills": ["SKILL.md"]}
   ],
-  "lastChangelogVersion": "0.54.2",
+  "lastChangelogVersion": "0.55.4",
   "theme": "dark"
 }
