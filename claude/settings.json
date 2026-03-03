@@ -167,6 +167,7 @@
       "Bash(tmux:*)"
     ]
   },
+  "model": "opus",
   "hooks": {
     "Stop": [
       {
@@ -205,8 +206,8 @@
     "typescript-lsp@claude-plugins-official": false,
     "pyright-lsp@claude-plugins-official": false,
     "gopls-lsp@claude-plugins-official": false,
-    "example-skills@anthropic-agent-skills": false
+    "example-skills@anthropic-agent-skills": false,
+    "figma@claude-plugins-official": true
   },
-  "skipDangerousModePermissionPrompt": true,
-  "model": "opus"
+  "skipDangerousModePermissionPrompt": true
 }
