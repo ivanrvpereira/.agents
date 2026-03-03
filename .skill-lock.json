@@ -78,9 +78,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mitsuhiko/agent-stuff.git",
       "skillPath": "skills/uv/SKILL.md",
-      "skillFolderHash": "4d5f7ddace5cf5367dbf5b5c4837af3cbd2fe734",
+      "skillFolderHash": "6d73099efb1a59e824fe2b63102a669bbf338bfe",
       "installedAt": "2026-02-19T13:36:43.174Z",
-      "updatedAt": "2026-02-19T13:36:43.174Z"
+      "updatedAt": "2026-03-03T08:07:17.675Z"
     },
     "tmux": {
       "source": "mitsuhiko/agent-stuff",
@@ -96,9 +96,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/goncalossilva/.agents.git",
       "skillPath": "skills/oracle/SKILL.md",
-      "skillFolderHash": "054f18f5d293e1e52be582becd659a4aee72ae1f",
+      "skillFolderHash": "",
       "installedAt": "2026-02-19T13:43:51.177Z",
-      "updatedAt": "2026-02-19T13:43:51.177Z"
+      "updatedAt": "2026-02-26T10:32:02.321Z"
     },
     "deep-research": {
       "source": "199-biotechnologies/claude-deep-research-skill",
@@ -123,9 +123,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
       "skillPath": "skills/react-best-practices/SKILL.md",
-      "skillFolderHash": "079b06a135401704ea94ab74c7c9d86c92ba259f",
+      "skillFolderHash": "fce8b5a24ff4ff2fc5db6aa1051e03b53c6b5bf1",
       "installedAt": "2026-02-19T15:14:48.836Z",
-      "updatedAt": "2026-02-19T15:14:48.836Z"
+      "updatedAt": "2026-03-03T08:07:21.416Z"
     }
   },
   "dismissed": {}

@@ -1,6 +1,6 @@
 ---
 name: oracle
-description: Get a second opinion by bundling a prompt + a curated file set, then asking another powerful LLM for debugging, refactor advice, design checks, or cross-validation.
+description: Get a second opinion by bundling a prompt + a curated file set, then asking another powerful LLM for debugging, refactor advice, design checks, or code reviews.
 ---
 
 # Oracle (cross-model)
@@ -38,6 +38,8 @@ $HOME/.agents/skills/oracle/scripts/oracle-to-codex -p "<task>" --file "src/**" 
 
 - Prefer a minimal file set over “whole repo”.
 - If you need diffs reviewed, paste the diff into the prompt or attach the diff file via `--file`.
-- Make the prompt completely standalone: include error text, constraints, and the desired output format (plan vs patch vs pros/cons).
+- Make the prompt completely standalone: include intent, goals, constraints, error text (if any), and the desired output format (plan vs patch vs pros/cons.
 - Never include secrets (`.env`, tokens, key files).
+- Instruct the Oracle to be thorough. For example, if asking for a general code review, ask for feedback on the correctness of the solution, consistency with existing code, simplicity (no unecessary complexity, abstractions, etc), maintainability, performance, security, and edge cases.
+- Don't blindly follow Oracle's ideas or recommendations. Reason from first principles, and be clear on what has merit, and what doesn't.
 - Oracle can be slow while it reasons. Allow it several minutes to process.
