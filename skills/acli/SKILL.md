@@ -74,6 +74,8 @@ acli jira workitem edit --jql "project = PROJ AND labels = old" --labels "new" -
 acli jira workitem edit --from-json workitem.json
 ```
 
+> **Rich ADF descriptions:** `--description-file` only works for plain paragraphs. For headings, tables, lists, or any rich formatting, use `--from-json` with the ADF embedded in the workitem JSON. See `references/adf.md` for details.
+
 ### Assign
 
 ```bash
@@ -94,13 +96,11 @@ acli jira workitem transition --jql "project = PROJ AND labels = ready" --status
 
 ```bash
 acli jira workitem comment create --key KEY-123 --body "Comment text"
-acli jira workitem comment create --key KEY-123 --body-file comment.txt
+acli jira workitem comment create --key KEY-123 --body-file comment.json
 acli jira workitem comment create --key KEY-123 --editor
 acli jira workitem comment create --key KEY-123 --edit-last
 acli jira workitem comment create --jql "project = PROJ" --body "Bulk comment" --ignore-errors
 ```
-
-See `references/adf.md` for ADF (Atlassian Document Format) when rich formatting is needed.
 
 ### Attachments
 
@@ -165,6 +165,17 @@ See `references/jql.md` for full syntax. Key rules:
 - `~` is "contains" (text search)
 - Functions: `currentUser()`, `now()`, `startOfDay()`, `endOfWeek()`
 - Operators: `AND`, `OR`, `NOT`, `IN`, `IS`, `IS NOT`, `ORDER BY`
+
+## Rich Text (ADF)
+
+Jira Cloud uses **Atlassian Document Format** (ADF) — a JSON structure — for descriptions, comments, and textarea custom fields. Plain `\n` newlines don't create formatting.
+
+**When creating or editing issue content that needs any formatting** (headings, bold, lists, code blocks, tables, links, panels), **read `references/adf.md` first** for the full ADF syntax reference and recipes.
+
+Key rules:
+- Always write ADF JSON to a temp file, then use `--description-file` / `--body-file`. Never pass ADF inline — shell escaping will corrupt it.
+- Wrap everything in `{"version": 1, "type": "doc", "content": [...]}`.
+- Use marks (`strong`, `em`, `code`, `link`, `strike`, `underline`) on `text` nodes for inline formatting.
 
 ## Tips
 
