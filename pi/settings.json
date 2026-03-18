@@ -4,11 +4,10 @@
   "defaultThinkingLevel": "xhigh",
   "hideThinkingBlock": false,
   "enabledModels": [
-    "claude-opus-4-6:xhigh",
-    "claude-sonnet-4-5:xhigh",
-    "claude-sonnet-4:medium",
-    "claude-haiku-4-5:medium",
-    "gpt-5.3-codex:high"
+    "anthropic/claude-opus-4-6:medium",
+    "anthropic/claude-sonnet-4-6:off",
+    "openai-codex/gpt-5.4:medium",
+    "openai-codex/gpt-5.3-codex:medium"
   ],
   "packages": [
     "npm:pi-screenshots-picker",
@@ -20,6 +19,7 @@
       "skills": []
     },
     "npm:pi-perplexity",
+    "npm:pi-interview",
     {
       "source": "git:github.com/nicobailon/visual-explainer",
       "skills": [
@@ -27,6 +27,9 @@
       ]
     }
   ],
-  "lastChangelogVersion": "0.55.4",
+  "extensions": [
+    "~/.agents/pi/extensions"
+  ],
+  "lastChangelogVersion": "0.60.0",
   "theme": "dark"
 }

@@ -167,7 +167,6 @@
       "Bash(tmux:*)"
     ]
   },
-  "model": "opus",
   "hooks": {
     "Stop": [
       {
@@ -207,7 +206,9 @@
     "pyright-lsp@claude-plugins-official": false,
     "gopls-lsp@claude-plugins-official": false,
     "example-skills@anthropic-agent-skills": false,
-    "figma@claude-plugins-official": true
+    "figma@claude-plugins-official": true,
+    "notion-workspace-plugin@notion-plugin-marketplace": true
   },
+  "effortLevel": "high",
   "skipDangerousModePermissionPrompt": true
 }
