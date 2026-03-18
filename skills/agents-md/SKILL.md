@@ -48,9 +48,9 @@ The end state is always: `CLAUDE.md` starts with `@AGENTS.md`, and all agent-agn
 
 ### Phase 3: Write the Root AGENTS.md
 
-Target: **30-60 lines** for the root file. Maximum 300 lines. Every line must be universally applicable — no task-specific content in the root.
+Target: **30-60 lines** for the root file. Maximum 300 lines. Instruction-following quality degrades as document length increases — keep it tight. Every line must be universally applicable — no task-specific content in the root.
 
-Include all six essential sections:
+Include all essential sections:
 
 ```markdown
 # Project Name
@@ -61,6 +61,14 @@ Include all six essential sections:
 ## Commands
 [Copy-paste ready commands with full flags — build, test, lint, typecheck]
 
+## File-Scoped Commands
+[Per-file test/lint/typecheck commands — faster and cheaper than full project builds]
+| Task | Command |
+|------|---------|
+| Typecheck | `pnpm tsc --noEmit path/to/file.ts` |
+| Lint | `pnpm eslint path/to/file.ts` |
+| Test | `pnpm jest path/to/file.test.ts` |
+
 ## Structure
 [Directory layout with purposes and access levels (read/write/never modify)]
 
@@ -70,6 +78,10 @@ Include all six essential sections:
 
 ## Git
 [Commit format, branching strategy, PR process]
+
+## Commit Attribution
+AI commits MUST include:
+Co-Authored-By: (the agent's name and attribution byline)
 
 ## Boundaries
 
@@ -85,6 +97,7 @@ Include all six essential sections:
 
 **Key rules:**
 - Commands must be copy-paste ready with full syntax
+- Prefer file-scoped commands over project-wide builds (per-file is faster and cheaper)
 - Reference actual project files (`src/components/Button.tsx`), not hypothetical ones
 - Delegate code formatting to tools/hooks, not instructions
 - Use `file:line` references instead of embedding code snippets
@@ -147,6 +160,7 @@ Avoid these in generated AGENTS.md files:
 - No placeholder commands — extract real commands or ask the user
 - No contradictions between root and sub-files
 - No stale versions — extract programmatically from package.json/lockfiles
+- No listing installed skills or plugins — agents discover these automatically
 
 **Structure:**
 - No embedded code snippets — use `file:line` references (snippets go stale)
@@ -154,6 +168,7 @@ Avoid these in generated AGENTS.md files:
 - No missing boundaries — always include "Never commit secrets"
 - No using LLMs as linters — delegate formatting to tools/hooks
 - No uncurated /init output — LLM-generated context files perform worse than no file at all. Always manually review and strip auto-generated content down to only what the model can't discover on its own.
+- No full project-wide build commands when file-scoped alternatives exist
 
 ### Quality Gate
 
@@ -165,6 +180,7 @@ Before presenting, verify:
 - Examples reference real project paths
 - No duplication between root and sub-files
 - "Never commit secrets" or equivalent is present
+- Commit Attribution section is present
 
 ---
 
@@ -183,6 +199,8 @@ Before presenting, verify:
    - No lines compressible 50%+ without losing meaning
    - Boundaries include "never commit secrets" and read-only dirs
    - Destructive/production actions gated behind "ask first"
+   - File-scoped commands are preferred over project-wide builds
+   - Commit Attribution section is present
    - All anti-patterns from the Generate workflow are absent
 3. Propose a rewritten AGENTS.md (or diff) fixing every issue found
 4. For each change, include a one-line rationale
