@@ -96,3 +96,5 @@ The sync script backs up existing non-symlink files as `.bak` before replacing t
 - `claude/settings.json` — permissions (allow/deny/ask), hooks, plugins, model defaults. This is the most complex file; changes affect what Claude Code can do across all projects.
 - `claude/install-plugins.sh` — declarative plugin installation from multiple marketplaces. Run via `bin/sync --bootstrap`.
 - `AGENTS.md` — shared behavioral instructions loaded by both agents. Keep concise — every line applies globally.
+
+read @AGENTS.local.md
