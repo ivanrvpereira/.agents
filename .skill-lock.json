@@ -15,9 +15,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/skills.git",
       "skillPath": "skills/find-skills/SKILL.md",
-      "skillFolderHash": "c2f31172b6f256272305a5e6e7228b258446899f",
+      "skillFolderHash": "3013fdeb8a11b10b1eb795ec3ae8bfca38f7c26d",
       "installedAt": "2026-02-19T13:00:52.639Z",
-      "updatedAt": "2026-02-19T13:00:52.639Z"
+      "updatedAt": "2026-03-14T11:07:02.257Z"
     },
     "web-design-guidelines": {
       "source": "vercel-labs/agent-skills",
@@ -69,9 +69,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/mitsuhiko/agent-stuff.git",
       "skillPath": "skills/summarize/SKILL.md",
-      "skillFolderHash": "14b51a3413413bfe6c7b05666bd33cf2ebb7a2e5",
+      "skillFolderHash": "fe35bfe1f6508105f2baf70cd71b6351c0b0bfe4",
       "installedAt": "2026-02-19T13:36:27.173Z",
-      "updatedAt": "2026-02-19T13:36:27.173Z"
+      "updatedAt": "2026-03-11T08:33:27.938Z"
     },
     "uv": {
       "source": "mitsuhiko/agent-stuff",
@@ -123,9 +123,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
       "skillPath": "skills/react-best-practices/SKILL.md",
-      "skillFolderHash": "fce8b5a24ff4ff2fc5db6aa1051e03b53c6b5bf1",
+      "skillFolderHash": "",
       "installedAt": "2026-02-19T15:14:48.836Z",
-      "updatedAt": "2026-03-03T08:07:21.416Z"
+      "updatedAt": "2026-03-14T11:23:14.580Z"
     }
   },
   "dismissed": {}
