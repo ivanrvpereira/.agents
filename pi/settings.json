@@ -20,7 +20,7 @@
         "pi-extensions/*.ts",
         "!pi-extensions/control.ts",
         "!pi-extensions/go-to-bed.ts",
-        "!pi-extensions/multi-edit.ts",
+
         "!pi-extensions/notify.ts",
         "!pi-extensions/whimsical.ts"
       ],
@@ -37,7 +37,9 @@
     "git:github.com/HazAT/pi-interactive-subagents",
     {
       "source": "https://github.com/espennilsen/pi",
-      "extensions": ["extensions/pi-cmux/src/index.ts"],
+      "extensions": [
+        "extensions/pi-cmux/src/index.ts"
+      ],
       "skills": [],
       "prompts": [],
       "themes": []
