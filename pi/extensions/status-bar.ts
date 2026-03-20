@@ -49,7 +49,7 @@ interface GitStats {
 
 function getGitStats(): GitStats | null {
 	try {
-		const out = execSync("git status --porcelain -b", { encoding: "utf-8", timeout: 5000 });
+		const out = execSync("git status --porcelain -b", { encoding: "utf-8", timeout: 5000, stdio: ["pipe", "pipe", "pipe"] });
 		const lines = out.split("\n").filter(Boolean);
 		const stats: GitStats = { modified: 0, added: 0, deleted: 0, untracked: 0, ahead: 0, behind: 0, stash: 0 };
 
@@ -70,7 +70,7 @@ function getGitStats(): GitStats | null {
 		}
 
 		try {
-			const stashOut = execSync("git stash list", { encoding: "utf-8", timeout: 2000 });
+			const stashOut = execSync("git stash list", { encoding: "utf-8", timeout: 2000, stdio: ["pipe", "pipe", "pipe"] });
 			stats.stash = stashOut.split("\n").filter(Boolean).length;
 		} catch {}
 
@@ -94,9 +94,29 @@ function formatGitStats(stats: GitStats, theme: any): string {
 
 export default function (pi: ExtensionAPI) {
 	let cachedGitStats: GitStats | null = null;
+	let isGitRepo: boolean | null = null;
+	let lastCwd: string | null = null;
+
+	function detectGitRepo(): boolean {
+		try {
+			const out = execSync("git rev-parse --is-inside-work-tree", {
+				encoding: "utf-8",
+				timeout: 2000,
+				stdio: ["pipe", "pipe", "pipe"],
+			}).trim();
+			return out === "true";
+		} catch {
+			return false;
+		}
+	}
 
 	function refreshGitStats() {
-		cachedGitStats = getGitStats();
+		const cwd = process.cwd();
+		if (cwd !== lastCwd) {
+			lastCwd = cwd;
+			isGitRepo = detectGitRepo();
+		}
+		cachedGitStats = isGitRepo ? getGitStats() : null;
 	}
 
 	pi.on("session_start", async (_event, ctx) => {
@@ -136,7 +156,7 @@ export default function (pi: ExtensionAPI) {
 					let pwd = process.cwd();
 					const home = process.env.HOME || process.env.USERPROFILE;
 					if (home && pwd.startsWith(home)) pwd = `~${pwd.slice(home.length)}`;
-					const branch = footerData.getGitBranch();
+					const branch = isGitRepo ? footerData.getGitBranch() : null;
 					if (branch) pwd = `${pwd} (${branch})`;
 					const sessionName = ctx.sessionManager.getSessionName();
 					if (sessionName) pwd = `${pwd} • ${sessionName}`;
