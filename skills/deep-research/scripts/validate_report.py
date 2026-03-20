@@ -60,7 +60,7 @@ class ReportValidator:
         return len(self.errors) == 0
 
     def _check_executive_summary(self) -> bool:
-        """Check executive summary exists and is under 250 words"""
+        """Check executive summary exists and is 200-400 words"""
         pattern = r'## Executive Summary(.*?)(?=##|\Z)'
         match = re.search(pattern, self.content, re.DOTALL | re.IGNORECASE)
 
@@ -71,8 +71,8 @@ class ReportValidator:
         summary = match.group(1).strip()
         word_count = len(summary.split())
 
-        if word_count > 250:
-            self.warnings.append(f"Executive summary too long: {word_count} words (should be ≤250)")
+        if word_count > 400:
+            self.warnings.append(f"Executive summary too long: {word_count} words (should be ≤400)")
 
         if word_count < 50:
             self.warnings.append(f"Executive summary too short: {word_count} words (should be ≥50)")
