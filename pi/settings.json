@@ -11,25 +11,35 @@
   ],
   "packages": [
     "npm:pi-screenshots-picker",
-    "npm:pi-subagents",
     "npm:pi-boomerang",
     "npm:@coctostan/pi-exa-gh-web-tools",
     {
       "source": "git:github.com/mitsuhiko/agent-stuff",
-      "skills": []
+      "skills": [],
+      "extensions": [
+        "pi-extensions/*.ts",
+        "!pi-extensions/control.ts",
+        "!pi-extensions/go-to-bed.ts",
+        "!pi-extensions/multi-edit.ts",
+        "!pi-extensions/notify.ts",
+        "!pi-extensions/whimsical.ts"
+      ],
+      "themes": []
     },
     "npm:pi-perplexity",
-    "npm:pi-interview",
     {
       "source": "git:github.com/nicobailon/visual-explainer",
       "skills": [
         "SKILL.md"
       ]
-    }
+    },
+    "npm:pi-librarian",
+    "git:github.com/HazAT/pi-interactive-subagents",
+    "../../../../tmp/pi-cmux-compare/espennilsen-pi/extensions/pi-cmux"
   ],
   "extensions": [
     "~/.agents/pi/extensions"
   ],
-  "lastChangelogVersion": "0.60.0",
+  "lastChangelogVersion": "0.61.0",
   "theme": "dark"
 }
