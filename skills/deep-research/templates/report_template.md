@@ -79,7 +79,7 @@ CITATION TRACKING (CRITICAL):
 
 ## Executive Summary
 
-[Write 3-5 bullet points, 50-250 words total]
+[Write 3-5 bullet points, 200-400 words total]
 - **Key Finding 1:** [Major discovery with specific data/metrics]
 - **Key Finding 2:** [Important insight with evidence]
 - **Key Finding 3:** [Critical conclusion with implications]
@@ -116,7 +116,7 @@ CITATION TRACKING (CRITICAL):
 
 ## Main Analysis
 
-<!-- CRITICAL: Write 4-8 detailed findings, each 300-500 words -->
+<!-- CRITICAL: Write 4-8 detailed findings, each 600-2,000 words -->
 <!-- Each finding should have multiple paragraphs with evidence -->
 <!-- Include specific data, quotes, statistics, not vague statements -->
 <!-- PRECISION: Use exact numbers, specific metrics, no fluff words -->
@@ -319,9 +319,9 @@ CITATION TRACKING (CRITICAL):
 <!-- Format: [N] Author/Organization (Year). "Title". Publication. URL           -->
 <!-- ============================================================================ -->
 
-[1] Author Name or Organization (2025). "Full Title of Article or Paper". Publication Name or Website. https://full-url.com (Retrieved: 2025-11-04)
+[1] Author Name or Organization ([YEAR]). "Full Title of Article or Paper". Publication Name or Website. https://full-url.com (Retrieved: [CURRENT_DATE])
 
-[2] Second Author (2024). "Second Article Title". Journal Name, Volume(Issue), pages. https://doi-or-url.com (Retrieved: 2025-11-04)
+[2] Second Author ([YEAR]). "Second Article Title". Journal Name, Volume(Issue), pages. https://doi-or-url.com (Retrieved: [CURRENT_DATE])
 
 <!-- Add ALL remaining citations [3] through [N] here -->
 <!-- Standard reports: 15-30 sources | Deep/UltraDeep: 30-50 sources -->

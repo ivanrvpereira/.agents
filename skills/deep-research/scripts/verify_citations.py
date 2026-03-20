@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Citation Verification Script (Enhanced with CiteGuard techniques)
+Citation Verification Script
 
 Catches fabricated citations by checking:
 1. DOI resolution (via doi.org)
@@ -8,12 +8,6 @@ Catches fabricated citations by checking:
 3. URL accessibility verification
 4. Hallucination pattern detection (generic titles, suspicious patterns)
 5. Flags suspicious entries for manual review
-
-Enhanced in 2025 with:
-- Content alignment checking (when URL available)
-- Multi-source verification (DOI + URL + metadata cross-check)
-- Advanced hallucination detection patterns
-- Better false positive reduction
 
 Usage:
     python verify_citations.py --report [path]
@@ -31,6 +25,7 @@ from urllib import request, error
 from urllib.parse import quote
 import json
 import time
+from datetime import datetime
 
 class CitationVerifier:
     """Verify citations in research report"""
@@ -203,12 +198,13 @@ class CitationVerifier:
         # Check for inconsistent metadata
         if entry.get('year'):
             year = int(entry['year'])
+            current_year = datetime.now().year
             # Very recent without DOI or URL is suspicious
-            if year >= 2024 and not entry.get('doi') and not entry.get('url'):
-                issues.append("Recent year (2024+) with no verification method")
+            if year >= current_year - 1 and not entry.get('doi') and not entry.get('url'):
+                issues.append(f"Recent year ({year}) with no verification method")
             # Future year is definitely wrong
-            if year > 2025:
-                issues.append(f"Future year: {year}")
+            if year > current_year:
+                issues.append(f"Future year: {year} (current: {current_year})")
             # Very old with modern phrasing is suspicious
             if year < 2000 and any(word in title.lower() for word in ['ai', 'llm', 'gpt', 'transformer']):
                 issues.append(f"Anachronistic: pre-2000 ({year}) citation mentioning modern AI terms")

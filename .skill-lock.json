@@ -105,9 +105,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/199-biotechnologies/claude-deep-research-skill.git",
       "skillPath": "SKILL.md",
-      "skillFolderHash": "a725f9afa22880b367767c1639e3e956fe7d983f",
+      "skillFolderHash": "1341bdb2a18332449aeb296482e0647b48dcfef7",
       "installedAt": "2026-02-19T14:57:14.552Z",
-      "updatedAt": "2026-02-19T14:57:14.552Z"
+      "updatedAt": "2026-03-20T07:02:41.648Z"
     },
     "vercel-composition-patterns": {
       "source": "vercel-labs/agent-skills",
