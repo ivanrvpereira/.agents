@@ -35,7 +35,13 @@
     },
     "npm:pi-librarian",
     "git:github.com/HazAT/pi-interactive-subagents",
-    "../../../../tmp/pi-cmux-compare/espennilsen-pi/extensions/pi-cmux"
+    {
+      "source": "https://github.com/espennilsen/pi",
+      "extensions": ["extensions/pi-cmux/src/index.ts"],
+      "skills": [],
+      "prompts": [],
+      "themes": []
+    }
   ],
   "extensions": [
     "~/.agents/pi/extensions"
