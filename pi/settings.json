@@ -20,13 +20,12 @@
         "pi-extensions/*.ts",
         "!pi-extensions/control.ts",
         "!pi-extensions/go-to-bed.ts",
-
         "!pi-extensions/notify.ts",
         "!pi-extensions/whimsical.ts"
       ],
       "themes": []
     },
-    "npm:pi-perplexity",
+    "/Users/ivanpereira/work/src/pi-perplexity",
     {
       "source": "git:github.com/nicobailon/visual-explainer",
       "skills": [
@@ -34,7 +33,13 @@
       ]
     },
     "npm:pi-librarian",
-    "git:github.com/HazAT/pi-interactive-subagents",
+    "/Users/ivanpereira/work/contrib/pi-interactive-subagents",
+    {
+      "source": "git:github.com/edmundmiller/dotfiles",
+      "extensions": ["pi-packages/pi-prompt-stash/index.ts"],
+      "skills": [],
+      "themes": []
+    },
     {
       "source": "https://github.com/espennilsen/pi",
       "extensions": [
@@ -43,11 +48,13 @@
       "skills": [],
       "prompts": [],
       "themes": []
-    }
+    },
+    "git:https://github.com/badlogic/pi-diff-review",
+    "/Users/ivanpereira/work/src/glimpse"
   ],
   "extensions": [
     "~/.agents/pi/extensions"
   ],
-  "lastChangelogVersion": "0.61.0",
+  "lastChangelogVersion": "0.62.0",
   "theme": "dark"
 }

@@ -1,5 +1,6 @@
 # .agents — Project Knowledge Base
 
+
 Centralized configuration repository for AI coding agents. Manages shared and agent-specific configs for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and [Pi](https://github.com/mariozechner/pi) via symlinks.
 
 ## Structure
@@ -97,4 +98,11 @@ The sync script backs up existing non-symlink files as `.bak` before replacing t
 - `claude/install-plugins.sh` — declarative plugin installation from multiple marketplaces. Run via `bin/sync --bootstrap`.
 - `AGENTS.md` — shared behavioral instructions loaded by both agents. Keep concise — every line applies globally.
 
-read @AGENTS.local.md
+
+## pi source code
+
+pull to update the repository first
+
+`~/work/contrib/pi-mono`
+
+
