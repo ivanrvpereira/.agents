@@ -1,13 +1,13 @@
 {
-  "defaultProvider": "anthropic",
-  "defaultModel": "claude-opus-4-6",
-  "defaultThinkingLevel": "xhigh",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.3-codex",
+  "defaultThinkingLevel": "medium",
   "hideThinkingBlock": false,
   "enabledModels": [
-    "anthropic/claude-opus-4-6:medium",
-    "anthropic/claude-sonnet-4-6:off",
+    "anthropic/claude-opus-4-6:high",
+    "openai-codex/gpt-5.3-codex:medium",
     "openai-codex/gpt-5.4:medium",
-    "openai-codex/gpt-5.3-codex:medium"
+    "openai-codex/gpt-5.4:xhigh"
   ],
   "packages": [
     "npm:pi-screenshots-picker",
@@ -36,7 +36,9 @@
     "/Users/ivanpereira/work/contrib/pi-interactive-subagents",
     {
       "source": "git:github.com/edmundmiller/dotfiles",
-      "extensions": ["pi-packages/pi-prompt-stash/index.ts"],
+      "extensions": [
+        "pi-packages/pi-prompt-stash/index.ts"
+      ],
       "skills": [],
       "themes": []
     },
@@ -55,6 +57,6 @@
   "extensions": [
     "~/.agents/pi/extensions"
   ],
-  "lastChangelogVersion": "0.62.0",
+  "lastChangelogVersion": "0.66.1",
   "theme": "dark"
 }

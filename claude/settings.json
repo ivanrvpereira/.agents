@@ -121,11 +121,8 @@
     ],
     "ask": [
       "Read(.env)",
-      "Read(.env.*)",
       "Read(.env.local)",
       "Read(**/.env)",
-      "Read(**/.env.*)",
-      "Bash(git push:*)",
       "Bash(git checkout:*)",
       "Bash(git merge:*)",
       "Bash(git rebase:*)",
@@ -134,8 +131,6 @@
       "Bash(gh pr merge:*)",
       "Bash(docker run:*)",
       "Bash(docker build:*)",
-      "Bash(docker exec:*)",
-      "Bash(docker-compose:*)",
       "Bash(kubectl:*)",
       "Bash(k9s:*)",
       "Bash(kdash:*)",
@@ -167,7 +162,7 @@
       "Bash(tmux:*)"
     ]
   },
-  "model": "opus",
+  "model": "opus[1m]",
   "hooks": {
     "Stop": [
       {
@@ -207,9 +202,8 @@
     "pyright-lsp@claude-plugins-official": false,
     "gopls-lsp@claude-plugins-official": false,
     "example-skills@anthropic-agent-skills": false,
-    "figma@claude-plugins-official": true,
-    "notion-workspace-plugin@notion-plugin-marketplace": true
+    "notion-workspace-plugin@notion-plugin-marketplace": true,
+    "slack@claude-plugins-official": true
   },
-  "effortLevel": "high",
   "skipDangerousModePermissionPrompt": true
 }
