@@ -1,7 +1,10 @@
 {
   "cleanupPeriodDays": 99999,
   "env": {
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING": "1",
+    "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1",
+    "CLAUDE_CODE_SUBAGENT_MODEL": "sonnet"
   },
   "attribution": {
     "commit": "",
@@ -192,7 +195,7 @@
     "command": "bash ~/.claude/statusline-command.sh"
   },
   "enabledPlugins": {
-    "superpowers@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": false,
     "context7@claude-plugins-official": true,
     "cc-caffeine@samber": true,
     "document-skills@anthropic-agent-skills": false,
@@ -203,7 +206,11 @@
     "gopls-lsp@claude-plugins-official": false,
     "example-skills@anthropic-agent-skills": false,
     "notion-workspace-plugin@notion-plugin-marketplace": true,
-    "slack@claude-plugins-official": true
+    "slack@claude-plugins-official": true,
+    "frontend-design@claude-code-plugins": true
   },
-  "skipDangerousModePermissionPrompt": true
+  "effortLevel": "high",
+  "skipDangerousModePermissionPrompt": true,
+  "editorMode": "vim",
+  "autoCompactEnabled": false
 }

@@ -1,10 +1,11 @@
 {
   "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.3-codex",
-  "defaultThinkingLevel": "medium",
+  "defaultModel": "gpt-5.5",
+  "defaultThinkingLevel": "xhigh",
   "hideThinkingBlock": false,
   "enabledModels": [
     "anthropic/claude-opus-4-6:high",
+    "anthropic/claude-sonnet-4-6:medium",
     "openai-codex/gpt-5.3-codex:medium",
     "openai-codex/gpt-5.4:medium",
     "openai-codex/gpt-5.4:xhigh"
@@ -33,7 +34,8 @@
       ]
     },
     "npm:pi-librarian",
-    "/Users/ivanpereira/work/contrib/pi-interactive-subagents",
+    "/Users/ivanpereira/.agents/pi/extensions/pi-claude-code-use",
+    "git:github.com/HazAT/pi-interactive-subagents",
     {
       "source": "git:github.com/edmundmiller/dotfiles",
       "extensions": [
@@ -43,11 +45,13 @@
       "themes": []
     },
     {
-      "source": "https://github.com/espennilsen/pi",
+      "source": "git:github.com/HazAT/pi-config",
       "extensions": [
-        "extensions/pi-cmux/src/index.ts"
+        "extensions/cmux/index.ts"
       ],
-      "skills": [],
+      "skills": [
+        "skills/cmux/SKILL.md"
+      ],
       "prompts": [],
       "themes": []
     },
@@ -57,6 +61,6 @@
   "extensions": [
     "~/.agents/pi/extensions"
   ],
-  "lastChangelogVersion": "0.66.1",
+  "lastChangelogVersion": "0.70.0",
   "theme": "dark"
 }

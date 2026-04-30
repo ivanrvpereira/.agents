@@ -9,3 +9,4 @@
   - `mcp__exa__deep_researcher_start` — complex research requiring synthesis
 - Delegate to a subagent to avoid raw page content polluting context
 
+@RTK.md
