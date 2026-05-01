@@ -1,14 +1,13 @@
 {
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-5.5",
-  "defaultThinkingLevel": "xhigh",
+  "defaultThinkingLevel": "high",
   "hideThinkingBlock": false,
   "enabledModels": [
+    "openai-codex/gpt-5.5:high",
+    "openai-codex/gpt-5.5:xhigh",
     "anthropic/claude-opus-4-6:high",
-    "anthropic/claude-sonnet-4-6:medium",
-    "openai-codex/gpt-5.3-codex:medium",
-    "openai-codex/gpt-5.4:medium",
-    "openai-codex/gpt-5.4:xhigh"
+    "anthropic/claude-sonnet-4-6:medium"
   ],
   "packages": [
     "npm:pi-screenshots-picker",
@@ -18,11 +17,11 @@
       "source": "git:github.com/mitsuhiko/agent-stuff",
       "skills": [],
       "extensions": [
-        "pi-extensions/*.ts",
-        "!pi-extensions/control.ts",
-        "!pi-extensions/go-to-bed.ts",
-        "!pi-extensions/notify.ts",
-        "!pi-extensions/whimsical.ts"
+        "extensions/*.ts",
+        "!extensions/control.ts",
+        "!extensions/go-to-bed.ts",
+        "!extensions/notify.ts",
+        "!extensions/whimsical.ts"
       ],
       "themes": []
     },
