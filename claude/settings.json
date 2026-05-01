@@ -165,7 +165,7 @@
       "Bash(tmux:*)"
     ]
   },
-  "model": "opus[1m]",
+  "model": "claude-opus-4-6",
   "hooks": {
     "Stop": [
       {
