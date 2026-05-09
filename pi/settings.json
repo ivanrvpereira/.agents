@@ -1,7 +1,7 @@
 {
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-5.5",
-  "defaultThinkingLevel": "high",
+  "defaultThinkingLevel": "xhigh",
   "hideThinkingBlock": false,
   "enabledModels": [
     "openai-codex/gpt-5.5:high",
@@ -33,7 +33,6 @@
       ]
     },
     "npm:pi-librarian",
-    "/Users/ivanpereira/.agents/pi/extensions/pi-claude-code-use",
     "git:github.com/HazAT/pi-interactive-subagents",
     {
       "source": "git:github.com/edmundmiller/dotfiles",
@@ -55,11 +54,12 @@
       "themes": []
     },
     "git:https://github.com/badlogic/pi-diff-review",
-    "/Users/ivanpereira/work/src/glimpse"
+    "/Users/ivanpereira/work/src/glimpse",
+    "npm:@gotgenes/pi-anthropic-auth"
   ],
   "extensions": [
     "~/.agents/pi/extensions"
   ],
-  "lastChangelogVersion": "0.70.0",
+  "lastChangelogVersion": "0.74.0",
   "theme": "dark"
 }
