@@ -8,6 +8,7 @@ description: |
   (4) Requests for speaker notes, slide themes, or presentation exports
   (5) Vague requests like "make it look good" or "make slides professional"
   Supports themes, backgrounds, math, diagrams, and multiple export formats.
+disable-model-invocation: true
 ---
 
 # Marp Presentations

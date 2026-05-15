@@ -1,6 +1,7 @@
 ---
 name: agents-md
 description: Generate, review, and maintain AGENTS.md (or CLAUDE.md) files. Use when creating, auditing, or updating AI agent instruction files for a codebase.
+disable-model-invocation: true
 ---
 
 # AGENTS.md Generator & Reviewer

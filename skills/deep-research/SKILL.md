@@ -1,6 +1,7 @@
 ---
 name: deep-research
 description: Use when the user needs multi-source research with citation tracking, evidence persistence, and structured report generation. Triggers on "deep research", "comprehensive analysis", "research report", "compare X vs Y", "analyze trends", or "state of the art". Not for simple lookups, debugging, or questions answerable with 1-2 searches.
+disable-model-invocation: true
 ---
 
 # Deep Research
