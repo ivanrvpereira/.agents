@@ -60,12 +60,19 @@ All skills live in `skills/`. They are symlinked to Claude Code and auto-discove
 |-------|-------------|
 | [`agent-browser`](skills/agent-browser/SKILL.md) | Browser automation for AI agents |
 | [`agents-md`](skills/agents-md/SKILL.md) | Generate/review AGENTS.md files |
+| [`brainstorming`](skills/brainstorming/SKILL.md) | Explore intent and design before creative work |
 | [`crwl`](skills/crwl/SKILL.md) | Web crawling with Crawl4AI CLI |
 | [`hcloud`](skills/hcloud/SKILL.md) | Hetzner Cloud infrastructure via hcloud CLI |
+| [`handoff`](skills/handoff/SKILL.md) | Write or update HANDOFF.md for a fresh agent |
 | [`marp`](skills/marp/SKILL.md) | Slide presentations from Markdown |
 | [`marker`](skills/marker/SKILL.md) | Parse documents (PDF, images, PPTX, DOCX, XLSX, HTML, EPUB) to markdown via marker-pdf |
 | [`prd`](skills/prd/SKILL.md) | Generate Product Requirements Documents |
+| [`receiving-code-review`](skills/receiving-code-review/SKILL.md) | Process code review feedback rigorously |
+| [`requesting-code-review`](skills/requesting-code-review/SKILL.md) | Request review before completing major work |
 | [`skill-creator`](skills/skill-creator/SKILL.md) | Guide for creating new skills |
+| [`using-git-worktrees`](skills/using-git-worktrees/SKILL.md) | Isolate feature work with git worktrees |
+| [`writing-plans`](skills/writing-plans/SKILL.md) | Write plans before multi-step implementation |
+| [`writing-skills`](skills/writing-skills/SKILL.md) | Create and verify agent skills |
 
 ### Remote (via `npx skills`, tracked in `.skill-lock.json`)
 

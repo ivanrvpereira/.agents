@@ -26,12 +26,6 @@
       "themes": []
     },
     "/Users/ivanpereira/work/src/pi-perplexity",
-    {
-      "source": "git:github.com/nicobailon/visual-explainer",
-      "skills": [
-        "SKILL.md"
-      ]
-    },
     "npm:pi-librarian",
     "git:github.com/HazAT/pi-interactive-subagents",
     {

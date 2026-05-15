@@ -1,6 +1,7 @@
 ---
 name: marker
 description: Parse documents to markdown using marker-pdf. Supports PDF, images (PNG/JPG/TIFF/BMP/GIF/WebP), PPTX, DOCX, XLSX, HTML, and EPUB. Use when the user asks to read, extract, parse, or convert document content to markdown.
+disable-model-invocation: true
 ---
 
 # marker — Document to Markdown
