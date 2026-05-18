@@ -12,7 +12,6 @@
   "packages": [
     "npm:pi-screenshots-picker",
     "npm:pi-boomerang",
-    "npm:@coctostan/pi-exa-gh-web-tools",
     {
       "source": "git:https://github.com/mitsuhiko/agent-stuff",
       "skills": [],
