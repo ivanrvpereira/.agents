@@ -14,7 +14,7 @@
     "npm:pi-boomerang",
     "npm:@coctostan/pi-exa-gh-web-tools",
     {
-      "source": "git:github.com/mitsuhiko/agent-stuff",
+      "source": "git:https://github.com/mitsuhiko/agent-stuff",
       "skills": [],
       "extensions": [
         "extensions/*.ts",
@@ -27,9 +27,9 @@
     },
     "/Users/ivanpereira/work/src/pi-perplexity",
     "npm:pi-librarian",
-    "git:github.com/HazAT/pi-interactive-subagents",
+    "git:https://github.com/HazAT/pi-interactive-subagents",
     {
-      "source": "git:github.com/edmundmiller/dotfiles",
+      "source": "git:https://github.com/edmundmiller/dotfiles",
       "extensions": [
         "pi-packages/pi-prompt-stash/index.ts"
       ],
@@ -37,7 +37,7 @@
       "themes": []
     },
     {
-      "source": "git:github.com/HazAT/pi-config",
+      "source": "git:https://github.com/HazAT/pi-config",
       "extensions": [
         "extensions/cmux/index.ts"
       ],
@@ -49,7 +49,8 @@
     },
     "git:https://github.com/badlogic/pi-diff-review",
     "/Users/ivanpereira/work/src/glimpse",
-    "npm:@gotgenes/pi-anthropic-auth"
+    "npm:@gotgenes/pi-anthropic-auth",
+    "npm:@howaboua/pi-codex-conversion"
   ],
   "extensions": [
     "~/.agents/pi/extensions"
