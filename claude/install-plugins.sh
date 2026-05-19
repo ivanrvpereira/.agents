@@ -9,6 +9,7 @@ info "Adding marketplaces..."
 
 marketplaces=(
     "anthropics/claude-plugins-official"
+    "backnotprop/plannotator"
     "samber/cc"
     "sawyerhood/dev-browser"
     "wshobson/agents"
@@ -25,6 +26,7 @@ info "Installing plugins..."
 plugins=(
     "superpowers@claude-plugins-official"
     "context7@claude-plugins-official"
+    "plannotator@plannotator"
     "typescript-lsp@claude-plugins-official"
     "pyright-lsp@claude-plugins-official"
     "gopls-lsp@claude-plugins-official"
