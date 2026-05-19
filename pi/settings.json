@@ -1,12 +1,13 @@
 {
-  "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.5",
-  "defaultThinkingLevel": "xhigh",
+  "defaultProvider": "anthropic",
+  "defaultModel": "claude-opus-4-6",
+  "defaultThinkingLevel": "high",
   "hideThinkingBlock": false,
   "enabledModels": [
     "openai-codex/gpt-5.5:high",
     "openai-codex/gpt-5.5:xhigh",
     "anthropic/claude-opus-4-6:high",
+    "anthropic/claude-opus-4-7:high",
     "anthropic/claude-sonnet-4-6:medium"
   ],
   "packages": [
@@ -49,11 +50,17 @@
     "git:https://github.com/badlogic/pi-diff-review",
     "/Users/ivanpereira/work/src/glimpse",
     "npm:@gotgenes/pi-anthropic-auth",
-    "npm:@howaboua/pi-codex-conversion"
+    "npm:@howaboua/pi-codex-conversion",
+    "npm:pi-mcp-adapter",
+    "git:https://github.com/MasuRii/pi-rtk-optimizer",
+    "git:https://github.com/mksglu/context-mode"
   ],
   "extensions": [
     "~/.agents/pi/extensions"
   ],
-  "lastChangelogVersion": "0.74.0",
+  "skills": [
+    "/Users/ivanpereira/.local/share/mise/installs/node/26.0.0/lib/node_modules/hunkdiff/skills/hunk-review/SKILL.md"
+  ],
+  "lastChangelogVersion": "0.75.3",
   "theme": "dark"
 }
