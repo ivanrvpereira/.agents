@@ -1,7 +1,7 @@
 {
-  "defaultProvider": "anthropic",
-  "defaultModel": "claude-opus-4-6",
-  "defaultThinkingLevel": "high",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.5",
+  "defaultThinkingLevel": "xhigh",
   "hideThinkingBlock": false,
   "enabledModels": [
     "openai-codex/gpt-5.5:high",
@@ -13,6 +13,7 @@
   "packages": [
     "npm:pi-screenshots-picker",
     "npm:pi-boomerang",
+    "npm:@plannotator/pi-extension",
     {
       "source": "git:https://github.com/mitsuhiko/agent-stuff",
       "skills": [],
@@ -50,7 +51,6 @@
     "git:https://github.com/badlogic/pi-diff-review",
     "/Users/ivanpereira/work/src/glimpse",
     "npm:@gotgenes/pi-anthropic-auth",
-    "npm:@howaboua/pi-codex-conversion",
     "npm:pi-mcp-adapter",
     "git:https://github.com/MasuRii/pi-rtk-optimizer",
     "git:https://github.com/mksglu/context-mode"
