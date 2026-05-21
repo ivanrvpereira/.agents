@@ -1,7 +1,7 @@
 {
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-5.5",
-  "defaultThinkingLevel": "xhigh",
+  "defaultThinkingLevel": "high",
   "hideThinkingBlock": false,
   "enabledModels": [
     "openai-codex/gpt-5.5:high",
@@ -61,6 +61,6 @@
   "skills": [
     "/Users/ivanpereira/.local/share/mise/installs/node/26.0.0/lib/node_modules/hunkdiff/skills/hunk-review/SKILL.md"
   ],
-  "lastChangelogVersion": "0.75.3",
+  "lastChangelogVersion": "0.75.4",
   "theme": "dark"
 }
