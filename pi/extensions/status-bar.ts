@@ -3,12 +3,12 @@
  * colors context usage (green <80k, yellow >80k, red >120k),
  * and shows git stats (modified, new, deleted, ahead/behind, stash).
  */
-import type { AssistantMessage } from "@mariozechner/pi-ai";
-import type { ExtensionAPI } from "@mariozechner/pi-coding-agent";
-import { truncateToWidth, visibleWidth } from "@mariozechner/pi-tui";
-import { execSync } from "child_process";
-import { existsSync, readFileSync } from "fs";
-import { join } from "path";
+import type { AssistantMessage } from "@earendil-works/pi-ai";
+import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
+import { truncateToWidth, visibleWidth } from "@earendil-works/pi-tui";
+import { execSync } from "node:child_process";
+import { existsSync, readFileSync } from "node:fs";
+import { join } from "node:path";
 
 function formatTokens(count: number): string {
 	if (count < 1000) return count.toString();
@@ -246,7 +246,6 @@ export default function (pi: ExtensionAPI) {
 
 	// Refresh git stats on events that likely change files
 	pi.on("turn_end", async () => refreshGitStats());
-	pi.on("session_switch", async () => refreshGitStats());
 	pi.on("session_compact", async () => refreshGitStats());
 	pi.on("session_tree", async () => refreshGitStats());
 }
