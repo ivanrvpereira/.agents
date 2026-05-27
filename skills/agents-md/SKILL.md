@@ -80,10 +80,6 @@ Include all essential sections:
 ## Git
 [Commit format, branching strategy, PR process]
 
-## Commit Attribution
-AI commits MUST include:
-Co-Authored-By: (the agent's name and attribution byline)
-
 ## Boundaries
 
 ### Always
@@ -170,6 +166,7 @@ Avoid these in generated AGENTS.md files:
 - No using LLMs as linters — delegate formatting to tools/hooks
 - No uncurated /init output — LLM-generated context files perform worse than no file at all. Always manually review and strip auto-generated content down to only what the model can't discover on its own.
 - No full project-wide build commands when file-scoped alternatives exist
+- No AI attribution rules unless the project explicitly requires them
 
 ### Quality Gate
 
@@ -181,7 +178,7 @@ Before presenting, verify:
 - Examples reference real project paths
 - No duplication between root and sub-files
 - "Never commit secrets" or equivalent is present
-- Commit Attribution section is present
+- No AI attribution requirement is added unless explicitly requested
 
 ---
 
@@ -201,7 +198,7 @@ Before presenting, verify:
    - Boundaries include "never commit secrets" and read-only dirs
    - Destructive/production actions gated behind "ask first"
    - File-scoped commands are preferred over project-wide builds
-   - Commit Attribution section is present
+   - No AI attribution requirement is added unless explicitly requested
    - All anti-patterns from the Generate workflow are absent
 3. Propose a rewritten AGENTS.md (or diff) fixing every issue found
 4. For each change, include a one-line rationale
@@ -219,5 +216,4 @@ Present the proposed rewrite as a complete file (or files), not a report card. P
 3. Identify what changed in the codebase (new packages, changed commands, updated stack)
 4. Apply changes while preserving manual content
 5. Verify the file still meets the quality gate from the Generate workflow
-
 
