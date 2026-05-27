@@ -164,7 +164,8 @@
       "Bash(rsync:*)",
       "Bash(aria2c:*)",
       "Bash(tmux:*)"
-    ]
+    ],
+    "defaultMode": "auto"
   },
   "model": "claude-opus-4-7",
   "hooks": {
@@ -214,5 +215,6 @@
   "effortLevel": "high",
   "skipDangerousModePermissionPrompt": true,
   "editorMode": "vim",
-  "autoCompactEnabled": false
+  "autoCompactEnabled": false,
+  "skipAutoPermissionPrompt": true
 }
