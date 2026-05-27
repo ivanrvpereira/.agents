@@ -143,6 +143,31 @@ prune_stale() {
     done
 }
 
+# Remove old Pi shared-skill links. Pi discovers ~/.agents/skills directly, so
+# ~/.pi/agent/skills should only contain Pi-only skills.
+prune_pi_shared_skills() {
+    local dir="$1"
+    [ -d "$dir" ] || return 0
+
+    for item in "$dir"/*; do
+        [ -L "$item" ] || continue
+        [ -e "$item" ] || continue
+        local target
+        target="$(readlink "$item")"
+
+        case "$target" in
+            "$AGENTS_DIR/skills"/*)
+                if $DRY_RUN; then
+                    dry "Prune Pi shared skill: $item (→ $target)"
+                else
+                    rm "$item"
+                    info "Pruned Pi shared skill: $item"
+                fi
+                ;;
+        esac
+    done
+}
+
 # --- Main ---
 
 if ! $YES && ! $DRY_RUN; then
@@ -191,14 +216,11 @@ if [ -d "$AGENTS_DIR/pi/extensions" ]; then
     done
 fi
 
-# Pi skills (symlink shared skills into pi agent skills dir)
-if ! $DRY_RUN; then
-    mkdir -p "$PI_DIR/skills"
-fi
-link_skills "$AGENTS_DIR/skills" "$PI_DIR/skills"
-
 # Pi-only skills
 if [ -d "$AGENTS_DIR/pi/skills" ]; then
+    if ! $DRY_RUN; then
+        mkdir -p "$PI_DIR/skills"
+    fi
     link_skills "$AGENTS_DIR/pi/skills" "$PI_DIR/skills"
 fi
 
@@ -209,6 +231,7 @@ if $PRUNE; then
     prune_stale "$CLAUDE_DIR/skills"
     prune_stale "$PI_DIR/skills"
     prune_stale "$PI_DIR/extensions"
+    prune_pi_shared_skills "$PI_DIR/skills"
 fi
 
 # Bootstrap plugins
