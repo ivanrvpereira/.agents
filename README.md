@@ -19,8 +19,8 @@ _claude.md         # Claude wrapper (@AGENTS.md + Exa tools)
 CLAUDE.md          # Project-level CLAUDE.md (@AGENTS.md)
 .skill-lock.json   # Tracks external skills for updates
 bin/sync           # Unified symlink manager
-bin/add-skill      # Install local skill to both agents
-skills/            # Shared skills (local + remote)
+bin/add-skill      # Validate a local skill before syncing
+skills/            # Shared skills (Claude symlinks; Pi auto-discovers)
 claude/            # Claude Code configs (settings, commands, scripts)
 pi/                # Pi configs (settings, extensions, skills)
 ```
@@ -40,7 +40,7 @@ bin/sync --bootstrap
 # Remove stale symlinks
 bin/sync --prune
 
-# Add a local skill to both agents
+# Validate a local skill before syncing
 bin/add-skill my-skill
 
 # Add an external skill
@@ -71,8 +71,6 @@ All skills live in `skills/`. They are symlinked to Claude Code and auto-discove
 | [`requesting-code-review`](skills/requesting-code-review/SKILL.md) | Request review before completing major work |
 | [`skill-creator`](skills/skill-creator/SKILL.md) | Guide for creating new skills |
 | [`using-git-worktrees`](skills/using-git-worktrees/SKILL.md) | Isolate feature work with git worktrees |
-| [`writing-plans`](skills/writing-plans/SKILL.md) | Write plans before multi-step implementation |
-| [`writing-skills`](skills/writing-skills/SKILL.md) | Create and verify agent skills |
 
 ### Remote (via `npx skills`, tracked in `.skill-lock.json`)
 
@@ -104,7 +102,7 @@ skills/my-skill/
 └── SKILL.md
 ```
 
-Then install it: `bin/add-skill my-skill`
+Then run `bin/sync` to link it into Claude Code. Pi discovers `~/.agents/skills` directly.
 
 ## Adding agent-specific content
 

@@ -6,13 +6,15 @@ Centralized configuration repository for AI coding agents. Manages shared and ag
 ## Structure
 
 ```
-AGENTS.md       # Shared agent instructions → ~/.pi/agent/AGENTS.md
-_claude.md             # Claude wrapper (@AGENTS.md) → ~/.claude/CLAUDE.md
-bin/sync               # Symlink manager (creates all links below)
-skills/                # Shared skills → both agents' skills dirs
-.skill-lock.json       # Tracks external skills for updates
-claude/                # Claude Code: settings, commands, scripts
-pi/                    # Pi: settings, extensions, skills
+AGENTS.md        # Project knowledge base → ./CLAUDE.md context
+_agents.md       # Shared agent instructions → ~/.claude/AGENTS.md and ~/.pi/agent/AGENTS.md
+_claude.md       # Claude wrapper (@AGENTS.md) → ~/.claude/CLAUDE.md
+bin/sync         # Symlink manager (creates all links below)
+bin/add-skill    # Validate a local skill before syncing
+skills/          # Shared skills (Claude symlinks; Pi auto-discovers from ~/.agents)
+.skill-lock.json # Tracks external skills for updates
+claude/          # Claude Code: settings, commands, scripts
+pi/              # Pi: settings, extensions, skills
 ```
 
 ## Commands
@@ -23,6 +25,7 @@ pi/                    # Pi: settings, extensions, skills
 | Preview sync | `bin/sync --dry-run` |
 | Sync + install plugins | `bin/sync --bootstrap` |
 | Remove stale links | `bin/sync --prune` |
+| Validate local skill | `bin/add-skill skill-name` |
 | Add external skill | `npx skills add owner/repo -g -a claude-code -a pi -s skill-name` |
 | Update external skills | `npx skills update -g` |
 
@@ -30,10 +33,11 @@ pi/                    # Pi: settings, extensions, skills
 
 `bin/sync` creates symlinks from this repo into each agent's config directory:
 
-**Shared** (both agents):
+**Core links**:
 - `_claude.md` → `~/.claude/CLAUDE.md`
-- `AGENTS.md` → `~/.pi/agent/AGENTS.md`
-- Each `skills/<name>/` → `~/.claude/skills/` (Pi reads skills directly from `~/.agents`)
+- `_agents.md` → `~/.claude/AGENTS.md`
+- `_agents.md` → `~/.pi/agent/AGENTS.md`
+- Each `skills/<name>/` → `~/.claude/skills/` (Pi reads shared skills directly from `~/.agents/skills`)
 
 **Claude Code** (`~/.claude/`):
 - `claude/settings.json` → settings (permissions, hooks, plugins, model config)
@@ -63,7 +67,7 @@ The sync script backs up existing non-symlink files as `.bak` before replacing t
 ## Git
 
 - Conventional commits: `type(scope): description`
-- Full conventions in `AGENTS.md` → Git section
+- Full conventions in `_agents.md` → Git section
 
 ## Validation
 
@@ -74,12 +78,12 @@ The sync script backs up existing non-symlink files as `.bak` before replacing t
 
 ### Always
 - Run `bin/sync --dry-run` before `bin/sync` to preview changes
-- Keep `AGENTS.md` concise — every line applies to all projects
+- Keep `_agents.md` concise — every line applies to all projects
 
 ### Ask First
 - Running `bin/sync --prune` (deletes stale symlinks)
 - Modifying `claude/settings.json` (affects permissions across all projects)
-- Editing `AGENTS.md` (applies to all projects for both agents)
+- Editing `_agents.md` (applies to all projects for both agents)
 
 ### Never
 - Commit secrets or API keys
@@ -96,7 +100,8 @@ The sync script backs up existing non-symlink files as `.bak` before replacing t
 
 - `claude/settings.json` — permissions (allow/deny/ask), hooks, plugins, model defaults. This is the most complex file; changes affect what Claude Code can do across all projects.
 - `claude/install-plugins.sh` — declarative plugin installation from multiple marketplaces. Run via `bin/sync --bootstrap`.
-- `AGENTS.md` — shared behavioral instructions loaded by both agents. Keep concise — every line applies globally.
+- `_agents.md` — shared behavioral instructions loaded by both agents. Keep concise — every line applies globally.
+- `AGENTS.md` — repository knowledge for this config repo.
 
 
 ## pi source code
@@ -104,5 +109,3 @@ The sync script backs up existing non-symlink files as `.bak` before replacing t
 pull to update the repository first
 
 `~/work/contrib/pi-mono`
-
-
