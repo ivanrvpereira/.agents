@@ -48,7 +48,7 @@ Prefer modern CLI tools:
 
 Pre-installed: `fd`, `rg`, `ast-grep`, `pnpm`, `git`, `mise`, `uv`, `tmux`, `imagemagick`, `ffmpeg`, `pandoc`
 
-- Browser automation: prefer `dev-browser` when available; use `agent-browser` only as a fallback
+- Browser automation: prefer `dev-browser` when available
 
 ## Testing
 

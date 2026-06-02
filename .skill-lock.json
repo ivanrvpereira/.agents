@@ -10,15 +10,6 @@
       "installedAt": "2026-02-19T12:37:29.598Z",
       "updatedAt": "2026-02-19T12:37:29.598Z"
     },
-    "find-skills": {
-      "source": "vercel-labs/skills",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/vercel-labs/skills.git",
-      "skillPath": "skills/find-skills/SKILL.md",
-      "skillFolderHash": "3013fdeb8a11b10b1eb795ec3ae8bfca38f7c26d",
-      "installedAt": "2026-02-19T13:00:52.639Z",
-      "updatedAt": "2026-03-14T11:07:02.257Z"
-    },
     "web-design-guidelines": {
       "source": "vercel-labs/agent-skills",
       "sourceType": "github",
@@ -45,15 +36,6 @@
       "skillFolderHash": "c308bc949f232a4f31a77263a3d29be8fc55647c",
       "installedAt": "2026-02-19T13:19:37.470Z",
       "updatedAt": "2026-02-19T13:19:37.470Z"
-    },
-    "git-commit": {
-      "source": "goncalossilva/.agents",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/goncalossilva/.agents.git",
-      "skillPath": "skills/git-commit/SKILL.md",
-      "skillFolderHash": "16daac35a87c5f972c32a428d3e10813dad44ba6",
-      "installedAt": "2026-02-19T13:29:29.655Z",
-      "updatedAt": "2026-02-19T13:29:29.655Z"
     },
     "sentry": {
       "source": "mitsuhiko/agent-stuff",
@@ -90,15 +72,6 @@
       "skillFolderHash": "e13c178bf88cb6c423d5dd6c5ebcfa3b45001f11",
       "installedAt": "2026-02-19T13:36:51.340Z",
       "updatedAt": "2026-02-19T13:36:51.340Z"
-    },
-    "oracle": {
-      "source": "goncalossilva/.agents",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/goncalossilva/.agents.git",
-      "skillPath": "skills/oracle/SKILL.md",
-      "skillFolderHash": "",
-      "installedAt": "2026-02-19T13:43:51.177Z",
-      "updatedAt": "2026-02-26T10:32:02.321Z"
     },
     "deep-research": {
       "source": "199-biotechnologies/claude-deep-research-skill",
@@ -171,6 +144,25 @@
       "skillFolderHash": "004c1998fffe4d5cd4535123d65cf9fb1a107b64",
       "installedAt": "2026-03-23T15:00:26.431Z",
       "updatedAt": "2026-03-23T15:00:26.431Z"
+    },
+    "dev-browser": {
+      "source": "SawyerHood/dev-browser",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/SawyerHood/dev-browser.git",
+      "skillPath": "skills/dev-browser/SKILL.md",
+      "skillFolderHash": "71aa88dcc39949f014a7c87f68bc400843498da3",
+      "pluginName": "dev-browser",
+      "installedAt": "2026-05-28T23:17:03.350Z",
+      "updatedAt": "2026-05-28T23:17:03.350Z"
+    },
+    "liteparse": {
+      "source": "run-llama/llamaparse-agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/run-llama/llamaparse-agent-skills.git",
+      "skillPath": "skills/liteparse/SKILL.md",
+      "skillFolderHash": "a9d626d0fd696a15ab07b8bd382f7f4ea3c5cf3b",
+      "installedAt": "2026-06-02T11:18:52.912Z",
+      "updatedAt": "2026-06-02T11:18:52.912Z"
     }
   },
   "dismissed": {}

@@ -58,10 +58,10 @@ All skills live in `skills/`. They are symlinked to Claude Code and auto-discove
 
 | Skill | Description |
 |-------|-------------|
-| [`agent-browser`](skills/agent-browser/SKILL.md) | Browser automation for AI agents |
 | [`agents-md`](skills/agents-md/SKILL.md) | Generate/review AGENTS.md files |
 | [`brainstorming`](skills/brainstorming/SKILL.md) | Explore intent and design before creative work |
 | [`crwl`](skills/crwl/SKILL.md) | Web crawling with Crawl4AI CLI |
+| [`git-commit`](skills/git-commit/SKILL.md) | Conventional, focused, reviewable git commits |
 | [`hcloud`](skills/hcloud/SKILL.md) | Hetzner Cloud infrastructure via hcloud CLI |
 | [`handoff`](skills/handoff/SKILL.md) | Write or update HANDOFF.md for a fresh agent |
 | [`marp`](skills/marp/SKILL.md) | Slide presentations from Markdown |
@@ -77,12 +77,10 @@ All skills live in `skills/`. They are symlinked to Claude Code and auto-discove
 | Skill | Description | Source |
 |-------|-------------|--------|
 | [`deep-research`](https://github.com/199-biotechnologies/claude-deep-research-skill/blob/main/SKILL.md) | Multi-source research with citation tracking and verification | [199-biotechnologies/claude-deep-research-skill](https://github.com/199-biotechnologies/claude-deep-research-skill) |
-| [`find-skills`](https://github.com/vercel-labs/skills/blob/main/skills/find-skills/SKILL.md) | Discover and install agent skills by capability | [vercel-labs/skills](https://github.com/vercel-labs/skills) |
+| [`dev-browser`](https://github.com/SawyerHood/dev-browser/blob/main/skills/dev-browser/SKILL.md) | Browser automation with persistent page state | [SawyerHood/dev-browser](https://github.com/SawyerHood/dev-browser) |
 | [`frontend-design`](https://github.com/mitsuhiko/agent-stuff/blob/main/skills/frontend-design/SKILL.md) | Design and implement production-ready frontend interfaces | [mitsuhiko/agent-stuff](https://github.com/mitsuhiko/agent-stuff) |
-| [`git-commit`](https://github.com/goncalossilva/.agents/blob/main/skills/git-commit/SKILL.md) | Focused, reviewable commits with clear rationale | [goncalossilva/.agents](https://github.com/goncalossilva/.agents) |
 | [`github`](https://github.com/mitsuhiko/agent-stuff/blob/main/skills/github/SKILL.md) | GitHub operations via `gh` CLI (issues, PRs, CI runs, API) | [mitsuhiko/agent-stuff](https://github.com/mitsuhiko/agent-stuff) |
 | [`mermaid`](https://github.com/mitsuhiko/agent-stuff/blob/main/skills/mermaid/SKILL.md) | Create and edit Mermaid diagrams with validation | [mitsuhiko/agent-stuff](https://github.com/mitsuhiko/agent-stuff) |
-| [`oracle`](https://github.com/goncalossilva/.agents/blob/main/skills/oracle/SKILL.md) | Get a second opinion from another LLM on code, design, or debugging | [goncalossilva/.agents](https://github.com/goncalossilva/.agents) |
 | [`sentry`](https://github.com/mitsuhiko/agent-stuff/blob/main/skills/sentry/SKILL.md) | Fetch and analyze Sentry issues, events, and logs | [mitsuhiko/agent-stuff](https://github.com/mitsuhiko/agent-stuff) |
 | [`summarize`](https://github.com/mitsuhiko/agent-stuff/blob/main/skills/summarize/SKILL.md) | Fetch a URL or convert files (PDF/DOCX/HTML) to Markdown | [mitsuhiko/agent-stuff](https://github.com/mitsuhiko/agent-stuff) |
 | [`tmux`](https://github.com/mitsuhiko/agent-stuff/blob/main/skills/tmux/SKILL.md) | Remote control tmux sessions for interactive CLIs | [mitsuhiko/agent-stuff](https://github.com/mitsuhiko/agent-stuff) |
