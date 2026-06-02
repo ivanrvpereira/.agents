@@ -1,111 +1,18 @@
 {
   "cleanupPeriodDays": 99999,
   "env": {
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
     "CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING": "1",
     "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1",
-    "CLAUDE_CODE_SUBAGENT_MODEL": "sonnet",
-    "CLAUDE_CODE_NO_FLICKER": "1"
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "CLAUDE_CODE_NO_FLICKER": "1",
+    "CLAUDE_CODE_SUBAGENT_MODEL": "sonnet"
   },
   "attribution": {
     "commit": "",
     "pr": ""
   },
   "permissions": {
-    "allow": [
-      "Read",
-      "Edit",
-      "Write(src/**)",
-      "Write(tests/**)",
-      "Write(scripts/**)",
-      "Glob",
-      "Grep",
-      "Task",
-      "Write",
-      "WebSearch",
-      "Bash(bat:*)",
-      "Bash(cat:*)",
-      "Bash(fd:*)",
-      "Bash(find:*)",
-      "Bash(rg:*)",
-      "Bash(grep:*)",
-      "Bash(sd:*)",
-      "Bash(eza:*)",
-      "Bash(ls:*)",
-      "Bash(tree:*)",
-      "Bash(z:*)",
-      "Bash(zoxide:*)",
-      "Bash(procs:*)",
-      "Bash(dua:*)",
-      "Bash(duf:*)",
-      "Bash(fzf:*)",
-      "Bash(jq:*)",
-      "Bash(trash:*)",
-      "Bash(git status:*)",
-      "Bash(git diff:*)",
-      "Bash(git log:*)",
-      "Bash(git branch:*)",
-      "Bash(git show:*)",
-      "Bash(git add:*)",
-      "Bash(git commit:*)",
-      "Bash(gh pr view:*)",
-      "Bash(gh pr list:*)",
-      "Bash(gh issue:*)",
-      "Bash(lazygit:*)",
-      "Bash(tig:*)",
-      "Bash(docker ps:*)",
-      "Bash(docker images:*)",
-      "Bash(docker logs:*)",
-      "Bash(lazydocker:*)",
-      "Bash(dive:*)",
-      "Bash(nvim:*)",
-      "Bash(vim:*)",
-      "Bash(mise:*)",
-      "Bash(uv run:*)",
-      "Bash(uv sync:*)",
-      "Bash(python:*)",
-      "Bash(python3:*)",
-      "Bash(node:*)",
-      "Bash(npm run:*)",
-      "Bash(npm test:*)",
-      "Bash(npx:*)",
-      "Bash(go build:*)",
-      "Bash(go test:*)",
-      "Bash(go run:*)",
-      "Bash(cargo build:*)",
-      "Bash(cargo test:*)",
-      "Bash(cargo run:*)",
-      "Bash(rustc:*)",
-      "Bash(lua:*)",
-      "Bash(luarocks:*)",
-      "Bash(direnv:*)",
-      "Bash(brew list:*)",
-      "Bash(brew info:*)",
-      "Bash(brew search:*)",
-      "Bash(just:*)",
-      "Bash(make:*)",
-      "Bash(diff-so-fancy:*)",
-      "Bash(hyperfine:*)",
-      "Bash(tokei:*)",
-      "Bash(entr:*)",
-      "Bash(watch:*)",
-      "Bash(starship:*)",
-      "Bash(ranger:*)",
-      "Bash(broot:*)",
-      "Bash(ctags:*)",
-      "Bash(exiftool:*)",
-      "Bash(navi:*)",
-      "WebFetch(domain:code.claude.com)",
-      "mcp__exa__web_search_exa",
-      "mcp__exa__crawling_exa",
-      "mcp__exa__get_code_context_exa",
-      "mcp__exa__deep_researcher_start",
-      "mcp__exa__deep_researcher_check",
-      "mcp__exa__company_research_exa",
-      "mcp__exa__linkedin_search_exa",
-      "mcp__plugin_context7_context7__resolve-library-id",
-      "mcp__plugin_context7_context7__query-docs"
-    ],
+    "allow": [],
     "deny": [
       "Read(**/secrets/**)",
       "Read(**/*credentials*)",
@@ -123,63 +30,11 @@
       "Bash(git push --force:*)",
       "Bash(git push -f:*)"
     ],
-    "ask": [
-      "Read(.env)",
-      "Read(.env.local)",
-      "Read(**/.env)",
-      "Bash(git checkout:*)",
-      "Bash(git merge:*)",
-      "Bash(git rebase:*)",
-      "Bash(git reset:*)",
-      "Bash(gh pr create:*)",
-      "Bash(gh pr merge:*)",
-      "Bash(docker run:*)",
-      "Bash(docker build:*)",
-      "Bash(kubectl:*)",
-      "Bash(k9s:*)",
-      "Bash(kdash:*)",
-      "Bash(aws:*)",
-      "Bash(telnet:*)",
-      "Bash(pgcli:*)",
-      "Bash(harlequin:*)",
-      "Bash(http:*)",
-      "Bash(httpie:*)",
-      "Bash(pip install:*)",
-      "Bash(pip3 install:*)",
-      "Bash(pipx install:*)",
-      "Bash(npm install:*)",
-      "Bash(uv add:*)",
-      "Bash(uv pip install:*)",
-      "Bash(brew install:*)",
-      "Bash(brew upgrade:*)",
-      "Bash(brew uninstall:*)",
-      "Bash(ipython:*)",
-      "Bash(op:*)",
-      "Bash(ngrok:*)",
-      "Bash(speedtest-cli:*)",
-      "Bash(doggo:*)",
-      "Bash(gping:*)",
-      "Bash(goaccess:*)",
-      "Bash(rpk:*)",
-      "Bash(rsync:*)",
-      "Bash(aria2c:*)",
-      "Bash(tmux:*)"
-    ],
+    "ask": [],
     "defaultMode": "auto"
   },
-  "model": "claude-opus-4-7",
+  "model": "claude-opus-4-8",
   "hooks": {
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "terminal-notifier -title 'Claude Code' -message 'Session finished' -sound default -group claude-code",
-            "async": true
-          }
-        ]
-      }
-    ],
     "Notification": [
       {
         "hooks": [
@@ -190,6 +45,95 @@
           }
         ]
       }
+    ],
+    "PermissionRequest": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '/Users/ivanpereira/.claude/hooks/herdr-agent-state.sh' blocked",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '/Users/ivanpereira/.claude/hooks/herdr-agent-state.sh' working",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '/Users/ivanpereira/.claude/hooks/herdr-agent-state.sh' release",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '/Users/ivanpereira/.claude/hooks/herdr-agent-state.sh' idle",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"/Users/ivanpereira/.claude/hooks/context-mode-cache-heal.mjs\""
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "terminal-notifier -title 'Claude Code' -message 'Session finished' -sound default -group claude-code",
+            "async": true
+          }
+        ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '/Users/ivanpereira/.claude/hooks/herdr-agent-state.sh' idle",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '/Users/ivanpereira/.claude/hooks/herdr-agent-state.sh' working",
+            "timeout": 10
+          }
+        ]
+      }
     ]
   },
   "statusLine": {
@@ -197,20 +141,36 @@
     "command": "bash ~/.claude/statusline-command.sh"
   },
   "enabledPlugins": {
-    "superpowers@claude-plugins-official": false,
-    "context7@claude-plugins-official": true,
     "cc-caffeine@samber": true,
-    "document-skills@anthropic-agent-skills": false,
+    "context7@claude-plugins-official": false,
     "dev-browser@dev-browser-marketplace": false,
-    "llm-application-dev@claude-code-workflows": false,
-    "typescript-lsp@claude-plugins-official": false,
-    "pyright-lsp@claude-plugins-official": false,
-    "gopls-lsp@claude-plugins-official": false,
+    "document-skills@anthropic-agent-skills": false,
     "example-skills@anthropic-agent-skills": false,
-    "notion-workspace-plugin@notion-plugin-marketplace": true,
-    "slack@claude-plugins-official": true,
     "frontend-design@claude-code-plugins": true,
-    "plannotator@plannotator": true
+    "gopls-lsp@claude-plugins-official": false,
+    "llm-application-dev@claude-code-workflows": false,
+    "notion-workspace-plugin@notion-plugin-marketplace": true,
+    "plannotator@plannotator": true,
+    "pyright-lsp@claude-plugins-official": false,
+    "sentry-mcp@sentry-mcp": true,
+    "slack@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": false,
+    "typescript-lsp@claude-plugins-official": false,
+    "context-mode@context-mode": true
+  },
+  "extraKnownMarketplaces": {
+    "sentry-mcp": {
+      "source": {
+        "source": "github",
+        "repo": "getsentry/sentry-mcp"
+      }
+    },
+    "context-mode": {
+      "source": {
+        "source": "github",
+        "repo": "mksglu/context-mode"
+      }
+    }
   },
   "effortLevel": "high",
   "skipDangerousModePermissionPrompt": true,

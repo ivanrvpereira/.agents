@@ -6,7 +6,7 @@
     "openai-codex/gpt-5.5:high",
     "openai-codex/gpt-5.5:xhigh",
     "anthropic/claude-opus-4-6:high",
-    "anthropic/claude-opus-4-7:high",
+    "anthropic/claude-opus-4-8:high",
     "anthropic/claude-sonnet-4-6:medium"
   ],
   "packages": [
@@ -14,20 +14,35 @@
     "npm:pi-boomerang",
     "npm:@plannotator/pi-extension",
     {
+      "source": "npm:tau-coding-agent",
+      "extensions": [
+        "extensions/sandbox/index.ts"
+      ],
+      "skills": [],
+      "prompts": [],
+      "themes": []
+    },
+    {
       "source": "git:https://github.com/mitsuhiko/agent-stuff",
       "skills": [],
       "extensions": [
-        "extensions/*.ts",
-        "!extensions/control.ts",
-        "!extensions/go-to-bed.ts",
-        "!extensions/notify.ts",
-        "!extensions/whimsical.ts"
+        "extensions/answer.ts",
+        "extensions/btw.ts",
+        "extensions/files.ts",
+        "extensions/goal.ts",
+        "extensions/loop.ts",
+        "extensions/multi-edit.ts",
+        "extensions/prompt-editor.ts",
+        "extensions/review.ts",
+        "extensions/session-breakdown.ts",
+        "extensions/split-fork.ts",
+        "extensions/todos.ts"
       ],
       "themes": []
     },
     "/Users/ivanpereira/work/src/pi-perplexity",
     "npm:pi-librarian",
-    "git:https://github.com/HazAT/pi-interactive-subagents",
+    "git:https://github.com/Michaelliv/pi-dynamic-workflows",
     {
       "source": "git:https://github.com/edmundmiller/dotfiles",
       "extensions": [
@@ -57,5 +72,5 @@
     "git:https://github.com/championswimmer/pi-context-usage",
     "git:https://github.com/championswimmer/pi-cache-graph"
   ],
-  "lastChangelogVersion": "0.75.5"
+  "lastChangelogVersion": "0.78.0"
 }
