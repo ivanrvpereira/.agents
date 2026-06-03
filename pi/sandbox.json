@@ -92,15 +92,20 @@
       ".env.*",
       "*.pem",
       "*.key",
-      "~/.ssh"
+      "~/.ssh",
+      ".pi/sandbox.json"
     ],
     "allowGitConfig": true,
     "allowGitCommonDir": true,
     "allowWrite": [
       ".",
+      "$TMPDIR",
+      "$TMPDIR/**",
       "~/.gnupg",
       "~/.cache",
       "~/Library/Caches",
+      "~/Library/Caches/org.swift.swiftpm",
+      "~/Library/Caches/org.swift.swiftpm/**",
       "~/**/__pycache__",
       "~/**/__pycache__/*",
       "~/.docker",
@@ -129,6 +134,8 @@
       "~/.nuget/packages",
       "~/.local/share/NuGet/*-cache",
       "~/.local/share/NuGet/*-cache/**",
+      "~/.Trash",
+      "~/.Trash/**",
       "~/.pi/agent/*.lock"
     ]
   },
