@@ -29,7 +29,6 @@
         "extensions/answer.ts",
         "extensions/btw.ts",
         "extensions/files.ts",
-        "extensions/goal.ts",
         "extensions/loop.ts",
         "extensions/multi-edit.ts",
         "extensions/prompt-editor.ts",
@@ -40,7 +39,7 @@
       ],
       "themes": []
     },
-    "/Users/ivanpereira/work/src/pi-perplexity",
+    "npm:pi-perplexity",
     "npm:pi-librarian",
     "git:https://github.com/Michaelliv/pi-dynamic-workflows",
     {
@@ -70,7 +69,8 @@
     "git:https://github.com/mksglu/context-mode",
     "git:https://github.com/championswimmer/pi-context-prune",
     "git:https://github.com/championswimmer/pi-context-usage",
-    "git:https://github.com/championswimmer/pi-cache-graph"
+    "git:https://github.com/championswimmer/pi-cache-graph",
+    "npm:pi-codex-goal"
   ],
   "lastChangelogVersion": "0.78.0"
 }
