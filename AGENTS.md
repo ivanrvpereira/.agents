@@ -92,6 +92,7 @@ The sync script backs up existing non-symlink files as `.bak` before replacing t
 ## Plugins & Skills
 
 - Some plugins are disabled globally — enable per-project in `.claude/settings.json` under `enabledPlugins`
+- Skills are managed with `npx skills`; never add/remove package-provided skills by editing `pi/settings.json` `skills` arrays
 - External skills are tracked in `.skill-lock.json` — update with `npx skills update -g`
 - List installed skills: `npx skills list -g`
 - Add external skill: `npx skills add owner/repo -g -s skill-name`
