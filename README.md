@@ -1,6 +1,6 @@
 # .agents
 
-Centralized configuration for AI coding agents. Manages shared and agent-specific configs for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and [Pi](https://pi.dev).
+Centralized configuration for AI coding agents. Manages shared and agent-specific configs for [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Pi](https://pi.dev), and [Codex](https://developers.openai.com/codex).
 
 ## Setup
 
@@ -23,6 +23,7 @@ bin/add-skill      # Validate a local skill before syncing
 skills/            # Shared skills (Claude symlinks; Pi auto-discovers)
 claude/            # Claude Code configs (settings, commands, scripts)
 pi/                # Pi configs (settings, extensions, skills)
+codex/             # Codex configs (config.toml, hooks)
 ```
 
 ## Usage
@@ -53,6 +54,7 @@ npx skills update -g
 ## Skills
 
 All skills live in `skills/`. They are symlinked to Claude Code and auto-discovered by Pi from `~/.agents/skills` (since Pi v0.54.0).
+Codex shared skills are symlinked into `~/.codex/skills`; conflicting non-symlink skills are backed up before replacement.
 
 ### Local (hand-crafted)
 
@@ -106,3 +108,4 @@ Then run `bin/sync` to link it into Claude Code. Pi discovers `~/.agents/skills`
 
 - **Claude Code**: Add files under `claude/` (commands, scripts)
 - **Pi**: Add extensions under `pi/extensions/`, skills under `pi/skills/`
+- **Codex**: Add durable settings under `codex/` and shared skills under `skills/`

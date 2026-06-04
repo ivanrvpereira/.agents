@@ -4,6 +4,7 @@ set -euo pipefail
 AGENTS_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 CLAUDE_DIR="$HOME/.claude"
 PI_DIR="$HOME/.pi/agent"
+CODEX_DIR="$HOME/.codex"
 
 DRY_RUN=false
 PRUNE=false
@@ -117,6 +118,50 @@ link_skills() {
     fi
 }
 
+# Symlink shared skills into Codex, backing up conflicting non-symlink skills.
+link_codex_skills() {
+    local src_dir="$1" dst_dir="$2"
+
+    $DRY_RUN || mkdir -p "$dst_dir"
+
+    for skill in "$src_dir"/*/; do
+        [ -d "$skill" ] || continue
+        local name dst current
+        name="$(basename "$skill")"
+        [ "$name" = "vendor" ] && continue
+        dst="$dst_dir/$name"
+
+        if [ -L "$dst" ]; then
+            current="$(readlink "$dst")"
+            if [ "$current" = "$skill" ]; then
+                skip "$dst"
+            elif $DRY_RUN; then
+                dry "Update: $dst → $skill"
+            else
+                rm "$dst"
+                ln -sf "$skill" "$dst"
+                info "$dst → $skill"
+            fi
+        elif [ -e "$dst" ]; then
+            if $DRY_RUN; then
+                dry "Backup + link: $dst → $skill"
+            else
+                warn "Backing up Codex skill $dst → ${dst}.bak"
+                mv "$dst" "${dst}.bak"
+                ln -sf "$skill" "$dst"
+                info "$dst → $skill"
+            fi
+        else
+            if $DRY_RUN; then
+                dry "Link: $dst → $skill"
+            else
+                ln -sf "$skill" "$dst"
+                info "$dst → $skill"
+            fi
+        fi
+    done
+}
+
 # Prune stale symlinks pointing into AGENTS_DIR
 prune_stale() {
     local dir="$1"
@@ -174,6 +219,7 @@ if ! $YES && ! $DRY_RUN; then
     echo "Sync $AGENTS_DIR → agent config directories"
     echo "  Claude: $CLAUDE_DIR"
     echo "  Pi:     $PI_DIR"
+    echo "  Codex:  $CODEX_DIR"
     echo ""
     read -rp "Continue? [y/N] " confirm
     [ "$confirm" = "y" ] || [ "$confirm" = "Y" ] || exit 0
@@ -182,6 +228,7 @@ fi
 if ! $DRY_RUN; then
     mkdir -p "$CLAUDE_DIR" "$CLAUDE_DIR/skills"
     mkdir -p "$PI_DIR" "$PI_DIR/extensions"
+    mkdir -p "$CODEX_DIR" "$CODEX_DIR/skills"
 fi
 
 echo ""
@@ -189,6 +236,7 @@ echo "=== Shared ==="
 link_file "$AGENTS_DIR/_claude.md" "$CLAUDE_DIR/CLAUDE.md"
 link_file "$AGENTS_DIR/_agents.md" "$CLAUDE_DIR/AGENTS.md"
 link_file "$AGENTS_DIR/_agents.md" "$PI_DIR/AGENTS.md"
+link_file "$AGENTS_DIR/_agents.md" "$CODEX_DIR/AGENTS.md"
 link_skills "$AGENTS_DIR/skills" "$CLAUDE_DIR/skills"
 
 echo ""
@@ -226,6 +274,16 @@ if [ -d "$AGENTS_DIR/pi/skills" ]; then
     fi
     link_skills "$AGENTS_DIR/pi/skills" "$PI_DIR/skills"
 fi
+
+echo ""
+echo "=== Codex ==="
+if [ -f "$AGENTS_DIR/codex/config.toml" ]; then
+    link_file "$AGENTS_DIR/codex/config.toml" "$CODEX_DIR/config.toml"
+fi
+if [ -f "$AGENTS_DIR/codex/hooks.json" ]; then
+    link_file "$AGENTS_DIR/codex/hooks.json" "$CODEX_DIR/hooks.json"
+fi
+link_codex_skills "$AGENTS_DIR/skills" "$CODEX_DIR/skills"
 
 # Prune stale symlinks
 if $PRUNE; then
