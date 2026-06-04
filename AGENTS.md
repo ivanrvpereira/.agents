@@ -1,7 +1,7 @@
 # .agents — Project Knowledge Base
 
 
-Centralized configuration repository for AI coding agents. Manages shared and agent-specific configs for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and [Pi](https://github.com/mariozechner/pi) via symlinks.
+Centralized configuration repository for AI coding agents. Manages shared and agent-specific configs for [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Pi](https://github.com/mariozechner/pi), and [Codex](https://developers.openai.com/codex) via symlinks.
 
 ## Structure
 
@@ -15,6 +15,7 @@ skills/          # Shared skills (Claude symlinks; Pi auto-discovers from ~/.age
 .skill-lock.json # Tracks external skills for updates
 claude/          # Claude Code: settings, commands, scripts
 pi/              # Pi: settings, extensions, skills
+codex/           # Codex: config.toml, hooks
 ```
 
 ## Commands
@@ -37,7 +38,9 @@ pi/              # Pi: settings, extensions, skills
 - `_claude.md` → `~/.claude/CLAUDE.md`
 - `_agents.md` → `~/.claude/AGENTS.md`
 - `_agents.md` → `~/.pi/agent/AGENTS.md`
+- `_agents.md` → `~/.codex/AGENTS.md`
 - Each `skills/<name>/` → `~/.claude/skills/` (Pi reads shared skills directly from `~/.agents/skills`)
+- Each `skills/<name>/` → `~/.codex/skills/`; conflicting non-symlink Codex skills are backed up first
 
 **Claude Code** (`~/.claude/`):
 - `claude/settings.json` → settings (permissions, hooks, plugins, model config)
@@ -50,12 +53,17 @@ pi/              # Pi: settings, extensions, skills
 - `pi/extensions/` → per-extension symlinks
 - `pi/skills/` → Pi-only skills
 
+**Codex** (`~/.codex/`):
+- `codex/config.toml` → model, approvals, permission profile, plugins
+- `codex/hooks.json` → Codex lifecycle hooks
+- `skills/` → shared skills, backing up conflicting non-symlink Codex skills
+
 The sync script backs up existing non-symlink files as `.bak` before replacing them. It's idempotent — safe to run repeatedly.
 
 ## Conventions
 
-- **Shared config** goes at root or in `skills/` — both agents get it
-- **Agent-specific config** goes in `claude/` or `pi/` — only that agent gets it
+- **Shared config** goes at root or in `skills/` — all agents get it
+- **Agent-specific config** goes in `claude/`, `pi/`, or `codex/` — only that agent gets it
 - **External skills** are installed via `npx skills add owner/repo -g`, tracked by `.skill-lock.json` at repo root
 - **Private/company commands** do not belong here — use a separate private repo
 - After adding or moving files, run `bin/sync` to update symlinks
@@ -101,7 +109,9 @@ The sync script backs up existing non-symlink files as `.bak` before replacing t
 
 - `claude/settings.json` — permissions (allow/deny/ask), hooks, plugins, model defaults. This is the most complex file; changes affect what Claude Code can do across all projects.
 - `claude/install-plugins.sh` — declarative plugin installation from multiple marketplaces. Run via `bin/sync --bootstrap`.
-- `_agents.md` — shared behavioral instructions loaded by both agents. Keep concise — every line applies globally.
+- `codex/config.toml` — Codex model, permission profile, network allowlist, plugins, and trusted projects.
+- `codex/hooks.json` — Codex lifecycle hooks.
+- `_agents.md` — shared behavioral instructions loaded by all agents. Keep concise — every line applies globally.
 - `AGENTS.md` — repository knowledge for this config repo.
 
 

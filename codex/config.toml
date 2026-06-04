@@ -1,0 +1,207 @@
+model = "gpt-5.5"
+model_reasoning_effort = "medium"
+tool_output_token_limit = 12000
+personality = "pragmatic"
+approval_policy = "on-request"
+allow_login_shell = false
+web_search = "cached"
+default_permissions = "project-edit"
+
+[features]
+hooks = true
+ghost_commit = false
+unified_exec = true
+apply_patch_freeform = true
+skills = true
+shell_snapshot = true
+
+[permissions.project-edit]
+description = "Workspace editing with dependency and service network allowlist."
+extends = ":workspace"
+
+[permissions.project-edit.filesystem.":workspace_roots"]
+"**/.env" = "deny"
+"**/.env.*" = "deny"
+"**/*.pem" = "deny"
+"**/*.key" = "deny"
+
+[permissions.project-edit.network]
+enabled = true
+allow_local_binding = true
+
+[permissions.project-edit.network.domains]
+"localhost" = "allow"
+"127.0.0.1" = "allow"
+"**.npmjs.org" = "allow"
+"**.npmjs.com" = "allow"
+"**.nodejs.org" = "allow"
+"**.pypi.org" = "allow"
+"**.pythonhosted.org" = "allow"
+"**.crates.io" = "allow"
+"rustup.rs" = "allow"
+"**.rust-lang.org" = "allow"
+"repo.maven.apache.org" = "allow"
+"gradle.org" = "allow"
+"**.gradle.org" = "allow"
+"proxy.golang.org" = "allow"
+"sum.golang.org" = "allow"
+"go.dev" = "allow"
+"golang.org" = "allow"
+"**.rubygems.org" = "allow"
+"nuget.org" = "allow"
+"**.nuget.org" = "allow"
+"github.com" = "allow"
+"**.github.com" = "allow"
+"githubusercontent.com" = "allow"
+"**.githubusercontent.com" = "allow"
+"gitlab.com" = "allow"
+"**.gitlab.com" = "allow"
+"bitbucket.org" = "allow"
+"**.bitbucket.org" = "allow"
+"ghcr.io" = "allow"
+"docker.io" = "allow"
+"**.docker.io" = "allow"
+"docker.com" = "allow"
+"**.docker.com" = "allow"
+"sentry.io" = "allow"
+"**.sentry.io" = "allow"
+"datadoghq.com" = "allow"
+"**.datadoghq.com" = "allow"
+"datadoghq.eu" = "allow"
+"**.datadoghq.eu" = "allow"
+"anthropic.com" = "allow"
+"**.anthropic.com" = "allow"
+"claude.ai" = "allow"
+"**.claude.ai" = "allow"
+"openai.com" = "allow"
+"**.openai.com" = "allow"
+"chatgpt.com" = "allow"
+"**.chatgpt.com" = "allow"
+"google.com" = "allow"
+"**.google.com" = "allow"
+"googleapis.com" = "allow"
+"**.googleapis.com" = "allow"
+"todoist.com" = "allow"
+"**.todoist.com" = "allow"
+"twist.com" = "allow"
+"**.twist.com" = "allow"
+"doist.com" = "allow"
+"**.doist.com" = "allow"
+
+[permissions.project-edit.network.unix_sockets]
+"/tmp" = "allow"
+"/private/tmp" = "allow"
+"~/Library/Group Containers/2BUA8C4S2C.com.1password/t" = "allow"
+"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock" = "allow"
+"$SSH_AUTH_SOCK" = "allow"
+"~/.orbstack/run/docker.sock" = "allow"
+
+[projects."/Users/ivanpereira/work"]
+trust_level = "trusted"
+
+[projects."/Users/ivanpereira/clawdbot"]
+trust_level = "trusted"
+
+[projects."/Users/ivanpereira/clawd"]
+trust_level = "trusted"
+
+[projects."/Users/ivanpereira/work/src/impic"]
+trust_level = "trusted"
+
+[projects."/Users/ivanpereira/work/articles"]
+trust_level = "trusted"
+
+[projects."/Users/ivanpereira/.agents"]
+trust_level = "trusted"
+
+[projects."/Users/ivanpereira/work/src/explore-poc"]
+trust_level = "trusted"
+
+[projects."/Users/ivanpereira/migrate-vault-wiki"]
+trust_level = "trusted"
+
+[projects."/Users/ivanpereira/work/contrib"]
+trust_level = "trusted"
+
+[projects."/Users/ivanpereira/work/contrib/hermes-agent"]
+trust_level = "trusted"
+
+[projects."/Users/ivanpereira/Downloads/angelaeivan"]
+trust_level = "trusted"
+
+[projects."/Users/ivanpereira/personal/fixit"]
+trust_level = "trusted"
+
+[notice]
+"hide_gpt-5.1-codex-max_migration_prompt" = true
+
+[notice.model_migrations]
+"gpt-5.1-codex-max" = "gpt-5.2-codex"
+"gpt-5.2-codex" = "gpt-5.4"
+
+[plugins."gmail@openai-curated"]
+enabled = true
+
+[plugins."github@openai-curated"]
+enabled = true
+
+[plugins."browser-use@openai-bundled"]
+enabled = true
+
+[plugins."documents@openai-primary-runtime"]
+enabled = true
+
+[plugins."spreadsheets@openai-primary-runtime"]
+enabled = true
+
+[plugins."presentations@openai-primary-runtime"]
+enabled = true
+
+[tui.model_availability_nux]
+"gpt-5.5" = 4
+
+[marketplaces.openai-bundled]
+last_updated = "2026-05-12T17:41:14Z"
+source_type = "local"
+source = "/Users/ivanpereira/.codex/.tmp/bundled-marketplaces/openai-bundled"
+
+[marketplaces.openai-primary-runtime]
+last_updated = "2026-05-12T17:41:35Z"
+source_type = "local"
+source = "/Users/ivanpereira/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
+
+[hooks.state]
+
+[hooks.state."/Users/ivanpereira/.codex/hooks.json:pre_tool_use:0:0"]
+trusted_hash = "sha256:18576933129a317a96fa0fc8de336c18f778d17bb11ad296714b7e6ba9210503"
+enabled = true
+
+[hooks.state."/Users/ivanpereira/.codex/hooks.json:permission_request:0:0"]
+trusted_hash = "sha256:6a34cba190445388020800d6e694a8a61ff4734e94c564976f22e885c71f4ba9"
+
+[hooks.state."/Users/ivanpereira/.codex/hooks.json:session_start:0:0"]
+trusted_hash = "sha256:13d1ac3a063e35fa6337a769c64179df59806e8bed81159a773cb9e8629ec38a"
+
+[hooks.state."/Users/ivanpereira/.codex/hooks.json:user_prompt_submit:0:0"]
+trusted_hash = "sha256:9561dc2cf7b9484d89eeb02fb3dacb0b9996cae4544fad9416bd3a121ca59cd1"
+
+[hooks.state."/Users/ivanpereira/.codex/hooks.json:stop:0:0"]
+trusted_hash = "sha256:9730e678710781f3c6a9ff165f451001ecc6d95b18b4bc8ed42f6db92f284bee"
+
+[hooks.state."/Users/ivanpereira/.codex/hooks.json:pre_tool_use:1:0"]
+trusted_hash = "sha256:daec6b148126dbb6d95bbd0550ccc2e5f27ad179ade4fe7010ad10febe081334"
+
+[hooks.state."/Users/ivanpereira/.codex/hooks.json:permission_request:1:0"]
+trusted_hash = "sha256:85ce95b4d15eb67d97a3f8a0be81eef5ea90eef4ad05d8b36893cccd349123e3"
+
+[hooks.state."/Users/ivanpereira/.codex/hooks.json:session_start:1:0"]
+trusted_hash = "sha256:926c586f7b427ae7707a38df3bb0f4854dabed0507901eee337dc34ac1d87e03"
+
+[hooks.state."/Users/ivanpereira/.codex/hooks.json:user_prompt_submit:1:0"]
+trusted_hash = "sha256:f92ae0a23568ca01718431c6dd909de589223c3e47959e9382458f78330b9b89"
+
+[hooks.state."/Users/ivanpereira/.codex/hooks.json:stop:1:0"]
+trusted_hash = "sha256:25c6b4926063368386587e7ae9634079f0f8c3d7ecac657dba405101414ab5d4"
+
+[hooks.state."/Users/ivanpereira/.codex/hooks.json:stop:2:0"]
+trusted_hash = "sha256:7518cd260e47841700a1e3c293c1091bf737668353ef81fa218c7ac3f4297f12"
