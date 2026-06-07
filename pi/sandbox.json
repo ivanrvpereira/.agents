@@ -103,6 +103,7 @@
       "$TMPDIR/**",
       "~/.gnupg",
       "~/.cache",
+      "~/.crawl4ai/.crawl4ai/",
       "~/Library/Caches",
       "~/Library/Caches/org.swift.swiftpm",
       "~/Library/Caches/org.swift.swiftpm/**",

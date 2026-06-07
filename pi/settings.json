@@ -70,7 +70,8 @@
     "git:https://github.com/championswimmer/pi-context-prune",
     "git:https://github.com/championswimmer/pi-context-usage",
     "git:https://github.com/championswimmer/pi-cache-graph",
-    "npm:pi-codex-goal"
+    "npm:pi-codex-goal",
+    "npm:@feniix/pi-exa"
   ],
-  "lastChangelogVersion": "0.78.0"
+  "lastChangelogVersion": "0.78.1"
 }
