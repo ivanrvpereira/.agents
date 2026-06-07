@@ -114,9 +114,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/kepano/obsidian-skills.git",
       "skillPath": "skills/obsidian-bases/SKILL.md",
-      "skillFolderHash": "4bef60bb848bfb02b4172b552626d5741b0d4057",
+      "skillFolderHash": "f3330f27de4d7907ead57d0f48672f4d3280bb77",
       "installedAt": "2026-03-23T10:56:31.414Z",
-      "updatedAt": "2026-03-23T10:56:31.414Z"
+      "updatedAt": "2026-06-07T06:01:12.618Z"
     },
     "obsidian-cli": {
       "source": "kepano/obsidian-skills",
