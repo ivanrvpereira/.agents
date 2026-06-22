@@ -9,15 +9,6 @@
             "type": "command"
           }
         ]
-      },
-      {
-        "hooks": [
-          {
-            "command": "bash '/Users/ivanpereira/.codex/herdr-agent-state.sh' blocked",
-            "timeout": 10,
-            "type": "command"
-          }
-        ]
       }
     ],
     "PreToolUse": [
@@ -29,15 +20,6 @@
             "type": "command"
           }
         ]
-      },
-      {
-        "hooks": [
-          {
-            "command": "bash '/Users/ivanpereira/.codex/herdr-agent-state.sh' working",
-            "timeout": 10,
-            "type": "command"
-          }
-        ]
       }
     ],
     "SessionStart": [
@@ -46,15 +28,6 @@
           {
             "command": "[ -n \"$CMUX_SURFACE_ID\" ] && [ \"$CMUX_CODEX_HOOKS_DISABLED\" != \"1\" ] && command -v cmux >/dev/null 2>&1 && cmux hooks codex session-start || echo '{}'",
             "timeout": 5000,
-            "type": "command"
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "command": "bash '/Users/ivanpereira/.codex/herdr-agent-state.sh' idle",
-            "timeout": 10,
             "type": "command"
           }
         ]
@@ -78,15 +51,6 @@
             "type": "command"
           }
         ]
-      },
-      {
-        "hooks": [
-          {
-            "command": "bash '/Users/ivanpereira/.codex/herdr-agent-state.sh' idle",
-            "timeout": 10,
-            "type": "command"
-          }
-        ]
       }
     ],
     "UserPromptSubmit": [
@@ -95,15 +59,6 @@
           {
             "command": "[ -n \"$CMUX_SURFACE_ID\" ] && [ \"$CMUX_CODEX_HOOKS_DISABLED\" != \"1\" ] && command -v cmux >/dev/null 2>&1 && cmux hooks codex prompt-submit || echo '{}'",
             "timeout": 5000,
-            "type": "command"
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "command": "bash '/Users/ivanpereira/.codex/herdr-agent-state.sh' working",
-            "timeout": 10,
             "type": "command"
           }
         ]
