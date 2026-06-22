@@ -1,7 +1,7 @@
 {
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-5.5",
-  "defaultThinkingLevel": "high",
+  "defaultThinkingLevel": "xhigh",
   "enabledModels": [
     "openai-codex/gpt-5.5:high",
     "openai-codex/gpt-5.5:xhigh",
@@ -13,15 +13,6 @@
     "npm:pi-screenshots-picker",
     "npm:pi-boomerang",
     "npm:@plannotator/pi-extension",
-    {
-      "source": "npm:tau-coding-agent",
-      "extensions": [
-        "extensions/sandbox/index.ts"
-      ],
-      "skills": [],
-      "prompts": [],
-      "themes": []
-    },
     {
       "source": "git:https://github.com/mitsuhiko/agent-stuff",
       "skills": [],
@@ -71,7 +62,9 @@
     "git:https://github.com/championswimmer/pi-context-usage",
     "git:https://github.com/championswimmer/pi-cache-graph",
     "npm:pi-codex-goal",
-    "npm:@feniix/pi-exa"
+    "npm:@feniix/pi-exa",
+    "npm:@ff-labs/pi-fff"
   ],
-  "lastChangelogVersion": "0.78.1"
+  "lastChangelogVersion": "0.79.9",
+  "theme": "dark"
 }
