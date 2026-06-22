@@ -132,9 +132,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/kepano/obsidian-skills.git",
       "skillPath": "skills/obsidian-markdown/SKILL.md",
-      "skillFolderHash": "5caf5d9e7de204f3904216857545f2aa36bcfcac",
+      "skillFolderHash": "4723197c6dc59abc29819da87863b1ac20b96095",
       "installedAt": "2026-03-23T10:56:32.096Z",
-      "updatedAt": "2026-03-23T10:56:32.096Z"
+      "updatedAt": "2026-06-11T06:40:26.278Z"
     },
     "humanizer": {
       "source": "softaworks/agent-toolkit",
@@ -172,6 +172,15 @@
       "skillFolderHash": "d9c9e4f484d7aed8b71f0e9dda7b0abddbdf6b13",
       "installedAt": "2026-06-03T08:49:55.788Z",
       "updatedAt": "2026-06-04T06:01:34.273Z"
+    },
+    "effective-liteparse": {
+      "source": "run-llama/llamaparse-agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/run-llama/llamaparse-agent-skills.git",
+      "skillPath": "skills/liteparse/SKILL.md",
+      "skillFolderHash": "955197f91dc1bf3c7a6bc551d9c17ecf55d7d22f",
+      "installedAt": "2026-06-19T08:29:01.162Z",
+      "updatedAt": "2026-06-22T08:05:18.812Z"
     }
   },
   "dismissed": {}
