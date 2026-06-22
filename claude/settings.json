@@ -33,7 +33,6 @@
     "ask": [],
     "defaultMode": "auto"
   },
-  "model": "claude-opus-4-8",
   "hooks": {
     "Notification": [
       {
@@ -46,53 +45,7 @@
         ]
       }
     ],
-    "PermissionRequest": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash '/Users/ivanpereira/.claude/hooks/herdr-agent-state.sh' blocked",
-            "timeout": 10
-          }
-        ]
-      }
-    ],
-    "PreToolUse": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash '/Users/ivanpereira/.claude/hooks/herdr-agent-state.sh' working",
-            "timeout": 10
-          }
-        ]
-      }
-    ],
-    "SessionEnd": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash '/Users/ivanpereira/.claude/hooks/herdr-agent-state.sh' release",
-            "timeout": 10
-          }
-        ]
-      }
-    ],
     "SessionStart": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash '/Users/ivanpereira/.claude/hooks/herdr-agent-state.sh' idle",
-            "timeout": 10
-          }
-        ]
-      },
       {
         "hooks": [
           {
@@ -111,28 +64,6 @@
             "async": true
           }
         ]
-      },
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash '/Users/ivanpereira/.claude/hooks/herdr-agent-state.sh' idle",
-            "timeout": 10
-          }
-        ]
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash '/Users/ivanpereira/.claude/hooks/herdr-agent-state.sh' working",
-            "timeout": 10
-          }
-        ]
       }
     ]
   },
@@ -141,21 +72,19 @@
     "command": "bash ~/.claude/statusline-command.sh"
   },
   "enabledPlugins": {
-    "cc-caffeine@samber": true,
-    "context7@claude-plugins-official": false,
-    "dev-browser@dev-browser-marketplace": false,
+    "dev-browser@dev-browser-marketplace": true,
     "document-skills@anthropic-agent-skills": false,
     "example-skills@anthropic-agent-skills": false,
     "frontend-design@claude-code-plugins": true,
-    "gopls-lsp@claude-plugins-official": false,
-    "llm-application-dev@claude-code-workflows": false,
+    "gopls-lsp@claude-plugins-official": true,
+    "llm-application-dev@claude-code-workflows": true,
     "notion-workspace-plugin@notion-plugin-marketplace": true,
     "plannotator@plannotator": true,
-    "pyright-lsp@claude-plugins-official": false,
+    "pyright-lsp@claude-plugins-official": true,
     "sentry-mcp@sentry-mcp": true,
     "slack@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": false,
-    "typescript-lsp@claude-plugins-official": false,
+    "superpowers@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
     "context-mode@context-mode": true
   },
   "extraKnownMarketplaces": {
@@ -170,9 +99,33 @@
         "source": "github",
         "repo": "mksglu/context-mode"
       }
+    },
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
+    },
+    "plannotator": {
+      "source": {
+        "source": "github",
+        "repo": "backnotprop/plannotator"
+      }
+    },
+    "dev-browser-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "sawyerhood/dev-browser"
+      }
+    },
+    "claude-code-workflows": {
+      "source": {
+        "source": "github",
+        "repo": "wshobson/agents"
+      }
     }
   },
-  "effortLevel": "high",
+  "effortLevel": "xhigh",
   "skipDangerousModePermissionPrompt": true,
   "editorMode": "vim",
   "autoCompactEnabled": false,
