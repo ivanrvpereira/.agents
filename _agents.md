@@ -27,6 +27,12 @@
 - Prefer purpose-built tools over generic shell pipelines.
 - Use `ast-grep` when code structure matters.
 - Prefer `sd` over `sed`, `fd` over `find`, and `uv` over raw `pip`/`python`/`venv`.
+- Use modern tools explicitly:
+  - Use `fd` instead of `find`: `fd -e py` for extensions, `fd -g '*.py'` for globs; do not pass shell globs like `*.py` as fd regexes.
+  - Use `rg` instead of `grep`: use `-g '*.py'` or `--type py`; `rg` does not support `--include`.
+  - Add `|| true` when `rg`, `grep`, or `fd` may validly return no matches.
+  - Use `sd` instead of `sed` for replacements.
+  - Use `fffind`/`ffgrep` before speculative `ls`/`rg` searches.
 
 ## Collaboration & Safety
 
