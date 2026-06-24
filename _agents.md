@@ -1,56 +1,37 @@
 # Agent Instructions
 
-## Code Quality
+## Core Behavior
 
-- Prefer the simplest, most intuitive solution
-- Prefer editing existing files over creating new ones
-- If there is a simpler or smaller approach, say so before adding complexity
-- No over-engineering: don't add features, abstractions, or error handling beyond what's asked
-- Keep edits surgical: every changed line should trace to the user's request; avoid drive-by refactors, formatting, or adjacent cleanup
-- For new files, inspect ~2 files of the same type first and mirror their structure/style/conventions. Exception: one-off artifacts (RCA, notes, plans, proposals, suggestions) — keep those token-light.
-- Step-down rule: high-level behavior at top, details below. In classes: constructor → public API → private helpers.
-- Fix root causes. Reason from first principles — no band-aids.
+- Prefer the simplest, most intuitive solution that satisfies the request.
+- Avoid over-engineering, extra abstractions, and unasked-for features.
+- Keep edits surgical: every changed line should trace to the user's request.
+- Prefer editing existing files over creating new ones.
+- Read relevant code/docs before modifying behavior.
+- Mirror local style and conventions. For new files inspect other files of the same type first to learn the style.
+- Fix root causes, not symptoms.
 - Remove code made unused by your change; mention unrelated dead code instead of deleting it.
-- Comments: only for non-obvious _why_. Prefer naming/structure.
-- Markdown you produce: tight, high-signal, no noise.
-- For new or heavily changed files, prefer focused files; don't split unrelated existing files unless asked.
+- Comments should explain non-obvious why, not obvious what.
+- Markdown should be concise, high-signal, and low-noise.
 
 ## Workflow
 
-- Re-skim this guide when requirements shift.
-- Surface ambiguity: if multiple plausible interpretations exist, state them and ask instead of silently choosing.
-- Read existing code before modifying
-- Git status/diffs are read-only. Never revert or assume missing changes were yours.
-- Plan before coding on non-trivial tasks. Research docs, review the codebase, ask about trade-offs if unsure.
-- For non-trivial work, define verification before coding. For bugs, reproduce with a failing test/script when practical.
-- Research dependencies and confirm fit with the user before adding.
-- If the user asks for advice, planning, or review, don't implement. If they ask for implementation and scope is clear, proceed.
-- Verify changes work before claiming completion
-
-## Collaboration
-
-- If you're unsure about trade-offs, ask the user explicitly.
-- Respond point-by-point to review feedback
-- Don't push, open PRs, or merge without explicit approval
+- If the task matches a skill, load and follow that skill.
+- Ask when requirements, ownership, risks, or tradeoffs are ambiguous.
+- For non-trivial work, state a short plan and verification path before coding.
+- If the user asks for advice, planning, or review, do not implement.
+- If the user asks for implementation and scope is clear, proceed.
+- Verify changes before claiming completion.
 
 ## Tools
 
-Prefer modern CLI tools:
-- `sd` over `sed`, `fd` over `find`, `rg` over `grep`, `procs` over `ps`
-- `gh` for all GitHub operations (including fetching github.com content)
+- Prefer purpose-built tools over generic shell pipelines.
+- Use `ast-grep` when code structure matters.
+- Prefer `sd` over `sed`, `fd` over `find`, and `uv` over raw `pip`/`python`/`venv`.
 
-Pre-installed: `fd`, `rg`, `ast-grep`, `pnpm`, `git`, `mise`, `uv`, `tmux`, `imagemagick`, `ffmpeg`, `pandoc`
+## Collaboration & Safety
 
-
-## Testing
-
-- Test behavior, not implementation — assert on outcomes, not internals
-- Don't mock what you don't own; prefer fakes/stubs over deep mocking
-- Tests should survive refactors — if only the implementation changes, tests shouldn't break
-
-## Safety
-
-- Use `trash` over `rm` — recoverable deletion
-- Ask before destructive or hard-to-reverse actions (force push, reset --hard, drop tables, delete branches)
-- Never commit secrets, credentials, or .env files
-- Investigate unexpected state before overwriting — it may be in-progress work
+- Preserve user work; never overwrite, delete, reset, or discard it without approval.
+- Do not commit, push, open PRs, merge, or force-push unless explicitly asked.
+- Ask before destructive or hard-to-reverse actions.
+- Never commit secrets, credentials, or `.env` files.
+- Investigate unexpected state before overwriting it.
