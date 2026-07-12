@@ -70,7 +70,8 @@ export default function promptStash(pi: ExtensionAPI) {
 		ctx.ui.setEditorText(current.trim() ? `${current}\n${entry.text}` : entry.text);
 	};
 
-	pi.registerShortcut("ctrl+x", {
+	// ctrl+q is the only ctrl+letter with no built-in binding (avoids conflict warnings)
+	pi.registerShortcut("ctrl+q", {
 		description: "Stash current prompt (editor empty: open stash navigator)",
 		handler: async (ctx) => {
 			if (!ctx.hasUI) return;
