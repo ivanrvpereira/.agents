@@ -5,12 +5,13 @@ AGENTS_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
 usage() {
     cat <<EOF
-Usage: $(basename "$0") <skill-name>
+Usage: $(basename "$0") <skill-name-or-path>
 
-Validate a local skill under skills/<skill-name>.
+Validate a local skill under skills/.
 
 Examples:
-  $(basename "$0") my-skill         # Validate skills/my-skill
+  $(basename "$0") my-skill         # Find and validate skills/**/my-skill
+  $(basename "$0") on-demand/acli   # Validate skills/on-demand/acli
 EOF
 }
 
@@ -24,8 +25,27 @@ if [ "$1" = "--help" ]; then
     exit 0
 fi
 
-SKILL_NAME="$1"
-SKILL_DIR="$AGENTS_DIR/skills/$SKILL_NAME"
+SKILL_REF="$1"
+
+if [ -d "$SKILL_REF" ]; then
+    SKILL_DIR="$(cd "$SKILL_REF" && pwd)"
+elif [ -d "$AGENTS_DIR/skills/$SKILL_REF" ]; then
+    SKILL_DIR="$AGENTS_DIR/skills/$SKILL_REF"
+else
+    matches=()
+    while IFS= read -r match; do
+        matches+=("$match")
+    done < <(find -L "$AGENTS_DIR/skills" -path "*/$SKILL_REF/SKILL.md" -type f | sort)
+    if [ "${#matches[@]}" -eq 1 ]; then
+        SKILL_DIR="$(dirname "${matches[0]}")"
+    elif [ "${#matches[@]}" -gt 1 ]; then
+        echo "Error: multiple skills named $SKILL_REF:" >&2
+        printf '  %s\n' "${matches[@]%/SKILL.md}" >&2
+        exit 1
+    else
+        SKILL_DIR="$AGENTS_DIR/skills/$SKILL_REF"
+    fi
+fi
 
 if [ ! -d "$SKILL_DIR" ]; then
     echo "Error: skill directory not found: $SKILL_DIR" >&2

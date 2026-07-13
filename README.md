@@ -62,6 +62,7 @@ Codex shared skills are symlinked into `~/.codex/skills`; conflicting non-symlin
 |-------|-------------|
 | [`agents-md`](skills/agents-md/SKILL.md) | Generate/review AGENTS.md files |
 | [`brainstorming`](skills/brainstorming/SKILL.md) | Explore intent and design before creative work |
+| [`code-review`](skills/auto/code-review/SKILL.md) | Two-axis diff review for standards, risk, and spec fit |
 | [`crwl`](skills/crwl/SKILL.md) | Web crawling with Crawl4AI CLI |
 | [`git-commit`](skills/git-commit/SKILL.md) | Conventional, focused, reviewable git commits |
 | [`hcloud`](skills/hcloud/SKILL.md) | Hetzner Cloud infrastructure via hcloud CLI |
