@@ -1,5 +1,5 @@
 model = "gpt-5.5"
-model_reasoning_effort = "medium"
+model_reasoning_effort = "xhigh"
 tool_output_token_limit = 12000
 personality = "pragmatic"
 approval_policy = "on-request"
@@ -132,6 +132,11 @@ trust_level = "trusted"
 [projects."/Users/ivanpereira/personal/fixit"]
 trust_level = "trusted"
 
+
+
+
+
+
 [notice]
 "hide_gpt-5.1-codex-max_migration_prompt" = true
 
@@ -159,6 +164,7 @@ enabled = true
 
 [tui.model_availability_nux]
 "gpt-5.5" = 4
+"gpt-5.6-sol" = 1
 
 [marketplaces.openai-bundled]
 last_updated = "2026-05-12T17:41:14Z"

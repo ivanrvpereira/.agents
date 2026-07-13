@@ -20,7 +20,6 @@
       "Read(~/.ssh/**)",
       "Read(~/.aws/credentials)",
       "Read(~/.config/gh/hosts.yml)",
-      "Bash(curl:*)",
       "Bash(wget:*)",
       "Bash(rm -rf:*)",
       "Bash(sudo:*)",
@@ -33,6 +32,7 @@
     "ask": [],
     "defaultMode": "auto"
   },
+  "model": "claude-fable-5[1m]",
   "hooks": {
     "Notification": [
       {
@@ -77,15 +77,14 @@
     "example-skills@anthropic-agent-skills": false,
     "frontend-design@claude-code-plugins": true,
     "gopls-lsp@claude-plugins-official": true,
-    "llm-application-dev@claude-code-workflows": true,
     "notion-workspace-plugin@notion-plugin-marketplace": true,
     "plannotator@plannotator": true,
     "pyright-lsp@claude-plugins-official": true,
-    "sentry-mcp@sentry-mcp": true,
-    "slack@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true,
+    "sentry-mcp@sentry-mcp": false,
+    "slack@claude-plugins-official": false,
     "typescript-lsp@claude-plugins-official": true,
-    "context-mode@context-mode": true
+    "codex@openai-codex": true,
+    "swift-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "sentry-mcp": {
@@ -123,9 +122,16 @@
         "source": "github",
         "repo": "wshobson/agents"
       }
+    },
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
     }
   },
-  "effortLevel": "xhigh",
+  "effortLevel": "high",
+  "autoUpdatesChannel": "stable",
   "skipDangerousModePermissionPrompt": true,
   "editorMode": "vim",
   "autoCompactEnabled": false,

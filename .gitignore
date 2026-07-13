@@ -6,4 +6,5 @@ codex/tmp/
 .pi/*
 !.pi/skills/
 !.pi/skills/**
+.pi-subagents/
 AGENTS.local.md
