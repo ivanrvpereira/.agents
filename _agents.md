@@ -21,6 +21,8 @@
 - If the user asks for advice, planning, or review, do not implement.
 - If the user asks for implementation and scope is clear, proceed.
 - Verify changes before claiming completion.
+- Validate all delegated/subagent work independently before reporting done — a delegate's report is a claim, not a fact.
+- If the result is verifiable in the browser, verify it there (e.g. devbrowser); otherwise verify through the task's native surface (CLI run, tests, API call).
 
 ## Tools
 
