@@ -11,8 +11,8 @@ _agents.md       # Shared agent instructions → ~/.claude/AGENTS.md and ~/.pi/a
 _claude.md       # Claude wrapper (@AGENTS.md) → ~/.claude/CLAUDE.md
 bin/sync         # Symlink manager (creates all links below)
 bin/add-skill    # Validate a local skill before syncing
-skills/          # Shared skills (Claude symlinks; Pi auto-discovers from ~/.agents)
-.skill-lock.json # Tracks external skills for updates
+skills/          # Shared skills; auto/ (model-invocable) + on-demand/ (manual)
+skills/VENDORED.md # Registry of copied upstream skills + their sources
 claude/          # Claude Code: settings, commands, scripts
 pi/              # Pi: settings, extensions, skills
 codex/           # Codex: config.toml, hooks
@@ -27,8 +27,8 @@ codex/           # Codex: config.toml, hooks
 | Sync + install plugins | `bin/sync --bootstrap` |
 | Remove stale links | `bin/sync --prune` |
 | Validate local skill | `bin/add-skill skill-name` |
-| Add external skill | `npx skills add owner/repo -g -a claude-code -a pi -s skill-name` |
-| Update external skills | `npx skills update -g` |
+| Add vendored skill | Copy upstream skill into `skills/auto/` or `skills/on-demand/`, add a row to `skills/VENDORED.md` |
+| Update vendored skills | Ask an AI agent to follow the update workflow in `skills/VENDORED.md` |
 
 ## How Syncing Works
 
@@ -39,8 +39,8 @@ codex/           # Codex: config.toml, hooks
 - `_agents.md` → `~/.claude/AGENTS.md`
 - `_agents.md` → `~/.pi/agent/AGENTS.md`
 - `_agents.md` → `~/.codex/AGENTS.md`
-- Each `skills/<name>/` → `~/.claude/skills/` (Pi reads shared skills directly from `~/.agents/skills`)
-- Each `skills/<name>/` → `~/.codex/skills/`; conflicting non-symlink Codex skills are backed up first
+- Each discovered skill directory under `skills/` → `~/.claude/skills/` (flattened; Pi reads shared skills recursively from `~/.agents/skills`)
+- Each discovered skill directory under `skills/` → `~/.codex/skills/`; conflicting non-symlink Codex skills are backed up first
 
 **Claude Code** (`~/.claude/`):
 - `claude/settings.json` → settings (permissions, hooks, plugins, model config)
@@ -64,7 +64,8 @@ The sync script backs up existing non-symlink files as `.bak` before replacing t
 
 - **Shared config** goes at root or in `skills/` — all agents get it
 - **Agent-specific config** goes in `claude/`, `pi/`, or `codex/` — only that agent gets it
-- **External skills** are installed via `npx skills add owner/repo -g`, tracked by `.skill-lock.json` at repo root
+- **Skills are bucketed by invocation:** `skills/auto/<name>/` = model may auto-invoke (no `disable-model-invocation`); `skills/on-demand/<name>/` = manual-only (`disable-model-invocation: true`). `bin/sync` flattens the bucket folders away, so skill folder names must be globally unique and the folder must match the flag.
+- **Vendored skills** are copied from upstream into a bucket and recorded in `skills/VENDORED.md` (source + pinned ref). We own the copies and may customize them; update them via the workflow in that file.
 - **Private/company commands** do not belong here — use a separate private repo
 - After adding or moving files, run `bin/sync` to update symlinks
 
@@ -100,10 +101,10 @@ The sync script backs up existing non-symlink files as `.bak` before replacing t
 ## Plugins & Skills
 
 - Some plugins are disabled globally — enable per-project in `.claude/settings.json` under `enabledPlugins`
-- Skills are managed with `npx skills`; never add/remove package-provided skills by editing `pi/settings.json` `skills` arrays
-- External skills are tracked in `.skill-lock.json` — update with `npx skills update -g`
-- List installed skills: `npx skills list -g`
-- Add external skill: `npx skills add owner/repo -g -s skill-name`
+- Never add/remove package-provided skills by editing `pi/settings.json` `skills` arrays
+- Skills live in `skills/auto/` or `skills/on-demand/`; vendored copies are tracked in `skills/VENDORED.md`
+- Add a skill: copy/author it into the right bucket, then run `bin/add-skill <name>` and `bin/sync`
+- Update vendored skills: follow the update workflow in `skills/VENDORED.md`
 
 ## Key Files
 

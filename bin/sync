@@ -92,43 +92,34 @@ link_dir() {
     info "$dst → $src"
 }
 
-# Symlink each skill directory into a target skills directory
+# Symlink each discovered skill directory into a target skills directory.
+# Skills may be grouped under folders (for example skills/tools/<name>/).
 link_skills() {
     local src_dir="$1" dst_dir="$2"
 
     $DRY_RUN || mkdir -p "$dst_dir"
 
-    # Own skills (top-level dirs, excluding vendor/)
-    for skill in "$src_dir"/*/; do
-        [ -d "$skill" ] || continue
-        local name
+    while IFS= read -r skill_file; do
+        [ -f "$skill_file" ] || continue
+        local skill name
+        skill="$(dirname "$skill_file")/"
         name="$(basename "$skill")"
-        [ "$name" = "vendor" ] && continue
         link_file "$skill" "$dst_dir/$name"
-    done
-
-    # Vendor skills (flattened into target)
-    if [ -d "$src_dir/vendor" ]; then
-        for skill in "$src_dir"/vendor/*/; do
-            [ -d "$skill" ] || continue
-            local name
-            name="$(basename "$skill")"
-            link_file "$skill" "$dst_dir/$name"
-        done
-    fi
+    done < <(find -L "$src_dir" -name SKILL.md -type f | sort)
 }
 
 # Symlink shared skills into Codex, backing up conflicting non-symlink skills.
+# Skills may be grouped under folders (for example skills/tools/<name>/).
 link_codex_skills() {
     local src_dir="$1" dst_dir="$2"
 
     $DRY_RUN || mkdir -p "$dst_dir"
 
-    for skill in "$src_dir"/*/; do
-        [ -d "$skill" ] || continue
-        local name dst current
+    while IFS= read -r skill_file; do
+        [ -f "$skill_file" ] || continue
+        local skill name dst current
+        skill="$(dirname "$skill_file")/"
         name="$(basename "$skill")"
-        [ "$name" = "vendor" ] && continue
         dst="$dst_dir/$name"
 
         if [ -L "$dst" ]; then
@@ -159,7 +150,7 @@ link_codex_skills() {
                 info "$dst → $skill"
             fi
         fi
-    done
+    done < <(find -L "$src_dir" -name SKILL.md -type f | sort)
 }
 
 # Prune stale symlinks pointing into AGENTS_DIR
