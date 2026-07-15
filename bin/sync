@@ -225,9 +225,6 @@ fi
 echo ""
 echo "=== Shared ==="
 link_file "$AGENTS_DIR/_claude.md" "$CLAUDE_DIR/CLAUDE.md"
-link_file "$AGENTS_DIR/_agents.md" "$CLAUDE_DIR/AGENTS.md"
-link_file "$AGENTS_DIR/_agents.md" "$PI_DIR/AGENTS.md"
-link_file "$AGENTS_DIR/_agents.md" "$CODEX_DIR/AGENTS.md"
 link_skills "$AGENTS_DIR/skills" "$CLAUDE_DIR/skills"
 
 echo ""
@@ -239,6 +236,9 @@ link_dir "$AGENTS_DIR/claude/scripts" "$CLAUDE_DIR/scripts"
 
 echo ""
 echo "=== Pi ==="
+if [ -f "$AGENTS_DIR/pi/APPEND_SYSTEM.md" ]; then
+    link_file "$AGENTS_DIR/pi/APPEND_SYSTEM.md" "$PI_DIR/APPEND_SYSTEM.md"
+fi
 if [ -f "$AGENTS_DIR/pi/settings.json" ]; then
     link_file "$AGENTS_DIR/pi/settings.json" "$PI_DIR/settings.json"
 fi

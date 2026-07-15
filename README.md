@@ -14,8 +14,7 @@ npx skills update -g  # restore external skills
 
 ```
 AGENTS.md          # Project knowledge base (symlinked as CLAUDE.md context)
-_agents.md         # Shared agent instructions (symlinked to both agents)
-_claude.md         # Claude wrapper (@AGENTS.md + Exa tools)
+_claude.md         # Claude Code instructions (Exa tools)
 CLAUDE.md          # Project-level CLAUDE.md (@AGENTS.md)
 .skill-lock.json   # Tracks external skills for updates
 bin/sync           # Unified symlink manager

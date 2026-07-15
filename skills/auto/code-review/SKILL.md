@@ -116,6 +116,8 @@ On top of repo documentation, the Standards axis always carries the **smell base
 - **Message Chains** — long `a.b().c().d()` navigation the caller should not depend on. → hide the walk behind one method on the first object.
 - **Middle Man** — a class/function mostly delegates onward. → cut it and call the real target directly.
 - **Refused Bequest** — a subclass/implementer ignores or overrides most inherited behavior. → drop inheritance and use composition.
+- **Reinvented Stdlib** — hand-rolled logic the standard library already ships. → name the exact stdlib function and replace.
+- **Needless Dependency** — a new dependency or custom code doing what the platform/runtime already provides. → name the native feature; prefer zero deps.
 
 ### 4. Spawn both sub-agents in parallel
 

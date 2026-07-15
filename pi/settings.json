@@ -1,6 +1,6 @@
 {
-  "defaultProvider": "anthropic",
-  "defaultModel": "claude-opus-4-8",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.6-terra",
   "defaultThinkingLevel": "high",
   "enabledModels": [
     "openai-codex/gpt-5.5:high",
@@ -50,19 +50,16 @@
       ],
       "themes": []
     },
-    "npm:pi-perplexity",
+    "npm:pi-perplexity@0.2.5",
     "git:https://github.com/badlogic/pi-diff-review",
     "npm:@gotgenes/pi-anthropic-auth",
-    "npm:pi-mcp-adapter",
     "npm:pi-rtk-optimizer",
     "npm:pi-context-usage",
     "npm:pi-cache-graph",
-    "npm:pi-codex-goal",
-    "npm:@feniix/pi-exa",
     "npm:@ff-labs/pi-fff",
     "npm:@tintinweb/pi-subagents"
   ],
-  "lastChangelogVersion": "0.80.6",
+  "lastChangelogVersion": "0.80.7",
   "terminal": {
     "clearOnShrink": true
   },
