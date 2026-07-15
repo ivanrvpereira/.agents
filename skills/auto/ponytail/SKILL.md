@@ -43,6 +43,9 @@ every sibling caller still broken. Fix it once, where all callers route through.
 
 ## Rules
 
+- Mirror local style and conventions. New file? Inspect sibling files of the same type first to learn the style.
+- Comments explain non-obvious why, not obvious what.
+- Remove code made unused by your change; mention unrelated dead code instead of deleting it.
 - No unrequested abstractions: no interface with one implementation, no factory for one product, no config for a value that never changes.
 - No boilerplate, no scaffolding "for later", later can scaffold for itself.
 - Deletion over addition. Boring over clever, clever is what someone decodes at 3am.

@@ -34,7 +34,7 @@ Keep the `Bucket` column in sync with the skill's actual folder and its
 | implement | on-demand | mattpocock/skills | skills/engineering/implement | 391a270 | no | end of wayfinder → to-spec → to-tickets → implement chain |
 | librarian | auto | mitsuhiko/agent-stuff | skills/librarian | d9c9e4f484d7 | no | |
 | liteparse | auto | run-llama/llamaparse-agent-skills | skills/liteparse | c8a6189b121b | no | had a dup vendor `effective-liteparse` (removed) |
-| ponytail | auto | DietrichGebert/ponytail | skills/ponytail | 8f32ae0f6eb0 | yes | shortened description for broad coding trigger |
+| ponytail | auto | DietrichGebert/ponytail | skills/ponytail | 8f32ae0f6eb0 | yes | shortened description for broad coding trigger; added 3 rules from retired `_agents.md` Core Behavior (style mirroring, comments-why, remove unused code) |
 | prototype | auto | mattpocock/skills | skills/engineering/prototype | 391a270 | no | incl. LOGIC.md, UI.md |
 | resolving-merge-conflicts | auto | mattpocock/skills | skills/engineering/resolving-merge-conflicts | 391a270 | no | |
 | ponytail-audit | auto | DietrichGebert/ponytail | skills/ponytail-audit | 8f32ae0f6eb0 | no | |
