@@ -7,8 +7,7 @@ Centralized configuration repository for AI coding agents. Manages shared and ag
 
 ```
 AGENTS.md        # Project knowledge base → ./CLAUDE.md context
-_agents.md       # Shared agent instructions → ~/.claude/AGENTS.md and ~/.pi/agent/AGENTS.md
-_claude.md       # Claude wrapper (@AGENTS.md) → ~/.claude/CLAUDE.md
+_claude.md       # Claude Code instructions → ~/.claude/CLAUDE.md
 bin/sync         # Symlink manager (creates all links below)
 bin/add-skill    # Validate a local skill before syncing
 skills/          # Shared skills; auto/ (model-invocable) + on-demand/ (manual)
@@ -36,9 +35,6 @@ codex/           # Codex: config.toml, hooks
 
 **Core links**:
 - `_claude.md` → `~/.claude/CLAUDE.md`
-- `_agents.md` → `~/.claude/AGENTS.md`
-- `_agents.md` → `~/.pi/agent/AGENTS.md`
-- `_agents.md` → `~/.codex/AGENTS.md`
 - Each discovered skill directory under `skills/` → `~/.claude/skills/` (flattened; Pi reads shared skills recursively from `~/.agents/skills`)
 - Each discovered skill directory under `skills/` → `~/.codex/skills/`; conflicting non-symlink Codex skills are backed up first
 
@@ -49,6 +45,7 @@ codex/           # Codex: config.toml, hooks
 - `claude/statusline-command.sh` → status bar display
 
 **Pi** (`~/.pi/agent/`):
+- `pi/APPEND_SYSTEM.md` → behavioral instructions appended to Pi's system prompt (Pi only; not loaded by Claude/Codex)
 - `pi/settings.json` → model config, packages
 - `pi/extensions/` → per-extension symlinks
 - `pi/skills/` → Pi-only skills
@@ -73,11 +70,6 @@ The sync script backs up existing non-symlink files as `.bak` before replacing t
 
 - **GitHub content**: Always use `gh` CLI for github.com — never crawl/scrape GitHub URLs. Use `gh api`, `gh repo view`, `gh pr view`, `gh issue view`, etc.
 
-## Git
-
-- Conventional commits: `type(scope): description`
-- Full conventions in `_agents.md` → Git section
-
 ## Validation
 
 - Preview symlink changes: `bin/sync --dry-run`
@@ -87,12 +79,12 @@ The sync script backs up existing non-symlink files as `.bak` before replacing t
 
 ### Always
 - Run `bin/sync --dry-run` before `bin/sync` to preview changes
-- Keep `_agents.md` concise — every line applies to all projects
+- Keep `pi/APPEND_SYSTEM.md` concise — every line is appended to every Pi session's system prompt
 
 ### Ask First
 - Running `bin/sync --prune` (deletes stale symlinks)
 - Modifying `claude/settings.json` (affects permissions across all projects)
-- Editing `_agents.md` (applies to all projects for both agents)
+- Editing `pi/APPEND_SYSTEM.md` (appended to the system prompt of every Pi session)
 
 ### Never
 - Commit secrets or API keys
@@ -112,12 +104,5 @@ The sync script backs up existing non-symlink files as `.bak` before replacing t
 - `claude/install-plugins.sh` — declarative plugin installation from multiple marketplaces. Run via `bin/sync --bootstrap`.
 - `codex/config.toml` — Codex model, permission profile, network allowlist, plugins, and trusted projects.
 - `codex/hooks.json` — Codex lifecycle hooks.
-- `_agents.md` — shared behavioral instructions loaded by all agents. Keep concise — every line applies globally.
+- `pi/APPEND_SYSTEM.md` — Pi-only behavioral instructions, appended to Pi's system prompt via `~/.pi/agent/APPEND_SYSTEM.md`. Keep concise — every line applies to all Pi sessions.
 - `AGENTS.md` — repository knowledge for this config repo.
-
-
-## pi source code
-
-pull to update the repository first
-
-`~/work/contrib/pi-mono`

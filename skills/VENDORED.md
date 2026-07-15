@@ -21,7 +21,7 @@ Keep the `Bucket` column in sync with the skill's actual folder and its
 | bro | on-demand | dmmulroy/.dotfiles | home/.agents/skills/bro | 287382ed4914 | no | |
 | caveman | on-demand | JuliusBrussee/caveman | skills/caveman | 25d22f864ad6 | yes | flag added for on-demand |
 | codebase-design | auto | mattpocock/skills | skills/engineering/codebase-design | c6b033e | no | incl. DEEPENING.md, DESIGN-IT-TWICE.md |
-| code-simplifier | auto | HazAT/pi-config | skills/code-simplifier | d8395b7 | no | `model: opus` in frontmatter |
+| code-simplifier | on-demand | HazAT/pi-config | skills/code-simplifier | d8395b7 | yes | flag added for on-demand; upstream `model: opus` pin removed |
 | deep-research | on-demand | 199-biotechnologies/claude-deep-research-skill | . | f2f2c0fa4e76 | no | repo root |
 | diagnosing-bugs | auto | mattpocock/skills | skills/engineering/diagnosing-bugs | 391a270 | no | incl. scripts/hitl-loop.template.sh |
 | domain-modeling | auto | mattpocock/skills | skills/engineering/domain-modeling | c6b033e | no | incl. ADR-FORMAT.md, CONTEXT-FORMAT.md |
@@ -36,18 +36,11 @@ Keep the `Bucket` column in sync with the skill's actual folder and its
 | liteparse | auto | run-llama/llamaparse-agent-skills | skills/liteparse | c8a6189b121b | no | had a dup vendor `effective-liteparse` (removed) |
 | ponytail | auto | DietrichGebert/ponytail | skills/ponytail | 8f32ae0f6eb0 | yes | shortened description for broad coding trigger; added 3 rules from retired `_agents.md` Core Behavior (style mirroring, comments-why, remove unused code) |
 | prototype | auto | mattpocock/skills | skills/engineering/prototype | 391a270 | no | incl. LOGIC.md, UI.md |
-| resolving-merge-conflicts | auto | mattpocock/skills | skills/engineering/resolving-merge-conflicts | 391a270 | no | |
-| ponytail-audit | auto | DietrichGebert/ponytail | skills/ponytail-audit | 8f32ae0f6eb0 | no | |
-| ponytail-debt | auto | DietrichGebert/ponytail | skills/ponytail-debt | 8f32ae0f6eb0 | no | |
-| ponytail-gain | auto | DietrichGebert/ponytail | skills/ponytail-gain | 8f32ae0f6eb0 | no | |
-| ponytail-help | auto | DietrichGebert/ponytail | skills/ponytail-help | 8f32ae0f6eb0 | no | |
-| ponytail-review | auto | DietrichGebert/ponytail | skills/ponytail-review | 8f32ae0f6eb0 | no | |
 | sentry | on-demand | mitsuhiko/agent-stuff | skills/sentry | e6c86e31bd30 | no | |
 | setup-matt-pocock-skills | on-demand | mattpocock/skills | skills/engineering/setup-matt-pocock-skills | 391a270 | no | one-time per-repo tracker/domain-docs setup; triage skill not vendored so Section B skips |
 | summarize | on-demand | mitsuhiko/agent-stuff | skills/summarize | fe35bfe1f650 | no | |
 | tdd | auto | mattpocock/skills | skills/engineering/tdd | 391a270 | no | incl. tests.md, mocking.md |
 | tmux | auto | mitsuhiko/agent-stuff | skills/tmux | e13c178bf88c | no | |
-| uv | auto | mitsuhiko/agent-stuff | skills/uv | 6d73099efb1a | no | |
 | teach | on-demand | mattpocock/skills | skills/productivity/teach | c6b033e | no | |
 | to-spec | on-demand | mattpocock/skills | skills/engineering/to-spec | 391a270 | no | replaced to-prd (upstream unification) |
 | to-tickets | on-demand | mattpocock/skills | skills/engineering/to-tickets | 391a270 | no | replaced to-issues (upstream unification) |
@@ -56,6 +49,14 @@ Keep the `Bucket` column in sync with the skill's actual folder and its
 | wayfinder | on-demand | mattpocock/skills | skills/engineering/wayfinder | 391a270 | no | needs tracker config from setup-matt-pocock-skills |
 | web-design-guidelines | on-demand | vercel-labs/agent-skills | skills/web-design-guidelines | 3116f3e62dbd | no | |
 | writing-great-skills | on-demand | mattpocock/skills | skills/productivity/writing-great-skills | 391a270 | no | replaced local `skill-creator` |
+| brandkit | on-demand | leonxlnx/taste-skill | skills/brandkit | b17742737e79 | yes | flag added for on-demand |
+| design-taste-frontend | on-demand | leonxlnx/taste-skill | skills/taste-skill | b17742737e79 | yes | flag added for on-demand |
+| high-end-visual-design | on-demand | leonxlnx/taste-skill | skills/soft-skill | b17742737e79 | yes | flag added for on-demand |
+| image-to-code | on-demand | leonxlnx/taste-skill | skills/image-to-code-skill | b17742737e79 | yes | flag added for on-demand |
+| imagegen-frontend-mobile | on-demand | leonxlnx/taste-skill | skills/imagegen-frontend-mobile | b17742737e79 | yes | flag added for on-demand |
+| imagegen-frontend-web | on-demand | leonxlnx/taste-skill | skills/imagegen-frontend-web | b17742737e79 | yes | flag added for on-demand |
+| minimalist-ui | on-demand | leonxlnx/taste-skill | skills/minimalist-skill | b17742737e79 | yes | flag added for on-demand |
+| redesign-existing-projects | on-demand | leonxlnx/taste-skill | skills/redesign-skill | b17742737e79 | yes | flag added for on-demand |
 
 _Local (non-vendored) skills are not listed here: acli, agents-md, code-review,
 crwl, git-commit, hcloud, marp._

@@ -1,6 +1,6 @@
 ---
 name: dev-browser
-description: Browser automation with persistent page state. Use for navigating sites, filling forms, taking screenshots, scraping/extracting web data, logging in, or testing/automating web apps — any browser interaction.
+description: Browser automation with persistent page state. Use when users ask to navigate websites, fill forms, take screenshots, extract web data, test web apps, or automate browser workflows. Trigger phrases include "go to [url]", "click on", "fill out the form", "take a screenshot", "scrape", "automate", "test the website", "log into", or any browser interaction request.
 ---
 
 # Dev Browser
@@ -17,3 +17,5 @@ dev-browser install
 ## Usage
 
 Run `dev-browser --help` to learn more.
+
+Named daemon-launched browsers persist by default. For unattended work, `--idle-timeout 5m` closes each launched browser after inactivity while preserving its profile and login state. The setting never closes Chrome attached with `--connect`; use `--idle-timeout 0` to disable configured cleanup.

@@ -1,5 +1,3 @@
-@AGENTS.md
-
 ## Web Content & Research
 
 - Use Exa MCP tools for non-GitHub web content and research:

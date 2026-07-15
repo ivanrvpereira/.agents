@@ -48,7 +48,7 @@ Rules:
    - `summary` REQUIRED. Short, imperative, <= 72 chars, no trailing period.
 2. Only when needed (don’t force it for trivial changes), write a body:
    - Add a blank line after the subject
-   - Wrap lines at 72 chars
+   - Do not hard-wrap body lines; keep each sentence or bullet on a single line
    - Focus on "what" and "why", not the "how"
    - Explain the motivation
    - Mention side effects, trade-offs, or alternatives considered
