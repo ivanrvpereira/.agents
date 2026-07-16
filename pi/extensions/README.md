@@ -12,7 +12,7 @@ Stops on two conditions: session ping budget exhausted (24 per session by defaul
 
 - `/keepalive [on|off|status|stats]` — toggle, inspect state, or browse recorded ping history (default on)
 - Status line: `♨ R148k ping@15:29 (3/24)` → `♨ cap 24/24 · cold ~17:21` — absolute times, no render ticks
-- Env: `PI_CACHE_KEEPALIVE=off` to disable, `PI_CACHE_KEEPALIVE_DELAY` (sec), `PI_CACHE_KEEPALIVE_PINGS` (session cap, default 24), `PI_CACHE_KEEPALIVE_MIN_TOKENS` (skip small contexts, default 20k)
+- Env: `PI_CACHE_KEEPALIVE=off` to disable, `PI_CACHE_KEEPALIVE_DELAY` (sec), `PI_CACHE_KEEPALIVE_PINGS` (session cap, default 24), `PI_CACHE_KEEPALIVE_MIN_TOKENS` (skip small contexts, default 10k — shows `♨ ctx … — no ping` when skipped)
 - Skips `openai-codex/*` models (automatic ~5–10 min cache, can't usefully be kept warm)
 
 ## done-notify.ts

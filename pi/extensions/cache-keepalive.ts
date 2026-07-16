@@ -39,7 +39,7 @@
  *   PI_CACHE_KEEPALIVE=off            disable by default (keepalive is on unless set)
  *   PI_CACHE_KEEPALIVE_DELAY=<sec>    override ping delay
  *   PI_CACHE_KEEPALIVE_PINGS=<n>      max pings per session (default 24)
- *   PI_CACHE_KEEPALIVE_MIN_TOKENS=<n> skip small contexts (default 20000)
+ *   PI_CACHE_KEEPALIVE_MIN_TOKENS=<n> skip small contexts (default 10000)
  */
 import type { ExtensionAPI, ExtensionContext } from "@earendil-works/pi-coding-agent";
 import { createHash } from "node:crypto";
@@ -61,7 +61,7 @@ const FIVE_MIN_MS = 5 * 60_000;
 const MAX_PINGS = intEnv("PI_CACHE_KEEPALIVE_PINGS", 24);
 const STATS_PATH = join(homedir(), ".pi", "agent", "cache-keepalive-stats.json");
 const MAX_STAT_EVENTS = 100;
-const MIN_TOKENS = intEnv("PI_CACHE_KEEPALIVE_MIN_TOKENS", 20_000);
+const MIN_TOKENS = intEnv("PI_CACHE_KEEPALIVE_MIN_TOKENS", 10_000);
 const DELAY_OVERRIDE_MS = Number.isFinite(Number(process.env.PI_CACHE_KEEPALIVE_DELAY)) && process.env.PI_CACHE_KEEPALIVE_DELAY
 	? Math.max(10, Number(process.env.PI_CACHE_KEEPALIVE_DELAY)) * 1000
 	: null;
@@ -261,7 +261,9 @@ export default function cacheKeepalive(pi: ExtensionAPI) {
 		cancelTimer();
 		if (!enabled || !captured) return;
 		if (captured.estTokens < MIN_TOKENS) {
-			setStatus(undefined); // rewrite would be cheap; not worth pinging
+			// Rewrite would be cheap; not worth pinging — but say so instead of
+			// showing nothing, so "why is there no ♨" is always answerable.
+			setStatus(`♨ ctx ~${fmtTokens(captured.estTokens)}<${fmtTokens(MIN_TOKENS)} — no ping`);
 			return;
 		}
 		if (sessionPings >= MAX_PINGS) {
