@@ -28,6 +28,7 @@ codex/           # Codex: config.toml, hooks
 | Validate local skill | `bin/add-skill skill-name` |
 | Add vendored skill | Copy upstream skill into `skills/auto/` or `skills/on-demand/`, add a row to `skills/VENDORED.md` |
 | Update vendored skills | Ask an AI agent to follow the update workflow in `skills/VENDORED.md` |
+| Update vendored Pi extensions | Ask an AI agent to follow the update workflow in `pi/extensions/VENDORED.md` |
 
 ## How Syncing Works
 
@@ -63,6 +64,7 @@ The sync script backs up existing non-symlink files as `.bak` before replacing t
 - **Agent-specific config** goes in `claude/`, `pi/`, or `codex/` — only that agent gets it
 - **Skills are bucketed by invocation:** `skills/auto/<name>/` = model may auto-invoke (no `disable-model-invocation`); `skills/on-demand/<name>/` = manual-only (`disable-model-invocation: true`). `bin/sync` flattens the bucket folders away, so skill folder names must be globally unique and the folder must match the flag.
 - **Vendored skills** are copied from upstream into a bucket and recorded in `skills/VENDORED.md` (source + pinned ref). We own the copies and may customize them; update them via the workflow in that file.
+- **Vendored Pi extensions** are copied from upstream repos into `pi/extensions/` and recorded in `pi/extensions/VENDORED.md` (source + pinned ref + update workflow).
 - **Private/company commands** do not belong here — use a separate private repo
 - After adding or moving files, run `bin/sync` to update symlinks
 

@@ -33,23 +33,6 @@
     }
   },
   "packages": [
-    "npm:pi-screenshots-picker",
-    "npm:@plannotator/pi-extension",
-    {
-      "source": "git:https://github.com/mitsuhiko/agent-stuff",
-      "skills": [],
-      "extensions": [
-        "extensions/answer.ts",
-        "extensions/btw.ts",
-        "extensions/files.ts",
-        "extensions/prompt-editor.ts",
-        "extensions/review.ts",
-        "extensions/session-breakdown.ts",
-        "extensions/split-fork.ts",
-        "extensions/todos.ts"
-      ],
-      "themes": []
-    },
     "npm:pi-perplexity@0.2.5",
     "git:https://github.com/badlogic/pi-diff-review",
     "npm:@gotgenes/pi-anthropic-auth",
@@ -59,11 +42,12 @@
     "npm:@ff-labs/pi-fff",
     "npm:@tintinweb/pi-subagents"
   ],
-  "lastChangelogVersion": "0.80.7",
+  "lastChangelogVersion": "0.80.10",
   "terminal": {
     "clearOnShrink": true
   },
   "theme": "dark",
   "outputPad": 0,
-  "showCacheMissNotices": true
+  "showCacheMissNotices": true,
+  "transport": "auto"
 }

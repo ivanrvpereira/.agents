@@ -284,7 +284,7 @@ export default function cacheKeepalive(pi: ExtensionAPI) {
 	async function firePing() {
 		timer = null;
 		if (!enabled || !captured) return;
-		setStatus(`${ICON} …`);
+		setStatus(`${ICON} ping…`);
 		const target = captured;
 		let result: PingResult;
 		try {

@@ -49,6 +49,12 @@ This controls agent-stuff `prompt-editor` presets:
 
 Keep this aligned with the user's preferred model presets when requested, but do not assume it must always match Ctrl+P. Ask if unclear.
 
+### Refreshing model catalogs
+
+- `pi update --models` — immediately refresh configured providers’ model catalogs only; it does not update Pi or extensions.
+- `/model` also refreshes configured providers in the background.
+- Catalogs are cached in `~/.pi/agent/models-store.json` for offline use.
+
 ### One-off/session model changes
 
 Use Pi itself rather than editing files:
