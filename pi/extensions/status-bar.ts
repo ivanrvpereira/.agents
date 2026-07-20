@@ -331,71 +331,53 @@ export default function (pi: ExtensionAPI) {
 						: `${formatTokens(contextTokens)}/${formatTokens(contextWindow)} ${contextPercent}%${autoIndicator}`;
 					parts.push(ansi256(CONTEXT_COLOR, contextDisplay));
 
-					// Cost (last) — lit up a bit above dim
-					const usingOAuth = ctx.model ? ctx.modelRegistry.isUsingOAuth(ctx.model) : false;
-					if (totalCost || usingOAuth) {
-						parts.push(theme.fg("text", `$${totalCost.toFixed(3)}${usingOAuth ? " (sub)" : ""}`));
+					// Cost (last) — lit up a bit above dim, rounded to whole dollars
+					if (totalCost) {
+						parts.push(theme.fg("text", `$${Math.round(totalCost)}`));
 						if (costPerMinute > 0) parts.push(theme.fg("text", formatRate(costPerMinute)));
 					}
 
-					let statsLeft = parts.join(" ");
-					let statsLeftWidth = visibleWidth(statsLeft);
-					if (statsLeftWidth > width) {
-						statsLeft = truncateToWidth(statsLeft, width, "...");
-						statsLeftWidth = visibleWidth(statsLeft);
-					}
+					// Extension statuses (keepalive etc.) go before the model name.
+					const statuses = footerData.getExtensionStatuses();
+					const statusStr = statuses.size > 0
+						? Array.from(statuses.entries())
+							.sort(([a], [b]) => a.localeCompare(b))
+							.map(([, t]) => sanitize(t))
+							.join(" ")
+						: "";
 
-					// Right side: model (highlighted) + thinking level (own color)
+					// Right side: statuses + model (highlighted) + thinking level (own color)
 					const modelId = ctx.model?.id || "no-model";
 					const level = ctx.model?.reasoning ? pi.getThinkingLevel() : null;
 					const levelLabel = level === null ? "" : level === "off" ? "thinking off" : level;
-					const showProvider = footerData.getAvailableProviderCount() > 1 && !!ctx.model;
-					const providerLabel = showProvider ? `(${ctx.model!.provider}) ` : "";
 					const levelSuffix = levelLabel ? ` • ${levelLabel}` : "";
 
-					// Plain text drives width math + truncation; drop provider prefix if it won't fit.
-					let rightPlain = `${providerLabel}${modelId}${levelSuffix}`;
-					const keepProvider = showProvider && statsLeftWidth + 2 + visibleWidth(rightPlain) <= width;
-					if (!keepProvider) rightPlain = `${modelId}${levelSuffix}`;
+					let statsLeft = parts.join(" ");
+					const statsLeftWidth = visibleWidth(statsLeft);
 
-					// Colored version: dim provider/separators, model-specific highlight, level-colored effort.
+					const rightPlain = `${statusStr ? `${statusStr} ` : ""}${modelId}${levelSuffix}`;
 					const rightColored =
-						(keepProvider ? theme.fg("dim", providerLabel) : "") +
+						(statusStr ? theme.fg("text", `${statusStr} `) : "") +
 						colorModel(modelId, theme.bold(theme.fg("accent", modelId))) +
 						(levelLabel ? theme.fg("dim", " • ") + colorThinking(level!, levelLabel) : "");
-
 					const rightWidth = visibleWidth(rightPlain);
-					const totalNeeded = statsLeftWidth + 2 + rightWidth;
-					let padWidth: number;
-					let rightRendered: string;
-					if (totalNeeded <= width) {
-						padWidth = width - statsLeftWidth - rightWidth;
-						rightRendered = rightColored;
-					} else {
-						const avail = width - statsLeftWidth - 2;
-						if (avail > 0) {
-							const tr = truncateToWidth(rightPlain, avail, "");
-							padWidth = Math.max(0, width - statsLeftWidth - visibleWidth(tr));
-							rightRendered = theme.fg("dim", tr);
-						} else {
-							padWidth = 0;
-							rightRendered = "";
-						}
-					}
 
 					const pwdLine = truncateToWidth(theme.fg("dim", pwd), width, theme.fg("dim", "..."));
-					const lines = [pwdLine, statsLeft + " ".repeat(padWidth) + rightRendered];
+					const lines = [pwdLine];
 
-					// Extension statuses
-					const statuses = footerData.getExtensionStatuses();
-					if (statuses.size > 0) {
-						const statusLine = Array.from(statuses.entries())
-							.sort(([a], [b]) => a.localeCompare(b))
-							.map(([, t]) => sanitize(t))
-							.join(" ");
-						lines.push(truncateToWidth(statusLine, width, theme.fg("dim", "...")));
+					if (statsLeftWidth + 2 + rightWidth <= width) {
+						// Wide: single line, right side right-aligned.
+						lines.push(statsLeft + " ".repeat(width - statsLeftWidth - rightWidth) + rightColored);
+					} else {
+						// Narrow: split the status line — stats on one line, status+model on the next.
+						if (statsLeftWidth > width) statsLeft = truncateToWidth(statsLeft, width, "...");
+						lines.push(statsLeft);
+						if (rightWidth <= width) {
+							lines.push(" ".repeat(width - rightWidth) + rightColored);
+						} else {
+							lines.push(truncateToWidth(rightPlain, width, "..."));
+						}
 					}
-
 					return lines;
 				},
 			};

@@ -55,6 +55,7 @@ function debugLog(entry: Record<string, unknown>) {
 }
 
 const STATUS_KEY = "cache-keepalive";
+const ICON = "\x1b[31m\u2665\x1b[0m"; // red heart — keepalive = keeping the cache's heart beating
 const ONE_HOUR_MS = 60 * 60_000;
 const FIVE_MIN_MS = 5 * 60_000;
 
@@ -73,7 +74,7 @@ function intEnv(name: string, fallback: number): number {
 }
 
 function fmtTime(epochMs: number): string {
-	return new Date(epochMs).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+	return new Date(epochMs).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: false });
 }
 
 function fmtTokens(count: number): string {
@@ -262,13 +263,13 @@ export default function cacheKeepalive(pi: ExtensionAPI) {
 		if (!enabled || !captured) return;
 		if (captured.estTokens < MIN_TOKENS) {
 			// Rewrite would be cheap; not worth pinging — but say so instead of
-			// showing nothing, so "why is there no ♨" is always answerable.
-			setStatus(`♨ ctx ~${fmtTokens(captured.estTokens)}<${fmtTokens(MIN_TOKENS)} — no ping`);
+			// showing nothing, so "why is there no heart" is always answerable.
+			setStatus(`${ICON} ctx ~${fmtTokens(captured.estTokens)}<${fmtTokens(MIN_TOKENS)} — skip`);
 			return;
 		}
 		if (sessionPings >= MAX_PINGS) {
 			const coldAt = (lastPingAt || Date.now()) + captured.ttlMs;
-			setStatus(`♨ cap ${sessionPings}/${MAX_PINGS} · cold ~${fmtTime(coldAt)}`);
+			setStatus(`${ICON} cap ${sessionPings}/${MAX_PINGS} · cold ~${fmtTime(coldAt)}`);
 			return;
 		}
 		const delay = pingDelayMs(captured.ttlMs);
@@ -277,13 +278,13 @@ export default function cacheKeepalive(pi: ExtensionAPI) {
 		// Never keep the process alive just for a keepalive.
 		(timer as any).unref?.();
 		const read = lastCacheRead > 0 ? `R${fmtTokens(lastCacheRead)} ` : "";
-		setStatus(`♨ ${read}ping@${fmtTime(nextPingAt)} (${sessionPings}/${MAX_PINGS})`);
+		setStatus(`${ICON} ${read}@${fmtTime(nextPingAt)} (${sessionPings}/${MAX_PINGS})`);
 	}
 
 	async function firePing() {
 		timer = null;
 		if (!enabled || !captured) return;
-		setStatus("♨ pinging…");
+		setStatus(`${ICON} …`);
 		const target = captured;
 		let result: PingResult;
 		try {
@@ -307,7 +308,7 @@ export default function cacheKeepalive(pi: ExtensionAPI) {
 				enabled = false;
 				autoDisabledReason = `cache miss (R${fmtTokens(result.cacheRead)} of ~${fmtTokens(target.estTokens)})`;
 				recordStat({ ...statBase(target), kind: "miss", cacheRead: result.cacheRead });
-				setStatus(`♨ MISS R${fmtTokens(result.cacheRead)} — keepalive off`);
+				setStatus(`${ICON} MISS R${fmtTokens(result.cacheRead)} — keepalive off`);
 				return;
 			}
 			sessionPings++;
@@ -326,14 +327,14 @@ export default function cacheKeepalive(pi: ExtensionAPI) {
 		if (result.status === 401 || result.status === 403) {
 			enabled = false;
 			autoDisabledReason = `auth error ${result.status}`;
-			setStatus(`♨ auth ${result.status} — keepalive off`);
+			setStatus(`${ICON} auth ${result.status} — keepalive off`);
 			return;
 		}
 		// Transient failure (5xx, 429, network): consume a ping slot and retry.
 		sessionPings++;
 		arm();
 		const retry = timer ? ` · retry@${fmtTime(nextPingAt)}` : "";
-		setStatus(`♨ ping failed (${result.status ?? result.error ?? "?"})${retry} (${sessionPings}/${MAX_PINGS})`);
+		setStatus(`${ICON} failed (${result.status ?? result.error ?? "?"})${retry} (${sessionPings}/${MAX_PINGS})`);
 	}
 
 	// "replay": resend the exact last request (pure cache refresh, zero new input).
