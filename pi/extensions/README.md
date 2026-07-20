@@ -27,6 +27,15 @@ Stash the prompt you're typing and restore it later, per project.
 - `Ctrl+Q` with an empty editor (or `/stash`): pick a stashed prompt to restore
 - Stored globally in `~/.pi/agent/prompt-stash.json`, keyed by project cwd — survives restarts, nothing written into the repo
 
+## save-last-message.ts
+
+Saves the latest assistant text response directly to a Markdown file without another agent turn.
+
+- `/save-last report.md` — save to a path relative to Pi's current working directory
+- `/save-last` — create a timestamped `agent-message-YYYYMMDD-HHMMSS.md` file
+- Adds `.md` when the supplied path has no extension and never overwrites an existing file
+- Also accepts absolute and `~/`-prefixed paths; surrounding quotes are stripped
+
 ## status-bar.ts
 
 Custom footer replacing the built-in status bar. Adds context token count with usage coloring (green < 80k, yellow > 80k, red > 120k), git stats (modified/new/deleted, ahead/behind, stash), cache hit ratio, and cost rate.
@@ -42,3 +51,7 @@ Custom footer replacing the built-in status bar. Adds context token count with u
 ```
 
 Requires running inside tmux ≥ 3.0. Prompts starting with `-` or `@` are space-prefixed so pi's CLI parses them as messages, not options/attachments.
+
+## Vendored extensions
+
+`answer.ts`, `btw.ts`, `files.ts`, `prompt-editor.ts`, `review.ts`, `session-breakdown.ts`, `todos.ts` are vendored copies from [mitsuhiko/agent-stuff](https://github.com/mitsuhiko/agent-stuff). Sources, pinned refs, rationale, and the update workflow live in [VENDORED.md](./VENDORED.md).

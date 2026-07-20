@@ -331,9 +331,11 @@ export default function (pi: ExtensionAPI) {
 						: `${formatTokens(contextTokens)}/${formatTokens(contextWindow)} ${contextPercent}%${autoIndicator}`;
 					parts.push(ansi256(CONTEXT_COLOR, contextDisplay));
 
-					// Cost (last) — lit up a bit above dim, rounded to whole dollars
+					// Cost (last) — lit up a bit above dim. Whole dollars once >= $1;
+					// cents below that so a $0.40 session never reads as "$0".
 					if (totalCost) {
-						parts.push(theme.fg("text", `$${Math.round(totalCost)}`));
+						const costLabel = totalCost < 1 ? `$${totalCost.toFixed(2)}` : `$${Math.round(totalCost)}`;
+						parts.push(theme.fg("text", costLabel));
 						if (costPerMinute > 0) parts.push(theme.fg("text", formatRate(costPerMinute)));
 					}
 
@@ -356,8 +358,10 @@ export default function (pi: ExtensionAPI) {
 					const statsLeftWidth = visibleWidth(statsLeft);
 
 					const rightPlain = `${statusStr ? `${statusStr} ` : ""}${modelId}${levelSuffix}`;
+					// Statuses may carry their own ANSI styling (with resets), so render
+					// them as-is instead of wrapping in a theme color a reset would break.
 					const rightColored =
-						(statusStr ? theme.fg("text", `${statusStr} `) : "") +
+						(statusStr ? `${statusStr} ` : "") +
 						colorModel(modelId, theme.bold(theme.fg("accent", modelId))) +
 						(levelLabel ? theme.fg("dim", " • ") + colorThinking(level!, levelLabel) : "");
 					const rightWidth = visibleWidth(rightPlain);
