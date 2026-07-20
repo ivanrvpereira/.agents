@@ -28,9 +28,10 @@ Keep the `Bucket` column in sync with the skill's actual folder and its
 | dev-browser | auto | SawyerHood/dev-browser | skills/dev-browser | 71aa88dcc399 | yes | also a plugin (`dev-browser`); flag removed to allow auto-invocation |
 | frontend-design | auto | mitsuhiko/agent-stuff | skills/frontend-design | f27c7ee2304a | yes | flag removed to allow auto-invocation |
 | grill-me | on-demand | mattpocock/skills | skills/productivity/grill-me | c6b033e | no | |
-| grilling | auto | mattpocock/skills | skills/productivity/grilling | 391a270 | yes | upstream added disable-model-invocation; flag stripped to keep auto (wayfinder invokes it) |
+| grilling | auto | mattpocock/skills | skills/in-progress/batch-grill-me | 9603c1c | yes | renamed to `grilling`; `disable-model-invocation` stripped to keep auto (wayfinder invokes it) |
 | handoff | on-demand | mattpocock/skills | skills/productivity/handoff | 391a270 | no | replaced the previous local handoff |
 | humanizer | on-demand | softaworks/agent-toolkit | skills/humanizer | 004c1998fffe | no | |
+| i-have-adhd | auto | ayghri/i-have-adhd | skills/i-have-adhd | 72c33eee81ea | no | |
 | implement | on-demand | mattpocock/skills | skills/engineering/implement | 391a270 | no | end of wayfinder → to-spec → to-tickets → implement chain |
 | librarian | auto | mitsuhiko/agent-stuff | skills/librarian | d9c9e4f484d7 | no | |
 | liteparse | auto | run-llama/llamaparse-agent-skills | skills/liteparse | c8a6189b121b | no | had a dup vendor `effective-liteparse` (removed) |
