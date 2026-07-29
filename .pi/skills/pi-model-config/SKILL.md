@@ -8,7 +8,7 @@ description: "Know how Pi model selection is configured and changed: default mod
 Use this skill when the user asks how to change Pi models or wants edits to:
 - the default model/provider/thinking level
 - the active model for a session
-- Ctrl+P scoped model cycling
+- model lists in both `pi/settings.json` (Ctrl+P) and `~/.pi/agent/modes.json` (Ctrl+Space)
 - prompt-editor modes (`/mode`, `ctrl+space`, `ctrl+shift+m`)
 
 ## Where model selection lives
@@ -47,7 +47,7 @@ This controls agent-stuff `prompt-editor` presets:
 - `ctrl+shift+m` — picker
 - `ctrl+space` — cycle prompt modes
 
-Keep this aligned with the user's preferred model presets when requested, but do not assume it must always match Ctrl+P. Ask if unclear.
+When adding, removing, or replacing models, update both `pi/settings.json` and `~/.pi/agent/modes.json` so Ctrl+P and Ctrl+Space stay aligned. Preserve each file's requested ordering and thinking levels.
 
 ### Refreshing model catalogs
 
@@ -68,7 +68,8 @@ Use Pi itself rather than editing files:
 
 1. Inspect current state
    - Read `pi/settings.json`
-   - Read `~/.pi/agent/modes.json` if prompt-editor modes are involved
+   - Read `~/.pi/agent/modes.json`
+   - For model-list changes, plan matching edits in both files
 2. Check prior intent from history
    - `git log --oneline -- pi/settings.json`
    - `git show <commit> -- pi/settings.json` for recent config commits
@@ -76,8 +77,8 @@ Use Pi itself rather than editing files:
    - `pi --list-models`
 4. Make the requested change
    - Defaults: update `defaultProvider`, `defaultModel`, `defaultThinkingLevel`
-   - Ctrl+P: update `enabledModels` in the exact requested order
-   - Prompt modes: update `~/.pi/agent/modes.json`
+   - Model lists: update `enabledModels` in `pi/settings.json` and `modes` in `~/.pi/agent/modes.json`
+   - Keep both lists aligned unless the user explicitly requests different Ctrl+P and Ctrl+Space presets
 5. Clean up stale entries
    - Remove duplicates
    - Remove deprecated models if requested

@@ -1,15 +1,13 @@
 {
-  "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.6-terra",
+  "defaultProvider": "anthropic",
+  "defaultModel": "claude-fable-5",
   "defaultThinkingLevel": "high",
   "enabledModels": [
-    "openai-codex/gpt-5.5:high",
-    "openai-codex/gpt-5.5:xhigh",
     "openai-codex/gpt-5.6-luna:high",
-    "openai-codex/gpt-5.6-sol:high",
+    "openai-codex/gpt-5.6-sol:medium",
     "openai-codex/gpt-5.6-terra:high",
     "anthropic/claude-fable-5:high",
-    "anthropic/claude-opus-4-8:high",
+    "anthropic/claude-opus-5:high",
     "anthropic/claude-sonnet-5:medium"
   ],
   "subagents": {
@@ -42,7 +40,7 @@
     "npm:@ff-labs/pi-fff",
     "npm:@tintinweb/pi-subagents"
   ],
-  "lastChangelogVersion": "0.80.10",
+  "lastChangelogVersion": "0.82.1",
   "terminal": {
     "clearOnShrink": true
   },
