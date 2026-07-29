@@ -8,3 +8,4 @@ codex/tmp/
 !.pi/skills/**
 .pi-subagents/
 AGENTS.local.md
+skills/private

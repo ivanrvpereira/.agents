@@ -59,5 +59,5 @@ Keep the `Bucket` column in sync with the skill's actual folder and its
 | minimalist-ui | on-demand | leonxlnx/taste-skill | skills/minimalist-skill | b17742737e79 | yes | flag added for on-demand |
 | redesign-existing-projects | on-demand | leonxlnx/taste-skill | skills/redesign-skill | b17742737e79 | yes | flag added for on-demand |
 
-_Local (non-vendored) skills are not listed here: acli, agents-md, code-review,
-crwl, git-commit, hcloud, marp._
+_Local (non-vendored) skills are not listed here: agents-md, code-review,
+crwl, git-commit, marp._
