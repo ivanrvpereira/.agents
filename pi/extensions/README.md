@@ -54,4 +54,4 @@ Requires running inside tmux ≥ 3.0. Prompts starting with `-` or `@` are space
 
 ## Vendored extensions
 
-`answer.ts`, `btw.ts`, `files.ts`, `prompt-editor.ts`, `review.ts`, `session-breakdown.ts`, `todos.ts` are vendored copies from [mitsuhiko/agent-stuff](https://github.com/mitsuhiko/agent-stuff). Sources, pinned refs, rationale, and the update workflow live in [VENDORED.md](./VENDORED.md).
+`answer.ts`, `btw.ts`, `files.ts`, `review.ts`, `session-breakdown.ts`, `todos.ts` are vendored copies from [mitsuhiko/agent-stuff](https://github.com/mitsuhiko/agent-stuff). Sources, pinned refs, rationale, and the update workflow live in [VENDORED.md](./VENDORED.md).

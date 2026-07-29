@@ -30,7 +30,6 @@ load without diagnostics). Ask an AI agent to run this.
 | answer.ts | mitsuhiko/agent-stuff | extensions/answer.ts | 4bce45560fa5 | no | |
 | btw.ts | mitsuhiko/agent-stuff | extensions/btw.ts | 4bce45560fa5 | no | |
 | files.ts | mitsuhiko/agent-stuff | extensions/files.ts | 4bce45560fa5 | no | |
-| prompt-editor.ts | mitsuhiko/agent-stuff | extensions/prompt-editor.ts | 4bce45560fa5 | no | |
 | review.ts | mitsuhiko/agent-stuff | extensions/review.ts | 4bce45560fa5 | no | |
 | session-breakdown.ts | mitsuhiko/agent-stuff | extensions/session-breakdown.ts | 4bce45560fa5 | no | |
 | todos.ts | mitsuhiko/agent-stuff | extensions/todos.ts | 4bce45560fa5 | no | |
