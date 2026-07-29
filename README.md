@@ -64,7 +64,6 @@ Codex shared skills are symlinked into `~/.codex/skills`; conflicting non-symlin
 | [`code-review`](skills/auto/code-review/SKILL.md) | Two-axis diff review for standards, risk, and spec fit |
 | [`crwl`](skills/crwl/SKILL.md) | Web crawling with Crawl4AI CLI |
 | [`git-commit`](skills/git-commit/SKILL.md) | Conventional, focused, reviewable git commits |
-| [`hcloud`](skills/hcloud/SKILL.md) | Hetzner Cloud infrastructure via hcloud CLI |
 | [`handoff`](skills/handoff/SKILL.md) | Write or update HANDOFF.md for a fresh agent |
 | [`marp`](skills/marp/SKILL.md) | Slide presentations from Markdown |
 | [`marker`](skills/marker/SKILL.md) | Parse documents (PDF, images, PPTX, DOCX, XLSX, HTML, EPUB) to markdown via marker-pdf |

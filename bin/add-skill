@@ -7,11 +7,12 @@ usage() {
     cat <<EOF
 Usage: $(basename "$0") <skill-name-or-path>
 
-Validate a local skill under skills/.
+Validate a local skill under skills/ or skills-scoped/.
 
 Examples:
-  $(basename "$0") my-skill         # Find and validate skills/**/my-skill
-  $(basename "$0") on-demand/acli   # Validate skills/on-demand/acli
+  $(basename "$0") my-skill           # Find and validate skills/**/my-skill
+  $(basename "$0") on-demand/marp     # Validate skills/on-demand/marp
+  $(basename "$0") prestashop         # Also searches skills-scoped/ (both repos)
 EOF
 }
 
@@ -32,10 +33,13 @@ if [ -d "$SKILL_REF" ]; then
 elif [ -d "$AGENTS_DIR/skills/$SKILL_REF" ]; then
     SKILL_DIR="$AGENTS_DIR/skills/$SKILL_REF"
 else
+    search_dirs=("$AGENTS_DIR/skills")
+    [ -d "$AGENTS_DIR/skills-scoped" ] && search_dirs+=("$AGENTS_DIR/skills-scoped")
+    [ -d "$HOME/.agents-private/skills-scoped" ] && search_dirs+=("$HOME/.agents-private/skills-scoped")
     matches=()
     while IFS= read -r match; do
         matches+=("$match")
-    done < <(find -L "$AGENTS_DIR/skills" -path "*/$SKILL_REF/SKILL.md" -type f | sort)
+    done < <(find -L "${search_dirs[@]}" -path "*/$SKILL_REF/SKILL.md" -type f | sort)
     if [ "${#matches[@]}" -eq 1 ]; then
         SKILL_DIR="$(dirname "${matches[0]}")"
     elif [ "${#matches[@]}" -gt 1 ]; then

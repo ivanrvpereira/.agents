@@ -1,0 +1,148 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Link a project-scoped skill (skills-scoped/) into a project's agent skill
+# directories, so it is auto-invocable only in that project.
+#
+# Sources searched (single source of truth, edit in place):
+#   ~/.agents/skills-scoped/<name>/
+#   ~/.agents-private/skills-scoped/<name>/
+#
+# Targets created in the project:
+#   <project>/.claude/skills/<name>  (Claude Code)
+#   <project>/.pi/skills/<name>      (Pi)
+#
+# Symlinks are added to the project's .git/info/exclude (local-only ignore),
+# never committed.
+
+AGENTS_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+PRIVATE_DIR="$HOME/.agents-private"
+
+ROOTS=()
+[ -d "$AGENTS_DIR/skills-scoped" ] && ROOTS+=("$AGENTS_DIR/skills-scoped")
+[ -d "$PRIVATE_DIR/skills-scoped" ] && ROOTS+=("$PRIVATE_DIR/skills-scoped")
+
+usage() {
+    cat <<EOF
+Usage: $(basename "$0") <skill-name> [project-dir]   Link skill into project
+       $(basename "$0") --remove <skill-name> [project-dir]
+       $(basename "$0") --list [project-dir]         List scoped skills (+ link state)
+
+project-dir defaults to the current directory.
+EOF
+}
+
+REMOVE=false
+LIST=false
+ARGS=()
+for arg in "$@"; do
+    case "$arg" in
+        --remove) REMOVE=true ;;
+        --list)   LIST=true ;;
+        --help)   usage; exit 0 ;;
+        -*)       echo "Unknown option: $arg" >&2; usage; exit 1 ;;
+        *)        ARGS+=("$arg") ;;
+    esac
+done
+
+if $LIST; then
+    PROJECT_DIR="$(cd "${ARGS[0]:-.}" && pwd)"
+    for root in "${ROOTS[@]}"; do
+        for skill in "$root"/*/; do
+            [ -f "$skill/SKILL.md" ] || continue
+            name="$(basename "$skill")"
+            state=""
+            [ -L "$PROJECT_DIR/.claude/skills/$name" ] && state=" [linked: $PROJECT_DIR]"
+            echo "$name  ($skill)$state"
+        done
+    done
+    exit 0
+fi
+
+if [ "${#ARGS[@]}" -lt 1 ]; then
+    usage
+    exit 1
+fi
+
+NAME="${ARGS[0]}"
+PROJECT_DIR="$(cd "${ARGS[1]:-.}" && pwd)"
+
+# Resolve skill source across roots; error on collision
+SKILL_DIR=""
+for root in "${ROOTS[@]}"; do
+    if [ -f "$root/$NAME/SKILL.md" ]; then
+        if [ -n "$SKILL_DIR" ]; then
+            echo "Error: '$NAME' exists in multiple roots:" >&2
+            echo "  $SKILL_DIR" >&2
+            echo "  $root/$NAME" >&2
+            exit 1
+        fi
+        SKILL_DIR="$root/$NAME"
+    fi
+done
+
+TARGETS=(
+    "$PROJECT_DIR/.claude/skills/$NAME"
+    "$PROJECT_DIR/.pi/skills/$NAME"
+)
+EXCLUDE_ENTRIES=(
+    ".claude/skills/$NAME"
+    ".pi/skills/$NAME"
+)
+
+git_exclude_file() {
+    [ -d "$PROJECT_DIR/.git" ] && echo "$PROJECT_DIR/.git/info/exclude" || echo ""
+}
+
+if $REMOVE; then
+    for dst in "${TARGETS[@]}"; do
+        if [ -L "$dst" ]; then
+            rm "$dst"
+            echo "Removed: $dst"
+            # Clean up empty parent dirs (skills/, then .claude|.pi if empty)
+            rmdir -p "$(dirname "$dst")" 2>/dev/null || true
+        fi
+    done
+    exclude="$(git_exclude_file)"
+    if [ -n "$exclude" ] && [ -f "$exclude" ]; then
+        tmp="$(mktemp)"
+        cp "$exclude" "$tmp"
+        for entry in "${EXCLUDE_ENTRIES[@]}"; do
+            grep -vxF "$entry" "$tmp" > "$tmp.new" || true
+            mv "$tmp.new" "$tmp"
+        done
+        mv "$tmp" "$exclude"
+    fi
+    exit 0
+fi
+
+if [ -z "$SKILL_DIR" ]; then
+    echo "Error: no scoped skill named '$NAME' found in:" >&2
+    printf '  %s\n' "${ROOTS[@]}" >&2
+    exit 1
+fi
+
+for dst in "${TARGETS[@]}"; do
+    if [ -L "$dst" ]; then
+        [ "$(readlink "$dst")" = "$SKILL_DIR" ] && { echo "Already linked: $dst"; continue; }
+        rm "$dst"
+    elif [ -e "$dst" ]; then
+        echo "Error: $dst exists and is not a symlink — resolve manually" >&2
+        exit 1
+    fi
+    mkdir -p "$(dirname "$dst")"
+    ln -s "$SKILL_DIR" "$dst"
+    echo "Linked: $dst → $SKILL_DIR"
+done
+
+exclude="$(git_exclude_file)"
+if [ -n "$exclude" ]; then
+    mkdir -p "$(dirname "$exclude")"
+    touch "$exclude"
+    for entry in "${EXCLUDE_ENTRIES[@]}"; do
+        grep -qxF "$entry" "$exclude" || echo "$entry" >> "$exclude"
+    done
+    echo "Ignored locally via .git/info/exclude"
+else
+    echo "Note: $PROJECT_DIR is not a git repo — no ignore entries added"
+fi
