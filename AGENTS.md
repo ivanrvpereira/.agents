@@ -12,7 +12,6 @@ bin/sync         # Symlink manager (creates all links below)
 bin/add-skill    # Validate a local skill before syncing
 bin/link-skill   # Link a scoped skill into one project
 skills/          # Shared skills; auto/ (model-invocable) + on-demand/ (manual)
-skills-scoped/   # Per-project skills; enabled via bin/link-skill, not synced globally
 skills/VENDORED.md # Registry of copied upstream skills + their sources
 claude/          # Claude Code: settings, commands, scripts
 pi/              # Pi: settings, extensions, skills
@@ -67,7 +66,7 @@ The sync script backs up existing non-symlink files as `.bak` before replacing t
 - **Shared config** goes at root or in `skills/` — all agents get it
 - **Agent-specific config** goes in `claude/`, `pi/`, or `codex/` — only that agent gets it
 - **Skills are bucketed by invocation:** `skills/auto/<name>/` = model may auto-invoke (no `disable-model-invocation`); `skills/on-demand/<name>/` = manual-only (`disable-model-invocation: true`). `bin/sync` flattens the bucket folders away, so skill folder names must be globally unique and the folder must match the flag.
-- **Project-scoped skills** live in `skills-scoped/<name>/` (outside `skills/`, so they are never synced globally). Enable per project with `bin/link-skill <name> <project-dir>`, which symlinks into the project's `.claude/skills/` and `.pi/skills/` and ignores the links via `.git/info/exclude`. They auto-invoke only where linked — zero context cost elsewhere. Private scoped skills go in `~/.agents-private/skills-scoped/`.
+- **Project-scoped skills** live in `~/.agents-private/skills-scoped/<name>/` (outside `skills/`, so they are never synced globally). Enable per project with `bin/link-skill <name> <project-dir>`, which symlinks into the project's `.claude/skills/` and `.pi/skills/` and ignores the links via `.git/info/exclude`. They auto-invoke only where linked — zero context cost elsewhere. `bin/link-skill` also picks up a local `skills-scoped/` in this repo if one exists.
 - **Vendored skills** are copied from upstream into a bucket and recorded in `skills/VENDORED.md` (source + pinned ref). We own the copies and may customize them; update them via the workflow in that file.
 - **Vendored Pi extensions** are copied from upstream repos into `pi/extensions/` and recorded in `pi/extensions/VENDORED.md` (source + pinned ref + update workflow).
 - **Private/company commands** do not belong here — use a separate private repo
