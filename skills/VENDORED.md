@@ -39,6 +39,7 @@ Keep the `Bucket` column in sync with the skill's actual folder and its
 | prototype | auto | mattpocock/skills | skills/engineering/prototype | 391a270 | no | incl. LOGIC.md, UI.md |
 | sentry | on-demand | mitsuhiko/agent-stuff | skills/sentry | e6c86e31bd30 | no | |
 | setup-matt-pocock-skills | on-demand | mattpocock/skills | skills/engineering/setup-matt-pocock-skills | 391a270 | no | one-time per-repo tracker/domain-docs setup; triage skill not vendored so Section B skips |
+| simple-english | auto | AminBlg/SimpleEnglish | skills/simple-english | 59bf6702197a | yes | replaced TheAngryByrd/simplified-technical-english-skill (2.2k★ upstream, full 53-rule catalog inline); description shortened; evals/, output-styles/, prompts/ not vendored |
 | summarize | on-demand | mitsuhiko/agent-stuff | skills/summarize | fe35bfe1f650 | no | |
 | tdd | auto | mattpocock/skills | skills/engineering/tdd | 391a270 | no | incl. tests.md, mocking.md |
 | tmux | auto | mitsuhiko/agent-stuff | skills/tmux | e13c178bf88c | no | |
