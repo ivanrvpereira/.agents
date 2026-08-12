@@ -32,6 +32,7 @@
   },
   "packages": [
     "npm:pi-perplexity@0.2.5",
+    "npm:pi-exa@0.6.1",
     "git:https://github.com/badlogic/pi-diff-review",
     "npm:@gotgenes/pi-anthropic-auth",
     "npm:pi-rtk-optimizer",
