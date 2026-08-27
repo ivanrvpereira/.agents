@@ -1,5 +1,9 @@
 # Agent Instructions
 
+## Writing
+
+- Never limit prose line length, in any format: no hard-wrapping markdown/text at a column, no CSS `max-width` on text blocks. One sentence-flow per line; text fills the page.
+
 ## Workflow
 
 - Ask when requirements, ownership, risks, or tradeoffs are ambiguous.
