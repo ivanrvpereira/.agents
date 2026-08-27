@@ -1,6 +1,6 @@
 {
   "defaultProvider": "anthropic",
-  "defaultModel": "claude-fable-5",
+  "defaultModel": "claude-opus-5",
   "defaultThinkingLevel": "high",
   "enabledModels": [
     "openai-codex/gpt-5.6-luna:high",
@@ -41,7 +41,7 @@
     "npm:@ff-labs/pi-fff",
     "npm:@tintinweb/pi-subagents"
   ],
-  "lastChangelogVersion": "0.82.1",
+  "lastChangelogVersion": "0.84.3",
   "terminal": {
     "clearOnShrink": true
   },

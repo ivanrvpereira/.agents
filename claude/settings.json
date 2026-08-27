@@ -27,7 +27,20 @@
       "Bash(mkfs:*)",
       "Bash(dd:*)",
       "Bash(git push --force:*)",
-      "Bash(git push -f:*)"
+      "Bash(git push -f:*)",
+      "EnterPlanMode",
+      "ExitPlanMode",
+      "DesignSync",
+      "NotebookEdit",
+      "SendMessage",
+      "PushNotification",
+      "RemoteTrigger",
+      "ReportFindings",
+      "ScheduleWakeup",
+      "AskUserQuestion",
+      "CronCreate",
+      "CronDelete",
+      "CronList"
     ],
     "ask": [],
     "defaultMode": "auto"
@@ -53,6 +66,16 @@
             "command": "\"/Users/ivanpereira/.claude/hooks/context-mode-cache-heal.mjs\""
           }
         ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$HOME/.claude/hooks/herdr-agent-state.sh\" session",
+            "timeout": 10
+          }
+        ]
       }
     ],
     "Stop": [
@@ -67,36 +90,32 @@
       }
     ]
   },
+  "disableRemoteControl": true,
+  "disableWorkflows": true,
   "statusLine": {
     "type": "command",
     "command": "bash ~/.claude/statusline-command.sh"
   },
   "enabledPlugins": {
+    "codex@openai-codex": true,
     "dev-browser@dev-browser-marketplace": true,
     "document-skills@anthropic-agent-skills": false,
     "example-skills@anthropic-agent-skills": false,
     "frontend-design@claude-code-plugins": true,
     "gopls-lsp@claude-plugins-official": true,
     "notion-workspace-plugin@notion-plugin-marketplace": true,
-    "plannotator@plannotator": true,
     "pyright-lsp@claude-plugins-official": true,
     "sentry-mcp@sentry-mcp": false,
     "slack@claude-plugins-official": false,
+    "swift-lsp@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true,
-    "codex@openai-codex": true,
-    "swift-lsp@claude-plugins-official": true
+    "exa@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
-    "sentry-mcp": {
+    "claude-code-workflows": {
       "source": {
         "source": "github",
-        "repo": "getsentry/sentry-mcp"
-      }
-    },
-    "context-mode": {
-      "source": {
-        "source": "github",
-        "repo": "mksglu/context-mode"
+        "repo": "wshobson/agents"
       }
     },
     "claude-plugins-official": {
@@ -105,10 +124,10 @@
         "repo": "anthropics/claude-plugins-official"
       }
     },
-    "plannotator": {
+    "context-mode": {
       "source": {
         "source": "github",
-        "repo": "backnotprop/plannotator"
+        "repo": "mksglu/context-mode"
       }
     },
     "dev-browser-marketplace": {
@@ -117,21 +136,26 @@
         "repo": "sawyerhood/dev-browser"
       }
     },
-    "claude-code-workflows": {
-      "source": {
-        "source": "github",
-        "repo": "wshobson/agents"
-      }
-    },
     "openai-codex": {
       "source": {
         "source": "github",
         "repo": "openai/codex-plugin-cc"
       }
+    },
+    "plannotator": {
+      "source": {
+        "source": "github",
+        "repo": "backnotprop/plannotator"
+      }
+    },
+    "sentry-mcp": {
+      "source": {
+        "source": "github",
+        "repo": "getsentry/sentry-mcp"
+      }
     }
   },
-  "effortLevel": "high",
-  "autoUpdatesChannel": "stable",
+  "autoUpdatesChannel": "latest",
   "skipDangerousModePermissionPrompt": true,
   "editorMode": "vim",
   "autoCompactEnabled": false,
