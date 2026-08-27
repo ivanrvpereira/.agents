@@ -37,6 +37,7 @@ Keep the `Bucket` column in sync with the skill's actual folder and its
 | liteparse | auto | run-llama/llamaparse-agent-skills | skills/liteparse | c8a6189b121b | no | had a dup vendor `effective-liteparse` (removed) |
 | ponytail | auto | DietrichGebert/ponytail | skills/ponytail | 8f32ae0f6eb0 | yes | shortened description for broad coding trigger; added 3 rules from retired `_agents.md` Core Behavior (style mirroring, comments-why, remove unused code) |
 | prototype | auto | mattpocock/skills | skills/engineering/prototype | 391a270 | no | incl. LOGIC.md, UI.md |
+| research | auto | mattpocock/skills | skills/engineering/research | 2ab9580 | no | vendored for wayfinder's `/research` step; Codex `agents/openai.yaml` intentionally not vendored |
 | sentry | on-demand | mitsuhiko/agent-stuff | skills/sentry | e6c86e31bd30 | no | |
 | setup-matt-pocock-skills | on-demand | mattpocock/skills | skills/engineering/setup-matt-pocock-skills | 391a270 | no | one-time per-repo tracker/domain-docs setup; triage skill not vendored so Section B skips |
 | simple-english | auto | AminBlg/SimpleEnglish | skills/simple-english | 59bf6702197a | yes | replaced TheAngryByrd/simplified-technical-english-skill (2.2k★ upstream, full 53-rule catalog inline); description shortened; evals/, output-styles/, prompts/ not vendored |
@@ -45,10 +46,10 @@ Keep the `Bucket` column in sync with the skill's actual folder and its
 | tmux | auto | mitsuhiko/agent-stuff | skills/tmux | e13c178bf88c | no | |
 | teach | on-demand | mattpocock/skills | skills/productivity/teach | c6b033e | no | |
 | to-spec | on-demand | mattpocock/skills | skills/engineering/to-spec | 391a270 | no | replaced to-prd (upstream unification) |
-| to-tickets | on-demand | mattpocock/skills | skills/engineering/to-tickets | 391a270 | no | replaced to-issues (upstream unification) |
+| to-tickets | on-demand | mattpocock/skills | skills/engineering/to-tickets | 2ab9580 | no | replaced to-issues (upstream unification); Codex `agents/openai.yaml` intentionally not vendored |
 | vercel-composition-patterns | on-demand | vercel-labs/agent-skills | skills/composition-patterns | bf90d0a4b83e | no | |
 | vercel-react-best-practices | on-demand | vercel-labs/agent-skills | skills/react-best-practices | (unpinned) | no | capture ref on next sync |
-| wayfinder | on-demand | mattpocock/skills | skills/engineering/wayfinder | 391a270 | no | needs tracker config from setup-matt-pocock-skills |
+| wayfinder | on-demand | mattpocock/skills | skills/engineering/wayfinder | 2ab9580 | no | needs tracker config from setup-matt-pocock-skills; references upstream `/research` skill (not vendored); Codex `agents/openai.yaml` intentionally not vendored |
 | web-design-guidelines | on-demand | vercel-labs/agent-skills | skills/web-design-guidelines | 3116f3e62dbd | no | |
 | writing-great-skills | on-demand | mattpocock/skills | skills/productivity/writing-great-skills | 391a270 | no | replaced local `skill-creator` |
 | brandkit | on-demand | leonxlnx/taste-skill | skills/brandkit | b17742737e79 | yes | flag added for on-demand |
