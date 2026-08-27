@@ -29,9 +29,9 @@ load without diagnostics). Ask an AI agent to run this.
 |-----------|--------|---------------|-----------|-----------|-------|
 | answer.ts | mitsuhiko/agent-stuff | extensions/answer.ts | 4bce45560fa5 | no | |
 | btw.ts | mitsuhiko/agent-stuff | extensions/btw.ts | 4bce45560fa5 | no | |
-| files.ts | mitsuhiko/agent-stuff | extensions/files.ts | 4bce45560fa5 | no | |
+| files.ts | mitsuhiko/agent-stuff | extensions/files.ts | 13bc8f87970b | no | |
 | review.ts | mitsuhiko/agent-stuff | extensions/review.ts | 4bce45560fa5 | no | |
-| session-breakdown.ts | mitsuhiko/agent-stuff | extensions/session-breakdown.ts | 4bce45560fa5 | no | |
+| session-breakdown.ts | mitsuhiko/agent-stuff | extensions/session-breakdown.ts | 13bc8f87970b | no | |
 | todos.ts | mitsuhiko/agent-stuff | extensions/todos.ts | 4bce45560fa5 | no | |
 
 _Local (non-vendored) extensions are not listed here: cache-keepalive,
