@@ -29,15 +29,12 @@
       "Bash(git push --force:*)",
       "Bash(git push -f:*)",
       "EnterPlanMode",
-      "ExitPlanMode",
       "DesignSync",
       "NotebookEdit",
-      "SendMessage",
       "PushNotification",
       "RemoteTrigger",
       "ReportFindings",
       "ScheduleWakeup",
-      "AskUserQuestion",
       "CronCreate",
       "CronDelete",
       "CronList"
@@ -45,7 +42,7 @@
     "ask": [],
     "defaultMode": "auto"
   },
-  "model": "claude-fable-5[1m]",
+  "model": "fable",
   "hooks": {
     "Notification": [
       {
@@ -153,6 +150,11 @@
         "source": "github",
         "repo": "getsentry/sentry-mcp"
       }
+    }
+  },
+  "modelSettings": {
+    "claude-fable-5-1": {
+      "effortLevel": "medium"
     }
   },
   "autoUpdatesChannel": "latest",

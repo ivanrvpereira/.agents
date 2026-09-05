@@ -3,12 +3,11 @@
   "defaultModel": "claude-opus-5",
   "defaultThinkingLevel": "high",
   "enabledModels": [
+    "anthropic/claude-opus-5:high",
     "openai-codex/gpt-5.6-luna:high",
     "openai-codex/gpt-5.6-sol:medium",
-    "openai-codex/gpt-5.6-terra:high",
-    "anthropic/claude-fable-5:high",
-    "anthropic/claude-opus-5:high",
-    "anthropic/claude-sonnet-5:medium"
+    "anthropic/claude-fable-5-1:high",
+    "openai-codex/gpt-6-astra:high"
   ],
   "subagents": {
     "defaultModel": "openai-codex/gpt-5.5:high",
@@ -23,7 +22,7 @@
         "model": "openai-codex/gpt-5.5:high"
       },
       "reviewer": {
-        "model": "anthropic/claude-fable-5:high"
+        "model": "anthropic/claude-fable-5-1:high"
       },
       "worker": {
         "model": "openai-codex/gpt-5.5:xhigh"
@@ -35,13 +34,12 @@
     "npm:pi-exa@0.6.1",
     "git:https://github.com/badlogic/pi-diff-review",
     "npm:@gotgenes/pi-anthropic-auth",
-    "npm:pi-rtk-optimizer",
     "npm:pi-context-usage",
     "npm:pi-cache-graph",
     "npm:@ff-labs/pi-fff",
     "npm:@tintinweb/pi-subagents"
   ],
-  "lastChangelogVersion": "0.84.3",
+  "lastChangelogVersion": "0.85.0",
   "terminal": {
     "clearOnShrink": true
   },
