@@ -100,6 +100,8 @@ Collect repo guidance that documents how code should be written or reviewed, for
 - framework/package-specific docs in the touched directories;
 - test, lint, typing, migration, API, security, or release guidance.
 
+When the review includes test changes, read [tdd](../tdd/SKILL.md) and its linked testing and mocking references. Apply the test-quality rules as review criteria, not as an instruction to start an implementation loop. Identify the agreed seams in the spec or project guidance. If no seam agreement is recorded, raise a Human callout rather than assume the existing tests were unauthorized.
+
 On top of repo documentation, the Standards axis always carries the **smell baseline** below. The repo overrides the baseline: if a documented local convention endorses something the baseline would flag, suppress the smell. Baseline smells are always judgement calls, not hard violations.
 
 ### Smell baseline
@@ -129,6 +131,7 @@ Paste the review target commands, commit list, touched files, relevant instructi
 
 - The diff/review commands and commit list.
 - The standards-source files and relevant excerpts.
+- For test changes, the TDD reference paths and agreed seams. Require the reviewer to read those references and name the protected behavior and plausible regression for each changed test.
 - The full smell baseline.
 - Brief:
   > Review only the changed lines/behavior. Report prioritized findings where the diff violates documented standards, introduces concrete safety/reliability/security/operational risk, or contains a meaningful baseline smell. Cite the standard or changed hunk for each finding. Distinguish hard standard/risk violations from smell judgement calls. Include separate Human callouts for migrations, dependencies, auth/API changes, destructive operations, external integrations, or rollout concerns. Under 500 words.
@@ -145,6 +148,8 @@ If the spec is missing, skip the Spec sub-agent and note this in the final repor
 ### 5. Verify and aggregate
 
 Before reporting, spot-check each sub-agent finding against the diff/spec/standards. Drop or qualify anything that is hallucinated, not introduced by the change, not actionable, or missing evidence.
+
+For disputed test-effectiveness findings, use a targeted regression or behavior-preserving probe in a disposable copy when practical. Verify the relevant assertion's response, not merely a passing suite or an unrelated failure. Do not add dependencies or modify the reviewed tree for these probes. Do not infer red-before-green execution from final test files.
 
 Present the reports under these headings:
 

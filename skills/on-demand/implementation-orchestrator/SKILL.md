@@ -14,6 +14,14 @@ Read the approved plan and project instructions. Inspect existing changes and es
 
 Use the task and repository to identify acceptance criteria, project checks, the progress file, and the user's shell. Identify required live checks and authorized test targets before live access. Ask only for missing information that blocks safe execution. If no approved plan exists, request it rather than inventing scope.
 
+## Testing contract
+
+Before a step adds or changes tests, read [tdd](../../auto/tdd/SKILL.md) and its linked testing and mocking references. Use the seams already approved in the plan or project guidance. If the seams are missing or need to change, obtain user approval before test work starts.
+
+Give implementation and review workers the TDD reference paths and the approved seams. Require them to read those references before their work. Implementation workers apply the loop. Review workers apply the test-quality rules.
+
+Require implementation reports to identify the protected behavior, seam, and observed red/green commands and results. For tests of already-correct behavior, a relevant broken variant in a disposable copy can supply the failure evidence. A passing suite alone is not evidence that a new test detects its claimed regression.
+
 ## Per-step loop
 
 1. **Implement.** Assign a worker the next step. Require the project checks to pass.

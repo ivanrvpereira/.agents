@@ -32,7 +32,7 @@ Keep the `Bucket` column in sync with the skill's actual folder and its
 | handoff | on-demand | mattpocock/skills | skills/productivity/handoff | 391a270 | no | replaced the previous local handoff |
 | humanizer | on-demand | softaworks/agent-toolkit | skills/humanizer | 004c1998fffe | no | |
 | i-have-adhd | auto | ayghri/i-have-adhd | skills/i-have-adhd | 72c33eee81ea | no | |
-| implement | on-demand | mattpocock/skills | skills/engineering/implement | 391a270 | no | end of wayfinder → to-spec → to-tickets → implement chain |
+| implement | on-demand | mattpocock/skills | skills/engineering/implement | 391a270 | yes | end of wayfinder → to-spec → to-tickets → implement chain; required TDD reference before test changes |
 | librarian | auto | mitsuhiko/agent-stuff | skills/librarian | d9c9e4f484d7 | no | |
 | liteparse | auto | run-llama/llamaparse-agent-skills | skills/liteparse | c8a6189b121b | no | had a dup vendor `effective-liteparse` (removed) |
 | ponytail | auto | DietrichGebert/ponytail | skills/ponytail | 8f32ae0f6eb0 | yes | shortened description for broad coding trigger; added 3 rules from retired `_agents.md` Core Behavior (style mirroring, comments-why, remove unused code) |
@@ -42,7 +42,7 @@ Keep the `Bucket` column in sync with the skill's actual folder and its
 | setup-matt-pocock-skills | on-demand | mattpocock/skills | skills/engineering/setup-matt-pocock-skills | 391a270 | no | one-time per-repo tracker/domain-docs setup; triage skill not vendored so Section B skips |
 | simple-english | auto | AminBlg/SimpleEnglish | skills/simple-english | 59bf6702197a | yes | replaced TheAngryByrd/simplified-technical-english-skill (2.2k★ upstream, full 53-rule catalog inline); description shortened; evals/, output-styles/, prompts/ not vendored |
 | summarize | on-demand | mitsuhiko/agent-stuff | skills/summarize | fe35bfe1f650 | no | |
-| tdd | auto | mattpocock/skills | skills/engineering/tdd | 391a270 | no | incl. tests.md, mocking.md |
+| tdd | auto | mattpocock/skills | skills/engineering/tdd | 391a270 | yes | incl. tests.md, mocking.md; broader test-change and test-quality review triggers |
 | tmux | auto | mitsuhiko/agent-stuff | skills/tmux | e13c178bf88c | no | |
 | teach | on-demand | mattpocock/skills | skills/productivity/teach | c6b033e | no | |
 | to-spec | on-demand | mattpocock/skills | skills/engineering/to-spec | 391a270 | no | replaced to-prd (upstream unification) |

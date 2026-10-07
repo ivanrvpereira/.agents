@@ -1,6 +1,6 @@
 ---
 name: tdd
-description: Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions "red-green-refactor", or wants integration tests.
+description: Behavior-focused testing and TDD. Use before adding or changing tests, when reviewing test quality, or when another skill needs test-seam and assertion standards.
 ---
 
 # Test-Driven Development
