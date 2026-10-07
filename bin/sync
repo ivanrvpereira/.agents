@@ -329,6 +329,7 @@ if $PRUNE; then
     prune_stale "$CLAUDE_DIR/skills"
     prune_stale "$PI_DIR/skills"
     prune_stale "$PI_DIR/extensions"
+    prune_stale "$CODEX_DIR/skills"
     prune_pi_shared_skills "$PI_DIR/skills"
 fi
 
