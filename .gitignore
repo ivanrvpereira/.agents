@@ -7,7 +7,7 @@ codex/tmp/
 !.pi/skills/
 !.pi/skills/**
 .pi-subagents/
-AGENTS.local.md
+*.local.md
 skills/private
 
 # Agent configs live in ~/.agents-private (linked by bin/sync); never re-add here
