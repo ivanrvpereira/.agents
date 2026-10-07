@@ -2,6 +2,7 @@
 set -euo pipefail
 
 AGENTS_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+PRIVATE_DIR="${AGENTS_PRIVATE_DIR:-$HOME/.agents-private}"
 CLAUDE_DIR="$HOME/.claude"
 PI_DIR="$HOME/.pi/agent"
 CODEX_DIR="$HOME/.codex"
@@ -16,6 +17,10 @@ usage() {
 Usage: $(basename "$0") [OPTIONS]
 
 Sync agent configurations from ~/.agents to agent config directories.
+
+Agent settings (claude/settings.json, pi/settings.json, pi/mcp.json,
+codex/config.toml, codex/hooks.json) and private skills are linked from the
+private repo at \$AGENTS_PRIVATE_DIR (default: ~/.agents-private), which must exist.
 
 Options:
   --dry-run      Preview changes without applying
@@ -90,6 +95,25 @@ link_dir() {
 
     ln -sfn "$src" "$dst"
     info "$dst → $src"
+}
+
+# Ensure the gitignored skills/private link points at the private repo's skills,
+# so shared skill discovery (find -L) picks them up. Never touches a real dir.
+link_private_skills() {
+    local src="$PRIVATE_DIR/skills" dst="$AGENTS_DIR/skills/private"
+    [ -d "$src" ] || return 0
+
+    if [ -e "$dst" ] && [ ! -L "$dst" ]; then
+        warn "$dst exists and is not a symlink; leaving it alone"
+        return 0
+    fi
+    # Accept an existing link (relative or absolute) that resolves to src
+    if [ -L "$dst" ] && [ -d "$dst" ] \
+        && [ "$(cd -P "$dst" && pwd)" = "$(cd -P "$src" && pwd)" ]; then
+        skip "$dst"
+        return 0
+    fi
+    link_dir "$src" "$dst"
 }
 
 # Symlink each discovered skill directory into a target skills directory.
@@ -206,11 +230,27 @@ prune_pi_shared_skills() {
 
 # --- Main ---
 
+if [ ! -d "$PRIVATE_DIR" ]; then
+    {
+        echo "Error: private config repo not found at $PRIVATE_DIR"
+        echo "Clone it first:"
+        echo "  git clone git@github.com:ivanrvpereira/agents-private.git ~/.agents-private"
+        echo "  (or https://github.com/ivanrvpereira/agents-private)"
+        echo "or set AGENTS_PRIVATE_DIR to its location."
+    } >&2
+    exit 1
+fi
+if [ ! -f "$PRIVATE_DIR/claude/settings.json" ]; then
+    echo "Error: $PRIVATE_DIR/claude/settings.json not found" >&2
+    exit 1
+fi
+
 if ! $YES && ! $DRY_RUN; then
     echo "Sync $AGENTS_DIR → agent config directories"
-    echo "  Claude: $CLAUDE_DIR"
-    echo "  Pi:     $PI_DIR"
-    echo "  Codex:  $CODEX_DIR"
+    echo "  Private: $PRIVATE_DIR"
+    echo "  Claude:  $CLAUDE_DIR"
+    echo "  Pi:      $PI_DIR"
+    echo "  Codex:   $CODEX_DIR"
     echo ""
     read -rp "Continue? [y/N] " confirm
     [ "$confirm" = "y" ] || [ "$confirm" = "Y" ] || exit 0
@@ -225,11 +265,12 @@ fi
 echo ""
 echo "=== Shared ==="
 link_file "$AGENTS_DIR/_claude.md" "$CLAUDE_DIR/CLAUDE.md"
+link_private_skills
 link_skills "$AGENTS_DIR/skills" "$CLAUDE_DIR/skills"
 
 echo ""
 echo "=== Claude Code ==="
-link_file "$AGENTS_DIR/claude/settings.json" "$CLAUDE_DIR/settings.json"
+link_file "$PRIVATE_DIR/claude/settings.json" "$CLAUDE_DIR/settings.json"
 link_file "$AGENTS_DIR/claude/statusline-command.sh" "$CLAUDE_DIR/statusline-command.sh"
 link_dir "$AGENTS_DIR/claude/commands" "$CLAUDE_DIR/commands"
 link_dir "$AGENTS_DIR/claude/scripts" "$CLAUDE_DIR/scripts"
@@ -239,8 +280,8 @@ echo "=== Pi ==="
 if [ -f "$AGENTS_DIR/pi/APPEND_SYSTEM.md" ]; then
     link_file "$AGENTS_DIR/pi/APPEND_SYSTEM.md" "$PI_DIR/APPEND_SYSTEM.md"
 fi
-if [ -f "$AGENTS_DIR/pi/settings.json" ]; then
-    link_file "$AGENTS_DIR/pi/settings.json" "$PI_DIR/settings.json"
+if [ -f "$PRIVATE_DIR/pi/settings.json" ]; then
+    link_file "$PRIVATE_DIR/pi/settings.json" "$PI_DIR/settings.json"
 fi
 if [ -f "$AGENTS_DIR/pi/keybindings.json" ]; then
     link_file "$AGENTS_DIR/pi/keybindings.json" "$PI_DIR/keybindings.json"
@@ -248,8 +289,8 @@ fi
 if [ -f "$AGENTS_DIR/pi/sandbox.json" ]; then
     link_file "$AGENTS_DIR/pi/sandbox.json" "$PI_DIR/sandbox.json"
 fi
-if [ -f "$AGENTS_DIR/pi/mcp.json" ]; then
-    link_file "$AGENTS_DIR/pi/mcp.json" "$PI_DIR/mcp.json"
+if [ -f "$PRIVATE_DIR/pi/mcp.json" ]; then
+    link_file "$PRIVATE_DIR/pi/mcp.json" "$PI_DIR/mcp.json"
 fi
 
 # Pi extensions (per-item symlinks: dirs and .ts files)
@@ -274,11 +315,11 @@ fi
 
 echo ""
 echo "=== Codex ==="
-if [ -f "$AGENTS_DIR/codex/config.toml" ]; then
-    link_file "$AGENTS_DIR/codex/config.toml" "$CODEX_DIR/config.toml"
+if [ -f "$PRIVATE_DIR/codex/config.toml" ]; then
+    link_file "$PRIVATE_DIR/codex/config.toml" "$CODEX_DIR/config.toml"
 fi
-if [ -f "$AGENTS_DIR/codex/hooks.json" ]; then
-    link_file "$AGENTS_DIR/codex/hooks.json" "$CODEX_DIR/hooks.json"
+if [ -f "$PRIVATE_DIR/codex/hooks.json" ]; then
+    link_file "$PRIVATE_DIR/codex/hooks.json" "$CODEX_DIR/hooks.json"
 fi
 link_codex_skills "$AGENTS_DIR/skills" "$CODEX_DIR/skills"
 

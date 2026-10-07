@@ -2,10 +2,13 @@
 
 Centralized configuration for AI coding agents. Manages shared and agent-specific configs for [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Pi](https://pi.dev), and [Codex](https://developers.openai.com/codex).
 
+This public repo holds the scripts and shareable config. Agent settings (`claude/settings.json`, `pi/settings.json`, `pi/mcp.json`, `codex/config.toml`, `codex/hooks.json`) and private skills live in the private companion repo `~/.agents-private`, which `bin/sync` requires. Set `AGENTS_PRIVATE_DIR` to use another location.
+
 ## Setup
 
 ```bash
 git clone git@github.com:ivanrvpereira/.agents.git ~/.agents
+git clone git@github.com:ivanrvpereira/agents-private.git ~/.agents-private
 ~/.agents/bin/sync --bootstrap
 npx skills update -g  # restore external skills
 ```
@@ -20,9 +23,12 @@ CLAUDE.md          # Project-level CLAUDE.md (@AGENTS.md)
 bin/sync           # Unified symlink manager
 bin/add-skill      # Validate a local skill before syncing
 skills/            # Shared skills (Claude symlinks; Pi auto-discovers)
-claude/            # Claude Code configs (settings, commands, scripts)
-pi/                # Pi configs (settings, extensions, skills)
-codex/             # Codex configs (config.toml, hooks)
+skills/private     # Gitignored symlink to ~/.agents-private/skills (created by bin/sync)
+claude/            # Claude Code configs (commands, scripts, statusline)
+pi/                # Pi configs (APPEND_SYSTEM.md, keybindings, extensions, skills)
+
+~/.agents-private/ # Private repo: claude/settings.json, pi/settings.json, pi/mcp.json,
+                   # codex/config.toml, codex/hooks.json, skills/, skills-scoped/
 ```
 
 ## Usage
@@ -107,4 +113,5 @@ Then run `bin/sync` to link it into Claude Code. Pi discovers `~/.agents/skills`
 
 - **Claude Code**: Add files under `claude/` (commands, scripts)
 - **Pi**: Add extensions under `pi/extensions/`, skills under `pi/skills/`
-- **Codex**: Add durable settings under `codex/` and shared skills under `skills/`
+- **Codex**: Add shared skills under `skills/`
+- **Agent settings** (Claude/Pi/Codex settings, MCP, Codex hooks): edit them in `~/.agents-private`, not here

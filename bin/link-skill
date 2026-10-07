@@ -6,7 +6,7 @@ set -euo pipefail
 #
 # Sources searched (single source of truth, edit in place):
 #   ~/.agents/skills-scoped/<name>/
-#   ~/.agents-private/skills-scoped/<name>/
+#   ~/.agents-private/skills-scoped/<name>/  (or $AGENTS_PRIVATE_DIR)
 #
 # Targets created in the project:
 #   <project>/.claude/skills/<name>  (Claude Code)
@@ -16,7 +16,7 @@ set -euo pipefail
 # never committed.
 
 AGENTS_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-PRIVATE_DIR="$HOME/.agents-private"
+PRIVATE_DIR="${AGENTS_PRIVATE_DIR:-$HOME/.agents-private}"
 
 ROOTS=()
 [ -d "$AGENTS_DIR/skills-scoped" ] && ROOTS+=("$AGENTS_DIR/skills-scoped")

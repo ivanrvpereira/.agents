@@ -9,3 +9,10 @@ codex/tmp/
 .pi-subagents/
 AGENTS.local.md
 skills/private
+
+# Agent configs live in ~/.agents-private (linked by bin/sync); never re-add here
+claude/settings.json
+pi/settings.json
+pi/mcp.json
+codex/config.toml
+codex/hooks.json
