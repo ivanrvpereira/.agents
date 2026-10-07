@@ -24,6 +24,7 @@ Keep the `Bucket` column in sync with the skill's actual folder and its
 | code-simplifier | on-demand | HazAT/pi-config | skills/code-simplifier | d8395b7 | yes | flag added for on-demand; upstream `model: opus` pin removed |
 | deep-research | on-demand | 199-biotechnologies/claude-deep-research-skill | . | f2f2c0fa4e76 | no | repo root |
 | diagnosing-bugs | auto | mattpocock/skills | skills/engineering/diagnosing-bugs | 391a270 | no | incl. scripts/hitl-loop.template.sh |
+| diagram-design | on-demand | cathrynlavery/diagram-design | skills/diagram-design | 562dbdf93ff3c3da630be4f90f4f6c2548175058 | yes | manual-only flag; root LICENSE and THIRD_PARTY_LICENSES.md included; no plugin or repository-level tooling |
 | domain-modeling | auto | mattpocock/skills | skills/engineering/domain-modeling | c6b033e | no | incl. ADR-FORMAT.md, CONTEXT-FORMAT.md |
 | dev-browser | auto | SawyerHood/dev-browser | skills/dev-browser | 71aa88dcc399 | yes | also a plugin (`dev-browser`); flag removed to allow auto-invocation |
 | frontend-design | auto | mitsuhiko/agent-stuff | skills/frontend-design | f27c7ee2304a | yes | flag removed to allow auto-invocation |
@@ -40,6 +41,7 @@ Keep the `Bucket` column in sync with the skill's actual folder and its
 | research | auto | mattpocock/skills | skills/engineering/research | 2ab9580 | no | vendored for wayfinder's `/research` step; Codex `agents/openai.yaml` intentionally not vendored |
 | sentry | on-demand | mitsuhiko/agent-stuff | skills/sentry | e6c86e31bd30 | no | |
 | setup-matt-pocock-skills | on-demand | mattpocock/skills | skills/engineering/setup-matt-pocock-skills | 391a270 | no | one-time per-repo tracker/domain-docs setup; triage skill not vendored so Section B skips |
+| show-me | on-demand | humanlayer/skills | plugins/show-me/skills/show-me | ca7c8088db69e315a8b2deea43820270457f8f3c | no | incl. root LICENSE; plugin metadata not vendored |
 | simple-english | auto | AminBlg/SimpleEnglish | skills/simple-english | 59bf6702197a | yes | replaced TheAngryByrd/simplified-technical-english-skill (2.2k★ upstream, full 53-rule catalog inline); description shortened; evals/, output-styles/, prompts/ not vendored |
 | summarize | on-demand | mitsuhiko/agent-stuff | skills/summarize | fe35bfe1f650 | no | |
 | tdd | auto | mattpocock/skills | skills/engineering/tdd | 391a270 | yes | incl. tests.md, mocking.md; broader test-change and test-quality review triggers |
