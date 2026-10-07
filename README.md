@@ -24,7 +24,7 @@ bin/sync           # Unified symlink manager
 bin/add-skill      # Validate a local skill before syncing
 skills/            # Shared skills (Claude symlinks; Pi auto-discovers)
 skills/private     # Gitignored symlink to ~/.agents-private/skills (created by bin/sync)
-claude/            # Claude Code configs (commands, scripts, statusline)
+claude/            # Claude Code configs (scripts, statusline)
 pi/                # Pi configs (APPEND_SYSTEM.md, keybindings, extensions, skills)
 
 ~/.agents-private/ # Private repo: claude/settings.json, pi/settings.json, pi/mcp.json,
@@ -111,7 +111,7 @@ Then run `bin/sync` to link it into Claude Code. Pi discovers `~/.agents/skills`
 
 ## Adding agent-specific content
 
-- **Claude Code**: Add files under `claude/` (commands, scripts)
+- **Claude Code**: Add files under `claude/` (scripts)
 - **Pi**: Add extensions under `pi/extensions/`, skills under `pi/skills/`
 - **Codex**: Add shared skills under `skills/`
 - **Agent settings** (Claude/Pi/Codex settings, MCP, Codex hooks): edit them in `~/.agents-private`, not here

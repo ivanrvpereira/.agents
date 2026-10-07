@@ -16,7 +16,7 @@ bin/link-skill   # Link a scoped skill into one project
 skills/          # Shared skills; auto/ (model-invocable) + on-demand/ (manual)
 skills/VENDORED.md # Registry of copied upstream skills + their sources
 skills/private   # Gitignored symlink to ~/.agents-private/skills (created by bin/sync)
-claude/          # Claude Code: commands, scripts, statusline, plugin installer
+claude/          # Claude Code: scripts, statusline, plugin installer
 pi/              # Pi: APPEND_SYSTEM.md, keybindings, sandbox, extensions, skills
 
 ~/.agents-private/   # Private repo (data only, required by bin/sync)
@@ -53,7 +53,6 @@ pi/              # Pi: APPEND_SYSTEM.md, keybindings, sandbox, extensions, skill
 
 **Claude Code** (`~/.claude/`):
 - `~/.agents-private/claude/settings.json` → settings (permissions, hooks, plugins, model config)
-- `claude/commands/` → slash commands (e.g. `/day-summary`)
 - `claude/scripts/` → automation scripts (sleep management)
 - `claude/statusline-command.sh` → status bar display
 
@@ -80,7 +79,7 @@ The sync script backs up existing non-symlink files as `.bak` before replacing t
 - **Project-scoped skills** live in `~/.agents-private/skills-scoped/<name>/` (outside `skills/`, so they are never synced globally). Enable per project with `bin/link-skill <name> <project-dir>`, which symlinks into the project's `.claude/skills/` and `.pi/skills/` and ignores the links via `.git/info/exclude`. They auto-invoke only where linked — zero context cost elsewhere. `bin/link-skill` also picks up a local `skills-scoped/` in this repo if one exists.
 - **Vendored skills** are copied from upstream into a bucket and recorded in `skills/VENDORED.md` (source + pinned ref). We own the copies and may customize them; update them via the workflow in that file.
 - **Vendored Pi extensions** are copied from upstream repos into `pi/extensions/` and recorded in `pi/extensions/VENDORED.md` (source + pinned ref + update workflow).
-- **Private/company commands** do not belong here — use a separate private repo
+- **Private/company config and skills** do not belong here — put them in `~/.agents-private`
 - After adding or moving files, run `bin/sync` to update symlinks
 
 ## Web Content & Research

@@ -272,7 +272,6 @@ echo ""
 echo "=== Claude Code ==="
 link_file "$PRIVATE_DIR/claude/settings.json" "$CLAUDE_DIR/settings.json"
 link_file "$AGENTS_DIR/claude/statusline-command.sh" "$CLAUDE_DIR/statusline-command.sh"
-link_dir "$AGENTS_DIR/claude/commands" "$CLAUDE_DIR/commands"
 link_dir "$AGENTS_DIR/claude/scripts" "$CLAUDE_DIR/scripts"
 
 echo ""
