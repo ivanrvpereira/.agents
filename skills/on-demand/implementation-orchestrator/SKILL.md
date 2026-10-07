@@ -8,6 +8,8 @@ disable-model-invocation: true
 
 Implement the approved plan autonomously. Continue through its steps without routine approval requests. Keep implementation choices yours; keep requirements and safety boundaries fixed.
 
+Before anything else, read [caveman](../caveman/SKILL.md) and apply it at its default level to your messages to the user for the whole run.
+
 ## Start from the actual state
 
 Read the approved plan and project instructions. Inspect existing changes and establish the relevant test baseline. Preserve unrelated work and distinguish existing failures from new ones.
