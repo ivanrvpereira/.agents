@@ -29,7 +29,7 @@ Require implementation reports to identify the protected behavior, seam, and obs
 1. **Implement.** Assign a worker the next step. Require the project checks to pass.
 2. **Review and simplify.** Assign a separate worker to review correctness, safety, project standards, and compliance with the plan. Have the reviewer apply fixes and remove unnecessary complexity while preserving required behavior. Require checks to pass after their changes.
 3. **Verify independently.** Read the final diff yourself. Run project checks and exercise the actual behavior through its CLI, browser, or API. Cover acceptance criteria, relevant failure paths, and regressions. Run required live checks yourself against the intended environment. A worker's report is a claim, not evidence.
-4. **Record and commit.** Update the progress file after verification. Make one conventional commit for the step, containing only its changes and the progress file. Inspect the staged diff. Do not push.
+4. **Record and commit.** Update the progress file after verification. Make one conventional commit for the step, containing only its changes. Never commit the progress file or the plan. Inspect the staged diff. Do not push.
 5. **Demonstrate and continue.** Give a short walkthrough with commands you executed successfully in the user's shell. State what now works, then continue without waiting for acknowledgment.
 
 Return failures to the appropriate worker and repeat the relevant part of the loop. Do not weaken checks to obtain a pass. Record any baseline exception explicitly; never describe a failing suite as passing.
@@ -70,7 +70,7 @@ Resolve ordinary implementation failures without asking. Escalate missing permis
 
 ## Progress and reporting
 
-Maintain `PROGRESS.md`, or the project's designated progress file, as a concise implementation handoff, not a diary. Keep step status, decisions and reasons, verified learnings, and verification evidence current.
+Maintain `PROGRESS.md`, or the project's designated progress file, as a concise implementation handoff, not a diary. Keep the progress file and the plan out of git: make sure they are ignored, and never force-add them. If one is already tracked, ask before untracking it or rewriting history. Keep step status, decisions and reasons, verified learnings, and verification evidence current.
 
 Distinguish facts from hypotheses. Record failed approaches only when they help remaining work. Replace stale information rather than accumulating a transcript. Do not copy the plan, raw command output, or worker reports into it.
 
