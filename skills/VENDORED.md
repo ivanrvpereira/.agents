@@ -32,7 +32,7 @@ Keep the `Bucket` column in sync with the skill's actual folder and its
 | grilling | auto | mattpocock/skills | skills/in-progress/batch-grill-me | 9603c1c | yes | renamed to `grilling`; `disable-model-invocation` stripped to keep auto (wayfinder invokes it) |
 | handoff | on-demand | mattpocock/skills | skills/productivity/handoff | 391a270 | no | replaced the previous local handoff |
 | humanizer | on-demand | softaworks/agent-toolkit | skills/humanizer | 004c1998fffe | no | |
-| i-have-adhd | auto | ayghri/i-have-adhd | skills/i-have-adhd | 72c33eee81ea | no | |
+| i-have-adhd | on-demand | ayghri/i-have-adhd | skills/i-have-adhd | 72c33eee81ea | yes | flag added for on-demand |
 | implement | on-demand | mattpocock/skills | skills/engineering/implement | 391a270 | yes | end of wayfinder → to-spec → to-tickets → implement chain; required TDD reference before test changes |
 | librarian | auto | mitsuhiko/agent-stuff | skills/librarian | d9c9e4f484d7 | no | |
 | liteparse | auto | run-llama/llamaparse-agent-skills | skills/liteparse | c8a6189b121b | no | had a dup vendor `effective-liteparse` (removed) |
