@@ -16,6 +16,7 @@ bin/link-skill   # Link a scoped skill into one project
 skills/          # Shared skills; auto/ (model-invocable) + on-demand/ (manual)
 skills/VENDORED.md # Registry of copied upstream skills + their sources
 skills/private   # Gitignored symlink to ~/.agents-private/skills (created by bin/sync)
+skills/rex       # Gitignored; installed and updated by `rex skill setup` (tool-owned, not synced)
 claude/          # Claude Code: scripts, statusline, plugin installer
 pi/              # Pi: APPEND_SYSTEM.md, keybindings, sandbox, extensions, skills
 
@@ -33,7 +34,7 @@ pi/              # Pi: APPEND_SYSTEM.md, keybindings, sandbox, extensions, skill
 |--------|---------|
 | Sync configs | `bin/sync` |
 | Preview sync | `bin/sync --dry-run` |
-| Sync + install plugins | `bin/sync --bootstrap` |
+| Sync + install plugins + Rex skill/hooks | `bin/sync --bootstrap` |
 | Remove stale links | `bin/sync --prune` |
 | Validate local skill | `bin/add-skill skill-name` |
 | Enable scoped skill in a project | `bin/link-skill skill-name [project-dir]` |
@@ -48,8 +49,9 @@ pi/              # Pi: APPEND_SYSTEM.md, keybindings, sandbox, extensions, skill
 
 **Core links**:
 - `_claude.md` → `~/.claude/CLAUDE.md`
-- Each discovered skill directory under `skills/` → `~/.claude/skills/` (flattened; Pi reads shared skills recursively from `~/.agents/skills`)
-- Each discovered skill directory under `skills/` → `~/.codex/skills/`; conflicting non-symlink Codex skills are backed up first
+- Each skill directory under `skills/auto/`, `skills/on-demand/`, and `skills/private/` → `~/.claude/skills/` (flattened; Pi reads shared skills recursively from `~/.agents/skills`)
+- Each skill directory under the same buckets → `~/.codex/skills/`; conflicting non-symlink Codex skills are backed up first
+- Other top-level folders under `skills/` are tool-owned and never linked (see Conventions)
 
 **Claude Code** (`~/.claude/`):
 - `~/.agents-private/claude/settings.json` → settings (permissions, hooks, plugins, model config)
@@ -78,6 +80,7 @@ The sync script backs up existing non-symlink files as `.bak` before replacing t
 - **Agent-specific config** goes in `claude/` or `pi/` — only that agent gets it
 - **Agent settings and private config** (`claude/settings.json`, `pi/settings.json`, `pi/mcp.json`, `codex/config.toml`, `codex/hooks.json`, private/company skills) live in `~/.agents-private` under the same relative paths, never here (gitignored in this repo). `bin/sync` requires `~/.agents-private` to exist
 - **Skills are bucketed by invocation:** `skills/auto/<name>/` = model may auto-invoke (no `disable-model-invocation`); `skills/on-demand/<name>/` = manual-only (`disable-model-invocation: true`). `bin/sync` flattens the bucket folders away, so skill folder names must be globally unique and the folder must match the flag.
+- **Tool-installed skills:** a top-level `skills/<name>/` folder outside the buckets is installed and updated by an external tool (for example `skills/rex/` from `rex skill setup`). It is gitignored, `bin/sync` does not link it, and the tool owns its copies in each agent directory. Pi and Codex read it from `~/.agents/skills` directly. Do not vendor or edit it; use the tool's own commands (`rex skill setup|status|remove`). `bin/sync --bootstrap` runs `rex skill setup` when `rex` is installed.
 - **Project-scoped skills** live in `~/.agents-private/skills-scoped/<name>/` (outside `skills/`, so they are never synced globally). Enable per project with `bin/link-skill <name> <project-dir>`, which symlinks into the project's `.claude/skills/` and `.pi/skills/` and ignores the links via `.git/info/exclude`. They auto-invoke only where linked — zero context cost elsewhere. `bin/link-skill` also picks up a local `skills-scoped/` in this repo if one exists.
 - **Vendored skills** are copied from upstream into a bucket and recorded in `skills/VENDORED.md` (source + pinned ref). We own the copies and may customize them; update them via the workflow in that file.
 - **Vendored Pi extensions** are copied from upstream repos into `pi/extensions/` and recorded in `pi/extensions/VENDORED.md` (source + pinned ref + update workflow).
@@ -86,6 +89,7 @@ The sync script backs up existing non-symlink files as `.bak` before replacing t
 
 ## Web Content & Research
 
+- Save agent research and session reports under `.scratch/` at the repository root. This folder is globally ignored. Keep `docs/` for maintained documentation, and keep research reports out of commits.
 - **GitHub content**: Always use `gh` CLI for github.com — never crawl/scrape GitHub URLs. Use `gh api`, `gh repo view`, `gh pr view`, `gh issue view`, etc.
 
 ## Validation

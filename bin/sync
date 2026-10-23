@@ -7,6 +7,10 @@ CLAUDE_DIR="$HOME/.claude"
 PI_DIR="$HOME/.pi/agent"
 CODEX_DIR="$HOME/.codex"
 
+# Repo-owned skill buckets. Other top-level folders under skills/ (such as
+# skills/rex) are installed and updated by external tools and are not synced.
+SKILL_BUCKETS=("$AGENTS_DIR/skills/auto" "$AGENTS_DIR/skills/on-demand" "$AGENTS_DIR/skills/private")
+
 DRY_RUN=false
 PRUNE=false
 BOOTSTRAP=false
@@ -25,7 +29,7 @@ private repo at \$AGENTS_PRIVATE_DIR (default: ~/.agents-private), which must ex
 Options:
   --dry-run      Preview changes without applying
   --prune        Remove stale symlinks from agent directories
-  --bootstrap    Also install Claude Code plugins
+  --bootstrap    Also install Claude Code plugins and run "rex skill setup"
   --yes          Skip confirmation prompts
   --help         Show this help
 EOF
@@ -266,7 +270,9 @@ echo ""
 echo "=== Shared ==="
 link_file "$AGENTS_DIR/_claude.md" "$CLAUDE_DIR/CLAUDE.md"
 link_private_skills
-link_skills "$AGENTS_DIR/skills" "$CLAUDE_DIR/skills"
+for bucket in "${SKILL_BUCKETS[@]}"; do
+    if [ -d "$bucket" ]; then link_skills "$bucket" "$CLAUDE_DIR/skills"; fi
+done
 
 echo ""
 echo "=== Claude Code ==="
@@ -327,7 +333,9 @@ fi
 if [ -f "$PRIVATE_DIR/codex/hooks.json" ]; then
     link_file "$PRIVATE_DIR/codex/hooks.json" "$CODEX_DIR/hooks.json"
 fi
-link_codex_skills "$AGENTS_DIR/skills" "$CODEX_DIR/skills"
+for bucket in "${SKILL_BUCKETS[@]}"; do
+    if [ -d "$bucket" ]; then link_codex_skills "$bucket" "$CODEX_DIR/skills"; fi
+done
 
 # Prune stale symlinks
 if $PRUNE; then
@@ -348,6 +356,18 @@ if $BOOTSTRAP; then
         "$AGENTS_DIR/claude/install-plugins.sh"
     else
         warn "claude/install-plugins.sh not found or not executable"
+    fi
+
+    echo ""
+    echo "=== Rex agent skill and hooks ==="
+    if command -v rex >/dev/null 2>&1; then
+        if $DRY_RUN; then
+            rex skill setup --dry-run
+        else
+            rex skill setup
+        fi
+    else
+        warn "rex not installed; skipping rex skill setup"
     fi
 fi
 
