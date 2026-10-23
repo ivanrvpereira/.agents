@@ -339,7 +339,7 @@ export default function (pi: ExtensionAPI) {
 						if (costPerMinute > 0) parts.push(theme.fg("text", formatRate(costPerMinute)));
 					}
 
-					// Extension statuses (keepalive etc.) go before the model name.
+					// Extension statuses go before the model name.
 					const statuses = footerData.getExtensionStatuses();
 					const statusStr = statuses.size > 0
 						? Array.from(statuses.entries())
