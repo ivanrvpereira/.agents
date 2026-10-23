@@ -282,6 +282,13 @@ fi
 if [ -f "$PRIVATE_DIR/pi/settings.json" ]; then
     link_file "$PRIVATE_DIR/pi/settings.json" "$PI_DIR/settings.json"
 fi
+if [ -f "$AGENTS_DIR/pi/WATCHDOG.md" ]; then
+    link_file "$AGENTS_DIR/pi/WATCHDOG.md" "$PI_DIR/WATCHDOG.md"
+fi
+if [ -f "$AGENTS_DIR/pi/subagents-config.json" ]; then
+    $DRY_RUN || mkdir -p "$PI_DIR/extensions/subagent"
+    link_file "$AGENTS_DIR/pi/subagents-config.json" "$PI_DIR/extensions/subagent/config.json"
+fi
 if [ -f "$AGENTS_DIR/pi/keybindings.json" ]; then
     link_file "$AGENTS_DIR/pi/keybindings.json" "$PI_DIR/keybindings.json"
 fi

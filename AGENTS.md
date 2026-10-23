@@ -58,7 +58,9 @@ pi/              # Pi: APPEND_SYSTEM.md, keybindings, sandbox, extensions, skill
 
 **Pi** (`~/.pi/agent/`):
 - `pi/APPEND_SYSTEM.md` → behavioral instructions appended to Pi's system prompt (Pi only; not loaded by Claude/Codex)
-- `~/.agents-private/pi/settings.json` → model config, packages
+- `~/.agents-private/pi/settings.json` → model config, packages, `subagents` (role overrides, watchdog)
+- `pi/WATCHDOG.md` → standing rules for the pi-subagents watchdog
+- `pi/subagents-config.json` → `extensions/subagent/config.json`, pi-subagents extension config (worktree defaults)
 - `~/.agents-private/pi/mcp.json` → MCP servers
 - `pi/extensions/` → per-extension symlinks
 - `pi/skills/` → Pi-only skills

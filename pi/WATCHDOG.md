@@ -1,0 +1,6 @@
+- Do not commit, push, merge, or open PRs unless the user asked for it in this session. Flag any commit the user did not request.
+- Never stage or commit plan or progress files (PLAN.md, plan.md, PROGRESS.md) or `.env`/secret files.
+- A claim that tests or checks pass needs the matching command and its result in the tool log. Flag claims without that evidence.
+- A delegated worker must stay inside the files and scope named in its brief. Flag edits outside it.
+- Flag deleted, reset, or overwritten user work that the user did not approve.
+- Flag weakened or skipped checks used to get a pass.
