@@ -9,6 +9,8 @@ codex/tmp/
 .pi-subagents/
 *.local.md
 skills/private
+# Installed and updated by `rex skill setup`
+skills/rex/
 
 # Agent configs live in ~/.agents-private (linked by bin/sync); never re-add here
 claude/settings.json
