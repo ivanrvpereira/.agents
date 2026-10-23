@@ -1,17 +1,17 @@
-import type { ExtensionAPI, ExtensionCommandContext } from "@earendil-works/pi-coding-agent";
+import { SessionManager, type ExtensionAPI, type ExtensionCommandContext } from "@earendil-works/pi-coding-agent";
 import { existsSync } from "node:fs";
 import * as path from "node:path";
 
 /**
- * /split — fork the current session into a new tmux pane.
+ * /split — copy the current conversation into a new Rex pane.
  *
  * Usage:
  *   /split              vertical split (pane below)
  *   /split h            horizontal split (pane to the right)
  *   /split [h] prompt   optionally send a prompt to the forked session
  *
- * Requires tmux >= 3.0: the command is passed as multiple arguments to
- * split-window, which exec's it directly (no shell interpretation).
+ * Requires Rex with rex on PATH and REX_SESSION / REX_BLOCK set.
+ * The legacy filename is retained so existing extension symlinks stay valid.
  */
 
 function getPiInvocationParts(): string[] {
@@ -29,53 +29,59 @@ function getPiInvocationParts(): string[] {
 }
 
 export default function (pi: ExtensionAPI): void {
-	async function forkToTmuxPane(ctx: ExtensionCommandContext, direction: "h" | "v", prompt: string): Promise<void> {
-		const sessionFile = ctx.sessionManager.getSessionFile();
-		if (!sessionFile) {
-			ctx.ui.notify("No active session to fork", "error");
+	async function forkToRexPane(ctx: ExtensionCommandContext, direction: "h" | "v", prompt: string): Promise<void> {
+		const session = process.env.REX_SESSION;
+		const block = process.env.REX_BLOCK;
+		if (!session || !block) {
+			ctx.ui.notify("Run /split inside a Rex terminal pane", "error");
 			return;
 		}
 
-		const inTmux = await pi.exec("tmux", ["display-message", "-p", "#{session_name}"]);
-		if (inTmux.code !== 0) {
-			ctx.ui.notify("Not inside a tmux session", "error");
-			return;
-		}
+		let forkFile: string | undefined;
+		try {
+			await ctx.waitForIdle();
+			const sessionFile = ctx.sessionManager.getSessionFile();
+			const leafId = ctx.sessionManager.getLeafId();
+			if (!sessionFile || !leafId || !existsSync(sessionFile)) {
+				throw new Error("No saved conversation to split yet");
+			}
 
-		// tmux: -h places the new pane to the right, -v below
-		const flag = direction === "h" ? "-h" : "-v";
-		const command = [...getPiInvocationParts(), "--fork", sessionFile];
-		if (prompt.length > 0) {
-			// pi parses args starting with "-" as options and "@" as file
-			// attachments, with no "--" separator. A leading space makes the
-			// arg parse as a plain message while leaving the prompt intact.
-			command.push(/^[-@]/.test(prompt) ? ` ${prompt}` : prompt);
-		}
+			// Clone through the selected leaf, not the last entry saved on another branch.
+			// A separate manager leaves the original session and its runtime untouched.
+			const fork = SessionManager.open(sessionFile, ctx.sessionManager.getSessionDir());
+			forkFile = fork.createBranchedSession(leafId);
+			if (!forkFile) throw new Error("Could not create a session copy");
 
-		const { code, stderr } = await pi.exec("tmux", ["split-window", flag, "-c", ctx.cwd, ...command]);
-		if (code !== 0) {
-			ctx.ui.notify(`tmux split failed: ${stderr?.trim() || "unknown error"}`, "error");
-			return;
-		}
+			const command = [...getPiInvocationParts(), "--session", forkFile];
+			if (prompt) {
+				// Even after --, Pi treats a leading @ as an attachment.
+				command.push("--", prompt.startsWith("@") ? ` ${prompt}` : prompt);
+			}
 
-		const suffix = prompt ? " and sent prompt" : "";
-		ctx.ui.notify(`Forked session into new tmux pane${suffix}.`, "info");
+			const { code, stderr, stdout } = await pi.exec("rex", [
+				"split", "-s", session, "-b", block,
+				`--split=${direction === "h" ? "right" : "below"}`,
+				"-c", ctx.cwd, "--focus=false", "--shell=none", "--", ...command,
+			]);
+			if (code !== 0) throw new Error(stderr.trim() || stdout.trim() || "Rex split failed");
+
+			ctx.ui.notify(`Opened a session copy in a new Rex pane${prompt ? " with a starting prompt" : ""}.`, "info");
+		} catch (error) {
+			const detail = error instanceof Error ? error.message : String(error);
+			// Keep the copy: a failed or timed-out request can still have opened a pane.
+			const saved = forkFile ? `\nSession copy: ${forkFile}` : "";
+			ctx.ui.notify(`Could not split session: ${detail}${saved}`, "error");
+		}
 	}
 
 	pi.registerCommand("split", {
-		description: "Fork session into a new tmux pane (vertical split; 'h' for horizontal, optional prompt)",
+		description: "Copy the current conversation into a Rex pane (below; 'h' for right, optional prompt)",
 		handler: async (args, ctx) => {
 			const trimmed = (args ?? "").trim();
-			const [first, ...rest] = trimmed.split(/\s+/);
-			let direction: "h" | "v" = "v";
-			let prompt = trimmed;
-
-			if (first === "h" || first === "v") {
-				direction = first;
-				prompt = rest.join(" ");
-			}
-
-			await forkToTmuxPane(ctx, direction, prompt);
+			const match = /^([hv])(?:\s+|$)/.exec(trimmed);
+			const direction = match?.[1] === "h" ? "h" : "v";
+			const prompt = match ? trimmed.slice(match[0].length) : trimmed;
+			await forkToRexPane(ctx, direction, prompt);
 		},
 	});
 }

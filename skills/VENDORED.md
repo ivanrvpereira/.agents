@@ -45,7 +45,6 @@ Keep the `Bucket` column in sync with the skill's actual folder and its
 | simple-english | auto | AminBlg/SimpleEnglish | skills/simple-english | 59bf6702197a | yes | replaced TheAngryByrd/simplified-technical-english-skill (2.2k★ upstream, full 53-rule catalog inline); description shortened; evals/, output-styles/, prompts/ not vendored |
 | summarize | on-demand | mitsuhiko/agent-stuff | skills/summarize | fe35bfe1f650 | no | |
 | tdd | auto | mattpocock/skills | skills/engineering/tdd | 391a270 | yes | incl. tests.md, mocking.md; broader test-change and test-quality review triggers |
-| tmux | auto | mitsuhiko/agent-stuff | skills/tmux | e13c178bf88c | no | |
 | teach | on-demand | mattpocock/skills | skills/productivity/teach | c6b033e | no | |
 | to-spec | on-demand | mattpocock/skills | skills/engineering/to-spec | 391a270 | no | replaced to-prd (upstream unification) |
 | to-tickets | on-demand | mattpocock/skills | skills/engineering/to-tickets | 2ab9580 | no | replaced to-issues (upstream unification); Codex `agents/openai.yaml` intentionally not vendored |
