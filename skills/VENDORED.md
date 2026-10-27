@@ -42,6 +42,7 @@ Keep the `Bucket` column in sync with the skill's actual folder and its
 | sentry | on-demand | mitsuhiko/agent-stuff | skills/sentry | e6c86e31bd30 | no | |
 | setup-matt-pocock-skills | on-demand | mattpocock/skills | skills/engineering/setup-matt-pocock-skills | 391a270 | no | one-time per-repo tracker/domain-docs setup; triage skill not vendored so Section B skips |
 | show-me | on-demand | humanlayer/skills | plugins/show-me/skills/show-me | ca7c8088db69e315a8b2deea43820270457f8f3c | no | incl. root LICENSE; plugin metadata not vendored |
+| skill-diet | auto | nicobailon/skill-diet | . (repo root) | 5f41df1220eb5759c413390206f1b9e6c63be754 | no | SKILL.md, LICENSE, references/, scripts/ only; plugin metadata, package.json, tools/, README, CHANGELOG and AGENTS.md (release notes) not vendored; scripts need Node |
 | simple-english | auto | AminBlg/SimpleEnglish | skills/simple-english | 59bf6702197a | yes | replaced TheAngryByrd/simplified-technical-english-skill (2.2k★ upstream, full 53-rule catalog inline); description shortened; evals/, output-styles/, prompts/ not vendored |
 | summarize | on-demand | mitsuhiko/agent-stuff | skills/summarize | fe35bfe1f650 | no | |
 | tdd | auto | mattpocock/skills | skills/engineering/tdd | 391a270 | yes | incl. tests.md, mocking.md; broader test-change and test-quality review triggers |
