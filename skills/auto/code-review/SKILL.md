@@ -1,9 +1,7 @@
 ---
 name: code-review
-description: "Review a diff, branch, PR, commit, or work-in-progress change along two separate axes: Standards (repo conventions, maintainability, safety) and Spec (does the change implement the originating issue/PRD/request?). Runs focused sub-agents in parallel and reports prioritized, actionable findings side by side. Use when the user wants to review a branch, PR, WIP changes, or asks to \"review since X\"."
+description: "Review a change against repo standards and its originating spec, with parallel sub-agents. Use when the user asks to review a branch, PR, commit, or WIP changes, or to \"review since X\"."
 ---
-
-Local/custom review skill. Do not treat this as a vendored upstream skill.
 
 Review changes through two independent axes:
 
@@ -123,7 +121,7 @@ On top of repo documentation, the Standards axis always carries the **smell base
 
 ### 4. Spawn both sub-agents in parallel
 
-Send one message with two `Agent` tool calls. Use `general-purpose` unless a repo-specific reviewer agent is clearly better.
+Launch both at once, each with a fresh context and read-only intent. In Claude Code, send one message with two `Agent` calls (`general-purpose` unless a repo-specific reviewer agent is clearly better). In Pi, run two parallel `reviewer` subagents.
 
 Paste the review target commands, commit list, touched files, relevant instructions, and the full **Review discipline**, **Mandatory risk checks**, and **priority definitions** into both prompts. Sub-agents do not inherit this skill file.
 
@@ -175,12 +173,3 @@ Standards: N findings, worst [PX]. Spec: N findings, worst [PX].
 ```
 
 Do **not** merge or rerank across axes. If one axis has no findings, say `No findings`.
-
-## Why two axes
-
-A change can pass one axis and fail the other:
-
-- Code that follows every standard but implements the wrong thing → **Standards pass, Spec fail.**
-- Code that does exactly what the issue asked but breaks project conventions or adds operational risk → **Spec pass, Standards fail.**
-
-Keeping the axes separate prevents one kind of correctness from masking the other.
