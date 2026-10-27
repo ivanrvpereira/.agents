@@ -10,7 +10,6 @@ This public repo holds the scripts and shareable config. Agent settings (`claude
 git clone git@github.com:ivanrvpereira/.agents.git ~/.agents
 git clone git@github.com:ivanrvpereira/agents-private.git ~/.agents-private
 ~/.agents/bin/sync --bootstrap
-npx skills update -g  # restore external skills
 ```
 
 ## Structure
@@ -19,10 +18,12 @@ npx skills update -g  # restore external skills
 AGENTS.md          # Project knowledge base (symlinked as CLAUDE.md context)
 _claude.md         # Claude Code instructions (Exa tools)
 CLAUDE.md          # Project-level CLAUDE.md (@AGENTS.md)
-.skill-lock.json   # Tracks external skills for updates
 bin/sync           # Unified symlink manager
 bin/add-skill      # Validate a local skill before syncing
-skills/            # Shared skills (Claude symlinks; Pi auto-discovers)
+bin/link-skill     # Enable a project-scoped skill in one project
+skills/auto/       # Shared skills the model may invoke on its own
+skills/on-demand/  # Shared skills you start by name
+skills/VENDORED.md # Skills copied from upstream, with source and pinned commit
 skills/private     # Gitignored symlink to ~/.agents-private/skills (created by bin/sync)
 claude/            # Claude Code configs (scripts, statusline)
 pi/                # Pi configs (APPEND_SYSTEM.md, keybindings, extensions, skills)
@@ -48,65 +49,31 @@ bin/sync --prune
 
 # Validate a local skill before syncing
 bin/add-skill my-skill
-
-# Add an external skill
-npx skills add owner/repo -g
-
-# Update all external skills
-npx skills update -g
 ```
 
 ## Skills
 
-All skills live in `skills/`. They are symlinked to Claude Code and auto-discovered by Pi from `~/.agents/skills` (since Pi v0.54.0).
-Codex shared skills are symlinked into `~/.codex/skills`; conflicting non-symlink skills are backed up before replacement.
+Skills live in two buckets. `skills/auto/` holds skills the model may invoke on its own. `skills/on-demand/` holds skills you start by name (`disable-model-invocation: true`). `bin/sync` links each skill into `~/.claude/skills` and `~/.codex/skills`. Pi reads `~/.agents/skills` directly.
 
-### Local (hand-crafted)
+Skills copied from upstream repos are listed in [`skills/VENDORED.md`](skills/VENDORED.md) with their source and pinned commit. The local skills are:
 
-| Skill | Description |
-|-------|-------------|
-| [`agents-md`](skills/agents-md/SKILL.md) | Generate/review AGENTS.md files |
-| [`brainstorming`](skills/brainstorming/SKILL.md) | Explore intent and design before creative work |
-| [`code-review`](skills/auto/code-review/SKILL.md) | Two-axis diff review for standards, risk, and spec fit |
-| [`crwl`](skills/crwl/SKILL.md) | Web crawling with Crawl4AI CLI |
-| [`git-commit`](skills/git-commit/SKILL.md) | Conventional, focused, reviewable git commits |
-| [`handoff`](skills/handoff/SKILL.md) | Write or update HANDOFF.md for a fresh agent |
-| [`marp`](skills/marp/SKILL.md) | Slide presentations from Markdown |
-| [`marker`](skills/marker/SKILL.md) | Parse documents (PDF, images, PPTX, DOCX, XLSX, HTML, EPUB) to markdown via marker-pdf |
-| [`prd`](skills/prd/SKILL.md) | Generate Product Requirements Documents |
-| [`receiving-code-review`](skills/receiving-code-review/SKILL.md) | Process code review feedback rigorously |
-| [`requesting-code-review`](skills/requesting-code-review/SKILL.md) | Request review before completing major work |
-| [`skill-creator`](skills/skill-creator/SKILL.md) | Guide for creating new skills |
-| [`using-git-worktrees`](skills/using-git-worktrees/SKILL.md) | Isolate feature work with git worktrees |
-
-### Remote (via `npx skills`, tracked in `.skill-lock.json`)
-
-| Skill | Description | Source |
-|-------|-------------|--------|
-| [`deep-research`](https://github.com/199-biotechnologies/claude-deep-research-skill/blob/main/SKILL.md) | Multi-source research with citation tracking and verification | [199-biotechnologies/claude-deep-research-skill](https://github.com/199-biotechnologies/claude-deep-research-skill) |
-| [`dev-browser`](https://github.com/SawyerHood/dev-browser/blob/main/skills/dev-browser/SKILL.md) | Browser automation with persistent page state | [SawyerHood/dev-browser](https://github.com/SawyerHood/dev-browser) |
-| [`frontend-design`](https://github.com/mitsuhiko/agent-stuff/blob/main/skills/frontend-design/SKILL.md) | Design and implement production-ready frontend interfaces | [mitsuhiko/agent-stuff](https://github.com/mitsuhiko/agent-stuff) |
-| [`github`](https://github.com/mitsuhiko/agent-stuff/blob/main/skills/github/SKILL.md) | GitHub operations via `gh` CLI (issues, PRs, CI runs, API) | [mitsuhiko/agent-stuff](https://github.com/mitsuhiko/agent-stuff) |
-| [`mermaid`](https://github.com/mitsuhiko/agent-stuff/blob/main/skills/mermaid/SKILL.md) | Create and edit Mermaid diagrams with validation | [mitsuhiko/agent-stuff](https://github.com/mitsuhiko/agent-stuff) |
-| [`sentry`](https://github.com/mitsuhiko/agent-stuff/blob/main/skills/sentry/SKILL.md) | Fetch and analyze Sentry issues, events, and logs | [mitsuhiko/agent-stuff](https://github.com/mitsuhiko/agent-stuff) |
-| [`summarize`](https://github.com/mitsuhiko/agent-stuff/blob/main/skills/summarize/SKILL.md) | Fetch a URL or convert files (PDF/DOCX/HTML) to Markdown | [mitsuhiko/agent-stuff](https://github.com/mitsuhiko/agent-stuff) |
-| [`uv`](https://github.com/mitsuhiko/agent-stuff/blob/main/skills/uv/SKILL.md) | Python package and script management with `uv` | [mitsuhiko/agent-stuff](https://github.com/mitsuhiko/agent-stuff) |
-| [`vercel-composition-patterns`](https://github.com/vercel-labs/agent-skills/blob/main/skills/composition-patterns/SKILL.md) | React composition patterns (compound components, render props, context) | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) |
-| [`vercel-react-best-practices`](https://github.com/vercel-labs/agent-skills/blob/main/skills/react-best-practices/SKILL.md) | React and Next.js performance optimization guidelines | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) |
-| [`web-design-guidelines`](https://github.com/vercel-labs/agent-skills/blob/main/skills/web-design-guidelines/SKILL.md) | Review UI for accessibility, design, and UX best practices | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) |
-
-To update remote skills: `npx skills update -g`
+| Skill | Bucket | Description |
+|-------|--------|-------------|
+| [`adr-writing`](skills/auto/adr-writing/SKILL.md) | auto | Decide whether a decision needs an ADR, then write, amend, or supersede it |
+| [`code-review`](skills/auto/code-review/SKILL.md) | auto | Review a change against repo standards and its originating spec |
+| [`crwl`](skills/auto/crwl/SKILL.md) | auto | Crawl and extract web content with the Crawl4AI CLI |
+| [`git-commit`](skills/auto/git-commit/SKILL.md) | auto | Focused Conventional Commits |
+| [`fable-safe-prompt`](skills/on-demand/fable-safe-prompt/SKILL.md) | on-demand | Rewrite Fable prompts so they are clearer and policy-aligned |
+| [`implementation-orchestrator`](skills/on-demand/implementation-orchestrator/SKILL.md) | on-demand | Implement an approved plan through delegated workers, review, and per-step commits |
+| [`marp`](skills/on-demand/marp/SKILL.md) | on-demand | Slide presentations from Markdown |
+| [`oss-repo-review`](skills/on-demand/oss-repo-review/SKILL.md) | on-demand | Audit a GitHub repository against open-source security practices |
+| [`supervisor`](skills/on-demand/supervisor/SKILL.md) | on-demand | Conduct implementation orchestrators across assignments through Rex and pi-intercom |
 
 ## Adding a new skill
 
-Create a directory under `skills/` with a `SKILL.md` file:
-
-```
-skills/my-skill/
-└── SKILL.md
-```
-
-Then run `bin/sync` to link it into Claude Code. Pi discovers `~/.agents/skills` directly.
+1. Create `skills/auto/<name>/SKILL.md` or `skills/on-demand/<name>/SKILL.md`. Folder names must be unique across both buckets.
+2. If it is copied from upstream, add a row to `skills/VENDORED.md`. If it is local, add it to the table above.
+3. Run `bin/add-skill <name>`, then `bin/sync`.
 
 ## Adding agent-specific content
 
