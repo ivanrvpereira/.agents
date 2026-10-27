@@ -37,7 +37,7 @@ Before launch, check that the selected agent has the required tools and extensio
 
 ## Testing contract
 
-Before a step adds or changes tests, read [tdd](../../auto/tdd/SKILL.md) and its linked testing and mocking references. Use the seams already approved in the plan or project guidance. If the seams are missing or need to change, obtain user approval before test work starts.
+Before a step adds or changes tests, load the `tdd` skill and read its linked testing and mocking references. Use the seams already approved in the plan or project guidance. If the seams are missing or need to change, obtain user approval before test work starts.
 
 Give implementation and review workers the TDD reference paths and the approved seams. Require them to read those references before their work. Implementation workers apply the loop. Review workers apply the test-quality rules.
 

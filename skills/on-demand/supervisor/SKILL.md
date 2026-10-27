@@ -30,7 +30,7 @@ Record explicit authorization before commits, pushes, pull requests, merges, rel
 
 ## Prepare the sessions
 
-Read [rex](../../rex/SKILL.md) and the installed `pi-intercom` skill before session operations.
+Load the `rex` skill and the installed `pi-intercom` skill before session operations.
 
 Use a persistent Pi session in a Rex pane for each implementation orchestrator. Use Rex for terminal operations and intercom for agent messages. Each implementation orchestrator loads pi-subagents guidance and manages its own workers and reviewers. Keep cross-feature priorities and orchestrator session management here. Leave the internal implementation loop to the orchestrator.
 
