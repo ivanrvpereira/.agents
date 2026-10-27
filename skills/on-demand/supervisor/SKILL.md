@@ -119,4 +119,4 @@ Report accepted outcomes, blocked decisions, and meaningful risks to the user in
 
 ## Background
 
-See [the research notes](../../../docs/conductor-orchestration-research.md) for sources and alternatives. This skill defines operating instructions, not runtime enforcement. A separate session is a lifecycle choice, not a proven token or speed advantage.
+This skill defines operating instructions, not runtime enforcement. A separate session is a lifecycle choice, not a proven token or speed advantage.

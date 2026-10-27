@@ -28,7 +28,7 @@ When running in Pi, read the installed `pi-subagents` skill and its relevant exe
 
 - Launch workers and reviewers asynchronously. Continue safe independent work, then yield for native completion notifications instead of polling or sleeping.
 - Have workers use `contact_supervisor` for questions to you, their immediate parent. Answer with `subagent_supervisor`. These tools connect your subagents to you, not to the separate cross-feature supervisor.
-- Use `steer` for guidance to a running worker and `resume` for an eligible completed worker. Inspect its state before replacement. Give independent reviewers fresh contexts with the plan, actual diff, and relevant evidence.
+- Use `steer` for guidance to a running worker and `resume` for an eligible completed worker. Inspect its state before replacement.
 - Use runtime verification gates for repeatable checks when supported. Inspect their results and the state they cover. A gate does not replace behavioral verification or required independent review.
 - Keep runs for this feature or plan attached to the same mission. Use its records and artifacts for recovery, not conversational memory alone.
 - Use direct calls for individual assignments. Use a workflow script when sequencing, branching, or parallel work benefits from one managed workflow.
@@ -39,15 +39,15 @@ Before launch, check that the selected agent has the required tools and extensio
 
 Before a step adds or changes tests, load the `tdd` skill and read its linked testing and mocking references. Use the seams already approved in the plan or project guidance. If the seams are missing or need to change, obtain user approval before test work starts.
 
-Give implementation and review workers the TDD reference paths and the approved seams. Require them to read those references before their work. Implementation workers apply the loop. Review workers apply the test-quality rules.
+Give implementation and review workers the approved seams. The `implement` and `code-review` skills direct them to the TDD references: implementation workers apply the loop, and review workers apply the test-quality rules.
 
 Require implementation reports to identify the protected behavior, seam, and observed red/green commands and results. For tests of already-correct behavior, a relevant broken variant in a disposable copy can supply the failure evidence. A passing suite alone is not evidence that a new test detects its claimed regression.
 
 ## Per-step loop
 
-1. **Implement.** Assign a worker the next step. Require the project checks to pass.
-2. **Review.** Assign two separate read-only reviewers in parallel: one for Standards (correctness, safety, project standards, unnecessary complexity) and one for Spec (compliance with the plan and acceptance criteria). Reviewers report the affected revision, violated requirement, and supporting evidence. They do not edit.
-3. **Fix and simplify.** Confirm each finding before acting on it. If no fixes are needed, skip this stage. Otherwise, resume the implementer or assign a fresh worker to apply confirmed fixes and remove confirmed unnecessary complexity. Choose based on useful retained context and the cause of the problem. Require relevant checks to pass after changes. Keep acceptance review separate from the worker applying fixes.
+1. **Implement.** Assign a worker the next step and have it follow the `implement` skill as a delegated worker. In Pi, pass `skill: "implement"` and confirm the launch reports no missing-skill warning; otherwise give the skill's absolute path in the brief. Require the project checks to pass.
+2. **Review.** Load the `code-review` skill and run it on the worker's changes. Supply the review target and spec yourself so it does not stop to ask: the diff from the step's starting revision, including untracked files, and the approved plan with its acceptance criteria. In Pi, launch its Standards and Spec reviewers as two parallel async `reviewer` subagents with fresh contexts and read-only tools, as that skill describes. Reviewers report the affected revision, violated requirement, and supporting evidence. They do not edit.
+3. **Fix and simplify.** Act only on findings that survive code-review's verify step. Record Human callouts in the progress record when recorded approvals cover them; otherwise escalate them to the supervisor, or the user in standalone work. If no fixes are needed, skip this stage. Otherwise, resume the implementer or assign a fresh worker with the same implement brief to apply confirmed fixes and remove confirmed unnecessary complexity. Choose based on useful retained context and the cause of the problem. Require relevant checks to pass after changes. If the fixes change behavior, run code-review again on the fix diff; otherwise step 4 covers them. The worker applying fixes never reviews its own changes.
 4. **Verify independently.** Read the final diff yourself. Run project checks directly or through runtime-executed gates. Exercise the actual behavior through its CLI, browser, or API. Cover acceptance criteria, relevant failure paths, and regressions. Run required live checks yourself against the intended environment. Tie evidence to the exact state verified; rerun affected checks after further changes. A worker's report is a claim, not evidence. Treat watchdog or other automated monitor findings as leads, not evidence: verify each one before routing it to a worker, and never count a clean monitor as verification.
 5. **Record and commit.** Update the progress record after verification. Within recorded authorization, make one conventional commit for the step, containing only its changes. Never commit the progress record or the plan. Inspect the staged diff. Do not push. If required commit permission is missing, report that step as blocked.
 6. **Demonstrate and continue.** Give the supervisor, or the user in standalone work, a short walkthrough with commands you executed successfully in the user's shell. State what now works, then continue without waiting for acknowledgment.
@@ -66,7 +66,7 @@ Follow existing patterns unless they prevent meeting the requirements. Prefer di
 
 Use the fewest concepts needed, not necessarily the fewest lines. Preserve clarity, safety, and test coverage. Do not rewrite clear, working code just to make it different.
 
-Have the reviewers look for unsupported behavior changes, removable layers or state, and generic machinery that a direct implementation can replace. Have the fix worker remove the confirmed complexity rather than leaving it reported.
+Code-review's Spec reviewer flags unsupported behavior changes, and its Standards smells cover removable layers and generic machinery. Have the fix worker remove the confirmed complexity rather than leaving it reported.
 
 Resolve ordinary implementation details yourself. Choose the narrowest interpretation consistent with the plan. Ask when ambiguity changes user-visible behavior, safety, or scope.
 
