@@ -29,6 +29,7 @@ Keep the `Bucket` column in sync with the skill's actual folder and its
 | dev-browser | auto | SawyerHood/dev-browser | skills/dev-browser | 71aa88dcc399 | yes | also a plugin (`dev-browser`); flag removed to allow auto-invocation |
 | frontend-design | auto | mitsuhiko/agent-stuff | skills/frontend-design | f27c7ee2304a | yes | flag removed to allow auto-invocation |
 | grill-me | on-demand | mattpocock/skills | skills/productivity/grill-me | c6b033e | no | |
+| grill-for-unknowns | on-demand | nicobailon/grill-for-unknowns | plugins/grill-for-unknowns | d8d5f4b422b8be1301dd4a515d96589eaddc5f3c | yes | flag added so it does not compete with `grilling`; `CONTEXT.md`/`CONTEXT-MAP.md` renamed to `GLOSSARY.md`/`GLOSSARY-MAP.md` (incl. templates/GLOSSARY.md) to match `domain-modeling` (keep on update); root NOTICE.md copied with its link fixed; plugin metadata not vendored |
 | grilling | auto | mattpocock/skills | skills/in-progress/batch-grill-me | 9603c1c | yes | renamed to `grilling`; `disable-model-invocation` stripped to keep auto (wayfinder invokes it) |
 | handoff | on-demand | mattpocock/skills | skills/productivity/handoff | 391a270 | no | replaced the previous local handoff |
 | humanizer | on-demand | softaworks/agent-toolkit | skills/humanizer | 004c1998fffe | no | |
