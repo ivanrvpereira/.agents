@@ -1,6 +1,6 @@
 ---
 name: pi-model-config
-description: "Know how Pi model selection is configured and changed: default model, thinking level, one-off model switches, Ctrl+P scoped model cycling, and prompt-editor modes for this repo."
+description: "Know how Pi model selection is configured and changed: default model, thinking level, one-off model switches, and the Ctrl+P / Ctrl+Space model cycle for this repo."
 ---
 
 # Pi Model Config
@@ -8,14 +8,11 @@ description: "Know how Pi model selection is configured and changed: default mod
 Use this skill when the user asks how to change Pi models or wants edits to:
 - the default model/provider/thinking level
 - the active model for a session
-- model lists in both `~/.agents-private/pi/settings.json` (Ctrl+P) and `~/.pi/agent/modes.json` (Ctrl+Space)
-- prompt-editor modes (`/mode`, `ctrl+space`, `ctrl+shift+m`)
+- the model cycle list (Ctrl+P / Ctrl+Space)
 
 ## Where model selection lives
 
-### Persistent defaults
-
-Edit the source config in the private companion repo (linked to `~/.pi/agent/settings.json` by `bin/sync`):
+All persistent model config is in one file, the source in the private companion repo (linked to `~/.pi/agent/settings.json` by `bin/sync`):
 
 - `~/.agents-private/pi/settings.json`
 
@@ -24,30 +21,11 @@ Relevant fields:
 - `defaultProvider` — provider selected on new sessions
 - `defaultModel` — model id selected on new sessions
 - `defaultThinkingLevel` — default thinking level
-- `enabledModels` — scoped model list used by Ctrl+P / Shift+Ctrl+P
+- `enabledModels` — the model cycle list, in cycle order, each entry with its own thinking level
 
-After changing synced config, remind the user to run (from `~/.agents`):
+### Model cycle keys
 
-```bash
-bin/sync --dry-run
-bin/sync
-```
-
-or `/reload` if the live Pi session already reads the target file.
-
-### Prompt-editor modes
-
-Edit the local prompt-editor mode file:
-
-- `~/.pi/agent/modes.json`
-
-This controls agent-stuff `prompt-editor` presets:
-
-- `/mode` — picker/command
-- `ctrl+shift+m` — picker
-- `ctrl+space` — cycle prompt modes
-
-When adding, removing, or replacing models, update both `~/.agents-private/pi/settings.json` and `~/.pi/agent/modes.json` so Ctrl+P and Ctrl+Space stay aligned. Preserve each file's requested ordering and thinking levels.
+`pi/keybindings.json` binds both `ctrl+p` and `ctrl+space` to `app.model.cycleForward`, so both keys cycle `enabledModels`. Adding a model to `enabledModels` is the whole change; there is no second list to keep aligned.
 
 ### Refreshing model catalogs
 
@@ -62,14 +40,12 @@ Use Pi itself rather than editing files:
 - `/model` — switch model in the current interactive session
 - `/settings` — adjust thinking level and related runtime settings
 - CLI: `pi --provider <provider> --model <model[:thinking]> --thinking <level>`
-- CLI: `pi --models <provider/model:thinking,...>` for one process's Ctrl+P cycle list
+- CLI: `pi --models <provider/model:thinking,...>` for one process's cycle list
 
 ## Workflow for config edits
 
 1. Inspect current state
    - Read `~/.agents-private/pi/settings.json`
-   - Read `~/.pi/agent/modes.json`
-   - For model-list changes, plan matching edits in both files
 2. Check prior intent from history (in `~/.agents-private`)
    - `git -C ~/.agents-private log --oneline -- pi/settings.json`
    - `git -C ~/.agents-private show <commit> -- pi/settings.json` for recent config commits
@@ -77,22 +53,20 @@ Use Pi itself rather than editing files:
    - `pi --list-models`
 4. Make the requested change
    - Defaults: update `defaultProvider`, `defaultModel`, `defaultThinkingLevel`
-   - Model lists: update `enabledModels` in `~/.agents-private/pi/settings.json` and `modes` in `~/.pi/agent/modes.json`
-   - Keep both lists aligned unless the user explicitly requests different Ctrl+P and Ctrl+Space presets
+   - Cycle list: update `enabledModels`
 5. Clean up stale entries
    - Remove duplicates
    - Remove deprecated models if requested
    - Preserve unrelated config
 6. Verify
-   - Re-read changed files
-   - `git -C ~/.agents-private diff -- pi/settings.json` for repo-tracked config
-   - Tell the user whether `/reload` or `bin/sync` is needed
+   - `jq . ~/.agents-private/pi/settings.json` parses
+   - `git -C ~/.agents-private diff -- pi/settings.json` shows only the intended lines (the file may carry other uncommitted changes; leave them alone)
+   - Tell the user to run `/reload` in live sessions; `bin/sync` is only needed if the `~/.pi/agent/settings.json` symlink is missing
 
 ## Conventions
 
 - Use exact model IDs from `pi --list-models`.
 - `enabledModels` format: `provider/model:thinking`.
-- `modes.json` format: `{ provider, modelId, thinkingLevel }`.
 - Thinking levels: `off|low|medium|high|xhigh`; CLI also documents `minimal`.
 - Interpret “extra high” or “max” as `xhigh` unless the user says otherwise.
 - Keep ordering exactly as requested.
