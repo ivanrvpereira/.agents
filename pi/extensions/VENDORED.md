@@ -34,4 +34,4 @@ load without diagnostics). Ask an AI agent to run this.
 | session-breakdown.ts | mitsuhiko/agent-stuff | extensions/session-breakdown.ts | 13bc8f87970b | no | |
 | todos.ts | mitsuhiko/agent-stuff | extensions/todos.ts | 4bce45560fa5 | no | |
 
-_Local (non-vendored) extensions are not listed here: prompt-stash, save-last-message, status-bar, tmux-fork._
+_Local (non-vendored) extensions are not listed here: prompt-stash, save-last-message, status-bar._
