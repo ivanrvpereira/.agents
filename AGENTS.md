@@ -8,7 +8,7 @@ This public repo is the control plane (all scripts + shareable config). Agent se
 ## Structure
 
 ```
-AGENTS.md        # Project knowledge base → ./CLAUDE.md context
+AGENTS.md        # Project knowledge base (read by every agent)
 _claude.md       # Claude Code instructions → ~/.claude/CLAUDE.md
 bin/sync         # Symlink manager (creates all links below)
 bin/add-skill    # Validate a local skill before syncing
