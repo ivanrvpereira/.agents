@@ -13,7 +13,6 @@
 ## Tools
 
 - Prefer `rg` over grep, `fd` over find, `sd` over sed, `uv` over pip/python/venv.
-- Use `fffind`/`ffgrep` before speculative `ls`/`rg` searches.
 - Use `ast-grep` when code structure matters.
 
 ## Safety
