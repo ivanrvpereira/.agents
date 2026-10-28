@@ -9,7 +9,7 @@ metadata:
     url: "https://github.com/humanlayer/skills/blob/main/plugins/show-me/skills/show-me/SKILL.md"
 ---
 
-First, take an inventory of the diff: list every changed path that existing callers already use, and every trust boundary the change touches (auth, user or tenant scoping, secrets, personal data). The inventory is complete when each touched file outside the new feature's own folder is either on the list or known to change nothing for current callers. The Summary covers every item on it.
+First, list from the diff every changed path that existing callers use, every trust boundary touched, and every data model change (stored schemas, config and log files, API shapes, states, data sent to third parties). The Summary covers the paths and boundaries; Data model changes covers the rest.
 
 Use this template for writing the PR body:
 
@@ -32,6 +32,10 @@ Use this template for writing the PR body:
 **Blast Radius:** <one-word description>
 
 <optional: potential ramifications of merge>
+
+## Data model changes
+
+<before/after diffs, then a summary table; or "None">
 ```
 
 ## Sections
@@ -151,17 +155,16 @@ function expandSkill(command: string): string {
 }
 ```
 
-#### What the inventory needs
-
-- **Shared paths.** Give each existing path whose shape changed its own call-tree `diff`, even when the PR's theme is a new feature. Order them by blast radius, widest first.
-- **Behaviour-preserving changes.** Pair the diff with the intended differences, however small, and name the tests that catch an unintended one.
-- **Trust boundaries.** Add one sequence diagram that traces the data from where it enters to every place it leaves: logs, browser, storage, third parties. Mark where each check happens, and state plainly what stays unchecked.
-
 #### Guidance
 
 Place each visual next to the short text it supports. Keep only the calls, files, props, states, and boundaries needed to answer the user's current question or the options to resolve the current discussion point.
 
 You may use one of these, you may use several, it is unlikely you will use all of them. Use your judgement and don't overwhelm the user.
+
+#### Always include
+
+- Give each changed shared path its own call-tree `diff`, widest blast radius first, even when the PR is mainly a new feature.
+- For a trust boundary, add one sequence diagram from where the data enters to every place it leaves. Mark each check and state what stays unchecked.
 
 ### Evidence
 
@@ -171,16 +174,14 @@ Screenshots are S-tier - when the environment is set up for it and the change is
 
 Execution-based evidence is A-tier. Test results, console output. Show the exact test that now fails and passes, using pseudocode.
 
-The strongest test evidence is a test seen failing with its check removed, e.g. `assert 200 == 503` once the guard is deleted. Spend the space on those few tests rather than on long lists of passing test names.
-
 ### Merge Danger
 
 Describe whether it's a one-way or two-way door. You can walk back through two-way doors, but not one-way doors. A PR that is cheap to roll back is lower risk. Changes that involve destructive actions or hard-to-reverse decisions are one-way doors.
 
 The blast radius is the potential impact or scope of the changes introduced by this PR. Consider all possibilities. Examples are layout shift, breakages for consumers, mobile responsiveness, etc.
 
-When the PR bundles changes with different risk or rollback cost (a dependency upgrade plus a feature, say), name the bundle here, and suggest a split or a merge strategy that keeps each change revertible.
+### Data model changes
 
-## After each push
+Show each changed shape as a before/after `diff` of its full definition (the whole table, not the migration SQL), and new states as a diff of the transitions. Take each "before" from the base branch, not memory. Collapse low-risk detail in `<details>`.
 
-Re-read the body against the pushed commit. Claims about flags, test counts, and file layout must match it. Report CI status only for that commit.
+End with a table, one row per change, hardest to undo first: where, change, compatible or breaking, undo, sensitive data. Breaking rows also go in the Summary; hard-to-undo rows also go under Merge Danger.
