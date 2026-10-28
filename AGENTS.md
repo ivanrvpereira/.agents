@@ -9,7 +9,6 @@ This public repo is the control plane (all scripts + shareable config). Agent se
 
 ```
 AGENTS.md        # Project knowledge base (read by every agent)
-_claude.md       # Claude Code instructions → ~/.claude/CLAUDE.md
 bin/sync         # Symlink manager (creates all links below)
 bin/add-skill    # Validate a local skill before syncing
 bin/link-skill   # Link a scoped skill into one project
@@ -48,7 +47,6 @@ pi/              # Pi: APPEND_SYSTEM.md, keybindings, sandbox, extensions, skill
 `bin/sync` creates symlinks from this repo and from `~/.agents-private` into each agent's config directory. It exits with an error if `~/.agents-private` (or `$AGENTS_PRIVATE_DIR`) is missing.
 
 **Core links**:
-- `_claude.md` → `~/.claude/CLAUDE.md`
 - Each skill directory under `skills/auto/`, `skills/on-demand/`, and `skills/private/` → `~/.claude/skills/` (flattened; Pi reads shared skills recursively from `~/.agents/skills`)
 - Each skill directory under the same buckets → `~/.codex/skills/`; conflicting non-symlink Codex skills are backed up first
 - Other top-level folders under `skills/` are tool-owned and never linked (see Conventions)
@@ -95,7 +93,7 @@ The sync script backs up existing non-symlink files as `.bak` before replacing t
 ## Validation
 
 - Preview symlink changes: `bin/sync --dry-run`
-- Verify sync state: `ls -la ~/.claude/CLAUDE.md` (should point to this repo)
+- Verify sync state: `ls -la ~/.claude/settings.json ~/.pi/agent/APPEND_SYSTEM.md` (both should be symlinks into `~/.agents-private` or this repo)
 
 ## Boundaries
 

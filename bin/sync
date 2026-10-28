@@ -268,7 +268,6 @@ fi
 
 echo ""
 echo "=== Shared ==="
-link_file "$AGENTS_DIR/_claude.md" "$CLAUDE_DIR/CLAUDE.md"
 link_private_skills
 for bucket in "${SKILL_BUCKETS[@]}"; do
     if [ -d "$bucket" ]; then link_skills "$bucket" "$CLAUDE_DIR/skills"; fi

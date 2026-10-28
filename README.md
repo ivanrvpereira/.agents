@@ -16,7 +16,6 @@ git clone git@github.com:ivanrvpereira/agents-private.git ~/.agents-private
 
 ```
 AGENTS.md          # Project knowledge base (read by Claude Code, Pi, and Codex)
-_claude.md         # Claude Code instructions (Exa tools)
 bin/sync           # Unified symlink manager
 bin/add-skill      # Validate a local skill before syncing
 bin/link-skill     # Enable a project-scoped skill in one project
