@@ -9,9 +9,7 @@ info "Adding marketplaces..."
 
 marketplaces=(
     "anthropics/claude-plugins-official"
-    "backnotprop/plannotator"
     "sawyerhood/dev-browser"
-    "wshobson/agents"
 )
 
 for mp in "${marketplaces[@]}"; do
@@ -23,13 +21,10 @@ done
 info "Installing plugins..."
 
 plugins=(
-    "superpowers@claude-plugins-official"
-    "plannotator@plannotator"
     "typescript-lsp@claude-plugins-official"
     "pyright-lsp@claude-plugins-official"
     "gopls-lsp@claude-plugins-official"
     "dev-browser@dev-browser-marketplace"
-    "llm-application-dev@claude-code-workflows"
 )
 
 for plugin in "${plugins[@]}"; do
