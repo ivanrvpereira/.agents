@@ -5,7 +5,7 @@ description: "Implement a piece of work based on a spec or set of tickets."
 
 Implement the work described by the user in the spec or tickets.
 
-If a parent agent delegated this work to you, its brief replaces the user's request: take the work from the brief instead of fetching tickets, ask the parent wherever this skill says to ask the user, and skip the final review and commit steps because the parent owns them.
+If a parent agent delegated this work to you, its brief replaces the user's request: take the work from the brief instead of fetching tickets, ask the parent wherever this skill says to ask the user, and skip the final review because the parent owns it. Commit only when the brief tells you to, and only on the branch it names.
 
 If the user passes a ticket reference, fetch it from the issue tracker and state its title before starting. If the reference is ambiguous, ask.
 

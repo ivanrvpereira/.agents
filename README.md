@@ -62,7 +62,7 @@ Skills copied from upstream repos are listed in [`skills/VENDORED.md`](skills/VE
 | [`crwl`](skills/auto/crwl/SKILL.md) | auto | Crawl and extract web content with the Crawl4AI CLI |
 | [`git-commit`](skills/auto/git-commit/SKILL.md) | auto | Focused Conventional Commits |
 | [`fable-safe-prompt`](skills/on-demand/fable-safe-prompt/SKILL.md) | on-demand | Rewrite Fable prompts so they are clearer and policy-aligned |
-| [`implementation-orchestrator`](skills/on-demand/implementation-orchestrator/SKILL.md) | on-demand | Implement an approved plan through delegated workers, review, and per-step commits |
+| [`implementation-orchestrator`](skills/on-demand/implementation-orchestrator/SKILL.md) | on-demand | Implement an approved plan through delegated workers on step branches, commit-range review, independent verification, and one commit per step |
 | [`marp`](skills/on-demand/marp/SKILL.md) | on-demand | Slide presentations from Markdown |
 | [`oss-repo-review`](skills/on-demand/oss-repo-review/SKILL.md) | on-demand | Audit a GitHub repository against open-source security practices |
 | [`supervisor`](skills/on-demand/supervisor/SKILL.md) | on-demand | Conduct implementation orchestrators across assignments through Rex and pi-intercom |
