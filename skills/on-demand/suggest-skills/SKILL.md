@@ -23,7 +23,7 @@ Work down the steps; skip the ones the situation does not need.
 | Settle a design question | `prototype` | Talk cannot settle how logic should behave or a UI should look. Bring the answer back to the plan. |
 | Plan | `to-spec`, then `to-tickets` | A build too big for one session. Use `tech-spec` instead for a typed call-stack design document rather than a tracker spec. |
 | Build | `implement` | One ticket, or a small task whose scope and test seams are agreed. It runs `tdd` and `code-review` itself. Start each ticket in a fresh session. |
-| Build with subagents | `implementation-orchestrator` | The user wants a whole approved plan executed by subagents. |
+| Build with subagents | `implementation-orchestrator` | The user wants a whole approved plan executed by subagents, with review and independent verification per step. Use `implement-spec` instead for Matt's lighter flow: a ticketed spec built in parallel and reviewed once at the end, on one integration branch that can become a draft PR. |
 | Ship | `pr` | Writing the pull request body. |
 | Look back | `retro` | After a build, before the session is cleared. |
 
