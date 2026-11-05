@@ -84,7 +84,7 @@ src/
 └── transport/      # sends API requests
 ```
 
-- Show component interaction, control flow, or data flow with Mermaid:
+- Show component interaction, control flow, or data flow with Mermaid. In labels and notes, `;` ends the statement and `#` starts an entity code: write commas, or `#59;` and `#35;`. Put a bare word `end` in brackets.
 
 ```mermaid
 sequenceDiagram
@@ -159,7 +159,7 @@ function expandSkill(command: string): string {
 
 Place each visual next to the short text it supports. Keep only the calls, files, props, states, and boundaries needed to answer the user's current question or the options to resolve the current discussion point.
 
-You may use one of these, you may use several, it is unlikely you will use all of them. Use your judgement and don't overwhelm the user.
+Use one or a few of these, rarely all; don't overwhelm the user.
 
 #### Always include
 
