@@ -75,5 +75,6 @@ Matt Pocock imports omit harness-specific `agents/openai.yaml` metadata.
 | imagegen-frontend-web | on-demand | Leonxlnx/imagegen-skills | skills/imagegen-frontend-web | beb16b0d0f4d | yes | flag added for on-demand; moved from leonxlnx/taste-skill |
 | minimalist-ui | on-demand | Leonxlnx/taste-skill-classics | skills/minimalist-skill | 5e08c9383dc4 | no | moved from leonxlnx/taste-skill; upstream ships the flag; agents/ not vendored |
 | redesign-existing-projects | on-demand | leonxlnx/taste-skill | skills/redesign-skill | b17742737e79 | yes | flag added for on-demand; retired upstream in 2.1.1 (merged into design-taste-frontend), so this copy is no longer maintained |
+| test-audit | auto | openclaw/openclaw | .agents/skills/test-audit | 918847e58888d0341ce3154f713304e00b94f7a1 | yes | project-agnostic adaptation (keep on update); MIT LICENSE plus attribution in SKILL.md; CAMPAIGN.md and references/audit.md kept in-tree; OpenClaw writing-tests.md, proof-policy, Vitest checkout, and pnpm deadcode commands rewritten as generic boundary, proof, and validation rules |
 
 _Local (non-vendored) skills are not listed here: adr-writing, code-review, crwl, git-commit, fable-safe-prompt, implementation-orchestrator, marp, oss-repo-review, supervisor._
