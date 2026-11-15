@@ -3,10 +3,15 @@ name: pr
 description: "Use when writing a PR body."
 metadata:
   credits:
-    skill: show-me
-    author: Dex Horthy
-    organisation: Humanlayer
-    url: "https://github.com/humanlayer/skills/blob/main/plugins/show-me/skills/show-me/SKILL.md"
+    - skill: pr
+      author: Matt Pocock
+      role: main skill
+      url: "https://github.com/mattpocock/skills/blob/main/skills/engineering/pr/SKILL.md"
+    - skill: show-me
+      author: Dex Horthy
+      organisation: Humanlayer
+      role: Summary visuals section
+      url: "https://github.com/humanlayer/skills/blob/main/plugins/show-me/skills/show-me/SKILL.md"
 ---
 
 First, list from the diff every changed path that existing callers use, every trust boundary touched, and every data model change (stored schemas, config and log files, API shapes, states, data sent to third parties). The Summary covers the paths and boundaries; Data model changes covers the rest.
