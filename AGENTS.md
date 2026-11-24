@@ -70,6 +70,10 @@ pi/              # Pi: APPEND_SYSTEM.md, keybindings, sandbox, extensions, skill
 - `~/.agents-private/codex/hooks.json` → Codex lifecycle hooks
 - `skills/` → shared skills, backing up conflicting non-symlink Codex skills
 
+**Ultimate** (`~/.ultimate/`):
+- `~/.agents-private/ultimate/settings.json`, `model-families.json`, `agents/`, `extensions/` → same names
+- `skills/` → the auto skills named in `~/.agents-private/ultimate/auto-skills`, every manual-only skill, and Ultimate's own skills from `~/.agents-private/ultimate/skills/`; links to other skills of these repos are removed
+
 The sync script backs up existing non-symlink files as `.bak` before replacing them. It's idempotent — safe to run repeatedly.
 
 ## Conventions

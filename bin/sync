@@ -6,6 +6,7 @@ PRIVATE_DIR="${AGENTS_PRIVATE_DIR:-$HOME/.agents-private}"
 CLAUDE_DIR="$HOME/.claude"
 PI_DIR="$HOME/.pi/agent"
 CODEX_DIR="$HOME/.codex"
+ULTIMATE_DIR="$HOME/.ultimate"
 
 # Repo-owned skill buckets. Other top-level folders under skills/ (such as
 # skills/rex) are installed and updated by external tools and are not synced.
@@ -23,8 +24,9 @@ Usage: $(basename "$0") [OPTIONS]
 Sync agent configurations from ~/.agents to agent config directories.
 
 Agent settings (claude/settings.json, pi/settings.json, pi/mcp.json,
-codex/config.toml, codex/hooks.json) and private skills are linked from the
-private repo at \$AGENTS_PRIVATE_DIR (default: ~/.agents-private), which must exist.
+codex/config.toml, codex/hooks.json), Ultimate's config (ultimate/) and private
+skills are linked from the private repo at \$AGENTS_PRIVATE_DIR
+(default: ~/.agents-private), which must exist.
 
 Options:
   --dry-run      Preview changes without applying
@@ -232,6 +234,51 @@ prune_pi_shared_skills() {
     done
 }
 
+# Link the skills Ultimate should see into ~/.ultimate/skills: its own skills
+# (ultimate/skills/), the auto-invoked skills named in ultimate/auto-skills, and
+# every manual-only skill (disable-model-invocation: true). Links into these repos
+# for any other skill are removed, so auto-skills stays the one list.
+link_ultimate_skills() {
+    local src="$1" dst_dir="$2" wanted=" " skill_file skill name item
+
+    $DRY_RUN || mkdir -p "$dst_dir"
+
+    while IFS= read -r skill_file; do
+        skill="$(dirname "$skill_file")/"
+        name="$(basename "$skill")"
+        if grep -qE '^disable-model-invocation: *true' "$skill_file" \
+            || grep -qxF "$name" "$src/auto-skills"; then
+            wanted+="$name "
+            link_file "$skill" "$dst_dir/$name"
+        fi
+    done < <(for bucket in "${SKILL_BUCKETS[@]}"; do
+        [ -d "$bucket" ] && find -L "$bucket" -name SKILL.md -type f
+    done | sort)
+
+    for skill in "$src/skills"/*/; do
+        [ -f "$skill/SKILL.md" ] || continue
+        name="$(basename "$skill")"
+        wanted+="$name "
+        link_file "$skill" "$dst_dir/$name"
+    done
+
+    for item in "$dst_dir"/*; do
+        [ -L "$item" ] || continue
+        name="$(basename "$item")"
+        case "$wanted" in *" $name "*) continue ;; esac
+        case "$(readlink "$item")" in
+            "$AGENTS_DIR"/*|"$PRIVATE_DIR"/*)
+                if $DRY_RUN; then
+                    dry "Unlink: $item (not for Ultimate)"
+                else
+                    rm "$item"
+                    info "Unlinked: $item (not for Ultimate)"
+                fi
+                ;;
+        esac
+    done
+}
+
 # --- Main ---
 
 if [ ! -d "$PRIVATE_DIR" ]; then
@@ -255,6 +302,7 @@ if ! $YES && ! $DRY_RUN; then
     echo "  Claude:  $CLAUDE_DIR"
     echo "  Pi:      $PI_DIR"
     echo "  Codex:   $CODEX_DIR"
+    echo "  Ultimate: $ULTIMATE_DIR"
     echo ""
     read -rp "Continue? [y/N] " confirm
     [ "$confirm" = "y" ] || [ "$confirm" = "Y" ] || exit 0
@@ -335,6 +383,18 @@ fi
 for bucket in "${SKILL_BUCKETS[@]}"; do
     if [ -d "$bucket" ]; then link_codex_skills "$bucket" "$CODEX_DIR/skills"; fi
 done
+
+echo ""
+echo "=== Ultimate ==="
+# Shared config only; secrets, logins, trust and conversations stay in ~/.ultimate.
+if [ -d "$PRIVATE_DIR/ultimate" ]; then
+    $DRY_RUN || mkdir -p "$ULTIMATE_DIR"
+    link_file "$PRIVATE_DIR/ultimate/settings.json" "$ULTIMATE_DIR/settings.json"
+    link_file "$PRIVATE_DIR/ultimate/model-families.json" "$ULTIMATE_DIR/model-families.json"
+    link_dir "$PRIVATE_DIR/ultimate/agents" "$ULTIMATE_DIR/agents"
+    link_dir "$PRIVATE_DIR/ultimate/extensions" "$ULTIMATE_DIR/extensions"
+    link_ultimate_skills "$PRIVATE_DIR/ultimate" "$ULTIMATE_DIR/skills"
+fi
 
 # Prune stale symlinks
 if $PRUNE; then

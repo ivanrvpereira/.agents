@@ -1,6 +1,6 @@
 # .agents
 
-Centralized configuration for AI coding agents. Manages shared and agent-specific configs for [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Pi](https://pi.dev), and [Codex](https://developers.openai.com/codex).
+Centralized configuration for AI coding agents. Manages shared and agent-specific configs for [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Pi](https://pi.dev), [Codex](https://developers.openai.com/codex), and [Ultimate](https://github.com/HazAT/ultimate).
 
 This public repo holds the scripts and shareable config. Agent settings (`claude/settings.json`, `pi/settings.json`, `pi/mcp.json`, `codex/config.toml`, `codex/hooks.json`) and private skills live in the private companion repo `~/.agents-private`, which `bin/sync` requires. Set `AGENTS_PRIVATE_DIR` to use another location.
 
