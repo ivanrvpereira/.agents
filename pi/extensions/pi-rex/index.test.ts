@@ -82,7 +82,8 @@ let output: string[];
 let restoreWrite: () => void;
 
 beforeEach(() => {
-  process.env.REX_SESSION = "session:agent";
+  // Rex sets only REX_BLOCK in its terminals.
+  delete process.env.REX_SESSION;
   process.env.REX_BLOCK = "block:agent";
   delete process.env.TMUX;
   delete process.env.STY;
@@ -183,8 +184,6 @@ test.each([
       const separator = launched.indexOf("--");
       expect(launched.slice(0, separator)).toEqual([
         "run",
-        "-s",
-        "session:agent",
         "--cwd",
         "/project with spaces",
         "--keep-open",
@@ -238,7 +237,7 @@ test("fork refuses unsafe contexts and cancelling the picker launches nothing", 
   await app.command("tab");
   expect(app.notifications.at(-1)).toContain("directly inside a Rex terminal");
   delete process.env.TMUX;
-  delete process.env.REX_SESSION;
+  delete process.env.REX_BLOCK;
   await app.command("tab");
   expect(app.notifications.at(-1)).toContain("directly inside a Rex terminal");
   expect(launches).toBe(0);

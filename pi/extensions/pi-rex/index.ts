@@ -45,9 +45,9 @@ export default function rexForkExtension(pi: ExtensionAPI) {
       if (target && target !== "split" && target !== "tab") {
         throw new Error("Usage: /rex-fork [split | tab]");
       }
-      const session = process.env.REX_SESSION;
+      // Rex sets only REX_BLOCK; rex commands default to the session that holds that pane.
       const block = process.env.REX_BLOCK;
-      if (!session || !block || process.env.TMUX || process.env.STY) {
+      if (!block || process.env.TMUX || process.env.STY) {
         throw new Error("Run /rex-fork directly inside a Rex terminal.");
       }
       if (!ctx.hasUI || ctx.mode !== "tui") {
@@ -81,7 +81,7 @@ export default function rexForkExtension(pi: ExtensionAPI) {
       const directory = ctx.sessionManager.getSessionDir();
       const fork = SessionManager.open(source, directory).createBranchedSession(leaf);
       if (!fork) throw new Error("Could not save the forked Pi session.");
-      const command = ["run", "-s", session, "--cwd", ctx.cwd, "--keep-open", "--json"];
+      const command = ["run", "--cwd", ctx.cwd, "--keep-open", "--json"];
       if (placement === "split") command.push("-b", block, "--split=right");
       command.push("--", "pi", "--session", fork, "--session-dir", directory);
       try {

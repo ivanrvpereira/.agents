@@ -40,8 +40,7 @@ or resume that copy with `pi --session <path>`.
   `docs/terminal-setup.md`. `PI_PROGRAM_STATUS=0|1` overrides detection.
 - **Teaching the model the `rex` CLI.** The `rex` skill does that. `rex skill
   setup` installs it, and it loads the guide from the installed Rex CLI when
-  needed. Bash commands already see `REX_SESSION`, `REX_BLOCK`, and
-  `REX_SERVER`.
+  needed. Bash commands already see `REX_BLOCK` and `REX_SERVER`.
 - **Adding text to the system prompt.** The upstream version returned
   `systemPrompt` from `before_agent_start` with the full Rex guide. That makes
   Pi rewrite the start of every request, so any tool change in the middle of a
